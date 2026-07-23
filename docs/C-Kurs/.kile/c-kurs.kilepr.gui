@@ -2,20 +2,36 @@
 kile_livePreviewEnabled=true
 kile_livePreviewStatusUserSpecified=false
 kile_livePreviewTool=LivePreview-PDFLaTeX
-lastDocument=
+lastDocument=c-kurs.tex
+
+[item:appendix/software.tex]
+open=true
+order=3
 
 [item:c-kurs.bib]
 open=true
-order=-1
+order=0
 
 [item:c-kurs.kilepr]
 open=false
 order=-1
 
+[item:c-kurs.sty]
+open=true
+order=2
+
 [item:c-kurs.tex]
-open=false
-order=-1
+open=true
+order=1
 
 [item:main.tex]
 open=true
 order=-1
+
+[view-settings,view=0,item:appendix/software.tex]
+CursorColumn=11
+CursorLine=2
+
+[view-settings,view=0,item:c-kurs.tex]
+CursorColumn=15
+CursorLine=6
