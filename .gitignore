@@ -53,3 +53,23 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# LaTeX build artifacts
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.synctex.gz
+*.fdb_latexmk
+*.dvi
+*.xdv
+
+# Kile backup files
+*.backup
