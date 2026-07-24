@@ -1,46 +1,46 @@
-\begin{man}{printf}
-\textbf{Header:} \codeinline{<stdio.h>}
+\begin{man}[stdio]{printf}
+    \begin{synopsis}
+        \begin{plaincode}[gobble=8]
+        #include <stdio.h>
+        int printf(const char *format, ...);
+        \end{plaincode}
+    \end{synopsis}
 
-\textbf{Syntax:}
-\begin{verbatim}
-int printf(const char *format, ...);
-\end{verbatim}
+    \begin{desc}
+        \codeinline{printf()} schreibt formattierten Text in die Standardausgabe (stdout). Der \codeinline{format}-String enthält:
+        \begin{itemize}
+            \item Normale Zeichen (werden direkt ausgegeben)
+            \item Format-Specifiers (beginnen mit \codeinline{\%})
+        \end{itemize}
 
-\textbf{Beschreibung:}
-\codeinline{printf()} schreibt formattierten Text in die Standardausgabe (stdout).
-Der \codeinline{format}-String enthält:
-\begin{itemize}
-    \item Normale Zeichen (werden direkt ausgegeben)
-    \item Format-Specifiers (beginnen mit \codeinline{\%})
-\end{itemize}
+        \textbf{Die wichtigsten Format-Specifiers:}
 
-\textbf{Die wichtigsten Format-Specifiers:}
+        \begin{tabular}{ll}
+        \texttt{\%d} & Ganzzahl (dezimal) \\
+        \texttt{\%f} & Gleitkommazahl \\
+        \texttt{\%c} & Zeichen (char) \\
+        \texttt{\%s} & Zeichenkette (String) \\
+        \texttt{\%x} & Hexadezimal (klein) \\
+        \texttt{\%X} & Hexadezimal (groß) \\
+        \texttt{\%p} & Zeiger (Pointer) \\
+        \end{tabular}
+    \end{desc}
 
-\begin{tabular}{ll}
-\texttt{\%d} & Ganzzahl (dezimal) \\
-\texttt{\%f} & Gleitkommazahl \\
-\texttt{\%c} & Zeichen (char) \\
-\texttt{\%s} & Zeichenkette (String) \\
-\texttt{\%x} & Hexadezimal (klein) \\
-\texttt{\%X} & Hexadezimal (groß) \\
-\texttt{\%p} & Zeiger (Pointer) \\
-\end{tabular}
+    \textbf{Beispiel:}
+    \begin{code}
+    #include <stdio.h>
 
-\textbf{Beispiel:}
-\begin{code}
-#include <stdio.h>
+    int main() {
+        int zahl = 42;
+        printf("Die Zahl ist: %d\n", zahl);
+        printf("Adresse: %p\n", (void*)&zahl);
+        return 0;
+    }
+    \end{code}
 
-int main() {
-    int zahl = 42;
-    printf("Die Zahl ist: %d\n", zahl);
-    printf("Adresse: %p\n", (void*)&zahl);
-    return 0;
-}
-\end{code}
+    \textbf{Rückgabewert:}
+    Die Anzahl der ausgegebenen Zeichen, oder \codeinline{-1} bei Fehler.
 
-\textbf{Rückgabewert:}
-Die Anzahl der ausgegebenen Zeichen, oder \codeinline{-1} bei Fehler.
-
-\textbf{Siehe auch:} \codeinline{scanf()}, \codeinline{sprintf()}, \codeinline{fprintf()}
+    \textbf{Siehe auch:} \codeinline{scanf()}, \codeinline{sprintf()}, \codeinline{fprintf()}
 \end{man}
 

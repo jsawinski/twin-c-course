@@ -98,6 +98,12 @@
     \lstset{style=cppstyle, #1}%
 }{}
 
+\lstnewenvironment{plaincode}[1][]{%
+    \lstset{#1}%
+}{}
+
+%\lstset{style=cppstyle}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Man-like entries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -108,12 +114,13 @@
 \newcounter{manpage}
 \setcounter{manpage}{0}
 
-\newenvironment{man}[2][]{%
-%     \newcommand{\synopsis}[1]{\textbf{Synopsis:} \texttt{##1}\par}%
-%     \newcommand{\desc}[1]{\textbf{Description:} ##1\par}%
-%     \newcommand{\returns}[1]{\textbf{Returns:} ##1\par}%
-%     \newcommand{\example}[1]{\textbf{Example:} ##1\par}%
-%     \newcommand{\seealso}[1]{\textbf{See also:} ##1\par}%
+\newenvironment{man}[2][libc]{%
+    \newenvironment{synopsis}{%
+        \textbf{Syntax}:%
+    }{}
+    \newenvironment{desc}{%
+        \textbf{Beschreibung}:\newline\noindent%
+    }{}
 
     \refstepcounter{manpage}%
     \par\noindent%
@@ -127,7 +134,7 @@
         \begin{flushleft}
             \large\bfseries\ttfamily
             #2%
-            \label{man:#2}%
+            \label{man:#1:#2}%
         \end{flushleft}
 
         % Content area (indented)

@@ -27,7 +27,6 @@
   \usetikzlibrary{positioning, fit, backgrounds}
 
 \usepackage{c-kurs}
-\lstset{style=cppstyle}
 
 \begin{document}
 \maketitle
@@ -42,48 +41,104 @@
 
 \tableofcontents
 
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Etwas Mathematik}
 \label{sec:etwas-mathematik}
 
-Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größere Zahlen darstellen zu können, werden mehrere dieser Nullen und Einsen, genannt ``\textbf{Bit}'' aneinandergereit. Am gebräuchlichsten dabei ist das ``\textbf{Byte}'' (siehe Abb.~\ref{fig:byte}), das aus 8 Bit besteht.
+Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größere Zahlen darstellen zu können, werden mehrere dieser Nullen und Einsen, genannt ``\textbf{Bit}'' aneinandergereit. Am gebräuchlichsten dabei ist das ``\textbf{Byte}'' (siehe Abb.~\ref{fig:byte_bits}), das aus 8 Bit besteht.
 
 \begin{figure}[h]
-\centering
-\begin{tikzpicture}[
-    bit/.style={
-        draw,
-        rectangle,
-        minimum width=0.8cm,
-        minimum height=0.8cm,
-        font=\ttfamily\large,
-        outer sep=0pt,
-    },
-    every node/.style={font=\sffamily}
-]
+  \centering
+  \begin{tikzpicture}[
+      cell/.style={
+          draw,
+          rectangle,
+          minimum width=0.8cm,
+          minimum height=0.8cm,
+          font=\ttfamily\large,
+          outer sep=0pt,          % Kein Abstand zwischen Zellen
+          anchor=base,
+      }
+  ]
 
-% The 8 bits
-\foreach \i in {0,1,...,7} {
-    \node[bit] at (\i,0) (bit\i) {\i};
-}
+  % Bit-Positionen (0 bis 7) nebeneinander
+  \foreach \i in {0,1,...,7} {
+      \node[cell] at (\i,0) (bit\i) {\i};
+  }
 
-% Labels below
-\foreach \i in {0,1,...,7} {
-    \node[font=\tiny, below=0.3cm of bit\i] {\small Bit \i};
-}
+  % Border around entire byte
+  \node[draw=black, thick, inner sep=4pt, fit=(bit0)(bit7)] (bytebox) {};
 
-% Border around entire byte
-\node[draw=black, thick, inner sep=4pt, fit=(bit0)(bit7)] (bytebox) {};
+  % Etikett "Bit" darüber
+  \node[font=\sffamily, left=0.1cm of bytebox] {\textbf{Bit}};
 
-% Label "Byte" above
-\node[above=0.4cm of bytebox] {\textbf{Byte}};
-
-\end{tikzpicture}
-\caption{Ein Byte mit den Bits 0 bis 7}
-\label{fig:byte}
+  \end{tikzpicture}
+  \caption{Ein Byte mit den Bit-Positionen 0 bis 7.}
+  \label{fig:byte_bits}
 \end{figure}
+
+\noindent
+Jedem Bit wird nun ein Wert zugeordnet. Das erfolgt mathematisch gemäß:
+\begin{equation*}
+  2^b
+\end{equation*}
+wobei $b$ die Nummer des Bits ist. Das ist eine sogenannte ``Potenz'', eine mathematische Operation die sagt, wie oft eine Zahl mit sich selbst multipliziert wird. In diesem Fall wird die ``2'' $b$-mal mit sich selbst multipliziert, zum Beispiel:
+\begin{align*}
+  2^1 &= 2              &= 2\\
+  2^2 &= 2\cdot2        &= 4\\
+  2^3 &= 2\cdot2\cdot2  &= 8
+\end{align*}
+Interessant ist nun die Frage, was $2^0$ ist. Wenn ihr genau hinschaut, dann merkt ihr, dass, um in die nächste Zeile zu kommen, ihr das Ergebnis mit $2$ multipliziern müsst. Umgekehrt genauso: um in die vorhergehende Zeile zu kommen, muss man durch $2$ teilen. Wenn also $2^1$ zwei ist und man, um zu $2^0$ zu kommen durch zwei Teilen muss, dann ergibt sich
+\begin{equation*}
+  2^0 = 1\,.
+\end{equation*}
+Übrigens, jede Zahl hoch $0$ hat als Ergebnis die $1$ (wir kommen später darauf zurück).
+
+Auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jeweils die Werte 1 bis 128 zugeordnet sind (siehe Abb.~\ref{fig:byte_values}).
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+      cell/.style={
+          draw,
+          rectangle,
+          minimum width=0.8cm,
+          minimum height=0.8cm,
+          font=\ttfamily\large,
+          outer sep=0pt,          % Kein Abstand zwischen Zellen
+          anchor=base,
+      }
+  ]
+
+  % Zeile 1: Bit-Positionen (0 bis 7)
+  \foreach \i in {0,1,...,7} {
+      \node[cell] at (\i,0) (bit\i) {\i};
+  }
+
+  % Zeile 2: Werte (1, 2, 4, 8, 16, 32, 64, 128)
+  \foreach \i in {0,1,...,7} {
+      \node[cell] at (\i,-1.2) (val\i) {\pgfmathparse{int(2^\i)}\pgfmathresult};
+  }
+
+  % Border around
+  \node[draw=black, thick, inner sep=4pt, fit=(bit0)(bit7)] (bytebox) {};
+  \node[draw=black, thick, inner sep=4pt, fit=(val0)(val7)] (valbox) {};
+
+
+  % Etiketten "Bit" und "Wert" darüber
+  \node[font=\sffamily, left=0.1cm of bytebox] {\textbf{Bit}};
+  \node[font=\sffamily, left=0.1cm of valbox] {\textbf{Wert}};
+
+  \end{tikzpicture}
+  \caption{Ein Byte mit Bit-Positionen und den zugehörigen Werten ($2^b$).}
+  \label{fig:byte_values}
+\end{figure}
+
+Das funktioniert übrigens auch genau so, wie ihr es vom Zehnersystem kennt: FIXME
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,14 +148,14 @@ Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größe
 
 In alter Tradition, ist das erste Programm, das man zu sehen bekommt, gewöhnlich das ``Hallo Welt!'' Programm \cite{wikipedia:hallo-welt}:
 
-\begin{lstlisting}
+\begin{code}
 #include <stdio.h>
 
 int main() {
   printf("Hallo Welt!\n");
   return 0;
 }
-\end{lstlisting}
+\end{code}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

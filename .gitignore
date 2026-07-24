@@ -70,6 +70,7 @@ dkms.conf
 *.fdb_latexmk
 *.dvi
 *.xdv
+*.fdb_latexmk
 
 # Kile backup files
 *.backup
