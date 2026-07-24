@@ -33,5 +33,6 @@ CursorColumn=11
 CursorLine=2
 
 [view-settings,view=0,item:c-kurs.tex]
-CursorColumn=15
-CursorLine=6
+CursorColumn=16
+CursorLine=23
+ScrollLine=1

@@ -8,13 +8,26 @@
 \setotherlanguage{english}\usepackage{graphicx} % allow embedded images
   \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
   \graphicspath{{images/}} % set of paths to search for images
+
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{couriers}
+
 \usepackage{amsmath}  % extended mathematics
 \usepackage{booktabs} % book-quality tables
 \usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
 \usepackage{fancyvrb} % extended verbatim environments
   \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+\usepackage{hyperref}
+%   \hypersetup{
+%     pdfborder=1 1 1,
+%     colorlinks=false}
+\usepackage{tikz}
+  \usetikzlibrary{positioning, fit, backgrounds}
+
 \usepackage{c-kurs}
+\lstset{style=cppstyle}
 
 \begin{document}
 \maketitle
@@ -22,13 +35,81 @@
     \begin{abstract}\noindent
     Dieser Kurs ist gedacht für Kinder ab der Grundschule mit guten mathematischen Fähigkeiten und dem Drang, programmieren zu lernen. Er entstand, nachdem die Söhne des Autors ihn über ein Jahr beknieten, ein Spiel zu entwickeln.
 
-    Der erste Teil des Kurses beschäfigt sich damit, alle grundlegenden Kenntnisse zu erwerben, umd eine Konsolen-basierte Regensimulation zu in C zu programmieren, was auch mathematische und physikalische Grundlagen beinhaltet.
+    Der erste Teil des Kurses beschäfigt sich damit, alle grundlegenden Kenntnisse zu erwerben, um eine Konsolen-basierte Regensimulation zu in C zu programmieren, was auch mathematische und physikalische Grundlagen beinhaltet.
+
+    Der zweite Teil des Kurses wird das Ziel haben, das Spiel Tetris® in C++ umzusetzen, wobei das Hauptaugenmerk dabei auf die Grundlagen Objekt-orientierter Programmierung gelegt wird.
     \end{abstract}
 
 \tableofcontents
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Etwas Mathematik}
+\label{sec:etwas-mathematik}
 
+Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größere Zahlen darstellen zu können, werden mehrere dieser Nullen und Einsen, genannt ``\textbf{Bit}'' aneinandergereit. Am gebräuchlichsten dabei ist das ``\textbf{Byte}'' (siehe Abb.~\ref{fig:byte}), das aus 8 Bit besteht.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    bit/.style={
+        draw,
+        rectangle,
+        minimum width=0.8cm,
+        minimum height=0.8cm,
+        font=\ttfamily\large,
+        outer sep=0pt,
+    },
+    every node/.style={font=\sffamily}
+]
+
+% The 8 bits
+\foreach \i in {0,1,...,7} {
+    \node[bit] at (\i,0) (bit\i) {\i};
+}
+
+% Labels below
+\foreach \i in {0,1,...,7} {
+    \node[font=\tiny, below=0.3cm of bit\i] {\small Bit \i};
+}
+
+% Border around entire byte
+\node[draw=black, thick, inner sep=4pt, fit=(bit0)(bit7)] (bytebox) {};
+
+% Label "Byte" above
+\node[above=0.4cm of bytebox] {\textbf{Byte}};
+
+\end{tikzpicture}
+\caption{Ein Byte mit den Bits 0 bis 7}
+\label{fig:byte}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hallo Welt!}
+\label{sec:hallo-welt}
+
+In alter Tradition, ist das erste Programm, das man zu sehen bekommt, gewöhnlich das ``Hallo Welt!'' Programm \cite{wikipedia:hallo-welt}:
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int main() {
+  printf("Hallo Welt!\n");
+  return 0;
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
 \include{appendix/software.tex}
+\include{appendix/reference.tex}
+
+\bibliographystyle{unsrt}
+\bibliography{c-kurs}
 
 \end{document}

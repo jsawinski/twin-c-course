@@ -1,0 +1,147 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code display
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors
+\definecolor{codegreen}{rgb}{0.0, 0.5, 0.0}      % green
+\definecolor{codegray}{rgb}{0.5, 0.5, 0.5}      % gray
+\definecolor{codepurple}{rgb}{0.58, 0.0, 0.82}  % purple
+\definecolor{codeblue}{rgb}{0.0, 0.0, 1.0}      % blue
+\definecolor{codered}{rgb}{0.8, 0.0, 0.0}       % red
+\definecolor{codeorange}{rgb}{0.8, 0.4, 0.0}    % orange
+\definecolor{codecyan}{rgb}{0.0, 0.6, 0.6}      % cyan
+\definecolor{codebg}{rgb}{0.95, 0.95, 0.97}     % light gray background
+\definecolor{stringcolor}{rgb}{0.0, 0.5, 0.0}   % dark green for strings
+
+% C++ style
+\lstdefinestyle{cppstyle}{
+    language=C++,
+    backgroundcolor=\color{codebg},
+    commentstyle=\color{codegray}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    keywordstyle=[2]{\color{codepurple}},
+    keywordstyle=[3]{\color{codeorange}},
+    stringstyle=\color{stringcolor},
+    identifierstyle=\color{black},
+    numberstyle=\tiny\color{codegray},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+%     frameround=tttt,
+    framesep=5pt,
+    rulecolor=\color{black!20},
+    morekeywords={alignas, alignof, and, and_eq, asm, atomic_cancel,
+                  atomic_commit, atomic_noexcept, auto, bitand, bitor,
+                  bool, break, case, catch, char, char8_t, char16_t,
+                  char32_t, class, compl, concept, const, consteval,
+                  constexpr, constinit, const_cast, continue, co_await,
+                  co_return, co_yield, decltype, default, delete, do,
+                  double, dynamic_cast, else, enum, explicit, export,
+                  extern, false, float, for, friend, goto, if, inline,
+                  int, long, mutable, namespace, new, noexcept, not,
+                  not_eq, nullptr, operator, or, or_eq, private,
+                  protected, public, reflexpr, register, reinterpret_cast,
+                  requires, return, short, signed, sizeof, static,
+                  static_assert, static_cast, struct, switch, synchronized,
+                  template, this, thread_local, throw, true, try,
+                  typedef, typeid, typename, union, unsigned, using,
+                  virtual, void, volatile, wchar_t, while, xor, xor_eq},
+    morekeywords=[2]{vector, string, map, set, unordered_map,
+                     unordered_set, pair, tuple, optional, variant,
+                     any, array, deque, forward_list, list,
+                     stack, queue, priority_queue},
+    morekeywords=[3]{cout, cin, cerr, endl, std, make_pair,
+                     make_tuple, move, forward, swap},
+    sensitive=true,
+    emph={NULL, nullptr, true, false, NAN, INFINITY},
+    emphstyle=\color{codered}\bfseries,
+    morecomment=[l][\color{codegreen}]{//},
+    morecomment=[s][\color{codegreen}]{/*}{*/},
+    morestring=[b]",
+    morestring=[b]',
+    morestring=[b]R"(
+}
+
+% Optional: Define a more compact style
+\lstdefinestyle{cppcompact}{
+    style=cppstyle,
+    numbers=none,
+    frame=none,
+    backgroundcolor=\color{white},
+    basicstyle=\ttfamily\footnotesize,
+}
+
+% Optional: Define a style with line numbers
+\lstdefinestyle{cppnumbered}{
+    style=cppstyle,
+    numbers=left,
+    stepnumber=1,
+    numberstyle=\tiny\color{codegray},
+}
+
+% Define \code for inline listings
+\newcommand{\codeinline}[1]{\lstinline{#1}}
+
+% Define the 'code' environment
+\lstnewenvironment{code}[1][]{%
+    \lstset{style=cppstyle, #1}%
+}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Man-like entries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ============================================================
+% Man Page Environment (Enhanced)
+% ============================================================
+
+\newcounter{manpage}
+\setcounter{manpage}{0}
+
+\newenvironment{man}[2][]{%
+%     \newcommand{\synopsis}[1]{\textbf{Synopsis:} \texttt{##1}\par}%
+%     \newcommand{\desc}[1]{\textbf{Description:} ##1\par}%
+%     \newcommand{\returns}[1]{\textbf{Returns:} ##1\par}%
+%     \newcommand{\example}[1]{\textbf{Example:} ##1\par}%
+%     \newcommand{\seealso}[1]{\textbf{See also:} ##1\par}%
+
+    \refstepcounter{manpage}%
+    \par\noindent%
+
+    % Man page header
+    \begin{minipage}{\textwidth}
+        \setlength{\parindent}{0pt}
+        \setlength{\parskip}{0pt}
+
+        % Header: command on left, manual section on right
+        \begin{flushleft}
+            \large\bfseries\ttfamily
+            #2%
+            \label{man:#2}%
+        \end{flushleft}
+
+        % Content area (indented)
+        \begin{flushright}
+            \begin{minipage}{0.95\textwidth}
+                \setlength{\parindent}{0pt}
+                \setlength{\parskip}{0.5\baselineskip}
+                \vspace{0.2\baselineskip}
+
+                \ignorespaces
+}%
+{%
+            \end{minipage}
+        \end{flushright}
+    \end{minipage}
+    \par\vspace{0.8\baselineskip}%
+}
