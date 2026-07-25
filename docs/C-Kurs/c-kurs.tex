@@ -13,8 +13,7 @@
 \usepackage{newtxmath}
 \usepackage{couriers}
 
-\usepackage{amsmath}  % extended mathematics
-\usepackage{booktabs} % book-quality tables
+\usepackage{amsmath}
 \usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
 \usepackage{fancyvrb} % extended verbatim environments
@@ -40,6 +39,22 @@
     \end{abstract}
 
 \tableofcontents
+
+\section*{Vorwort}
+
+Dieser Kurs ist aus der gemeinsamen Arbeit des Autors mit seinen Söhnen entstanden.
+Die Idee, einen C/C++-Kurs für Kinder zu schreiben, kam von den Jungs selbst,
+die unbedingt programmieren lernen wollten.
+
+Der Autor hat die Inhalte erarbeitet, erklärt und in LaTeX festgehalten.
+Bei der Strukturierung des Materials und der Erstellung einiger LaTeX-Makros
+wurde er durch \textbf{DeepSeek}, ein KI-gestütztes Werkzeug, unterstützt.
+
+DeepSeek lieferte Vorschläge zur Gliederung, zur didaktischen Aufbereitung
+und zu technischen Umsetzungen in LaTeX. Alle Vorschläge wurden vom Autor
+geprüft, angepasst und auf die Bedürfnisse seiner Kinder zugeschnitten.
+
+\textit{-- Jürgen ``George'' Sawinski, \today}
 
 \newpage
 
@@ -141,12 +156,12 @@ Um auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} je
 \noindent
 Damit können wir nun die Zahlen 0 bis 255 darstellen, z.B.:
 \begin{align*}
-  00000000 &= 0\,, \\
-  00000011 &= 3\,, \\
-  01011000 &= 88\,, \\
-  11111111 &= 255\,.
+  00000000 &\rightarrow 0\,, \\
+  00000011 &\rightarrow 3\,, \\
+  01011000 &\rightarrow 88\,, \\
+  11111111 &\rightarrow 255\,.
 \end{align*}
-Das addieren funktioniert nun genauso, wie ihr es aus der Schule, in der ihr natürlich das Zehnersystem gelernt habt. Beispiel:
+Das Addieren funktioniert nun genauso, wie ihr es aus der Schule, in der natürlich das Zehnersystem verwendet wird, gelernt habt. Beispiel:
 \begin{lstlisting}
       00100111       39
     + 00000110     +  6
@@ -170,9 +185,9 @@ Entsprechend lässt sich auch die Multiplikation durchführen:
       ---------------
             110100100        420
 \end{lstlisting}
-Wenn ihr genau hinschaut, dann seht ihr, dass wir zwei Bytes multipliziert haben. Aber das Ergebnis benötigt ein Bit mehr. Das führt zu dem Problem, dass, wenn ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis 164 ist. Das gleich passiert bei einem Byte, wenn ihr zu 255 die 1 dazuzählt, das Ergebnis ist 0!
+Wenn ihr genau hinseht, dann bemerkt ihr, dass wir zwei Bytes multipliziert haben, aber das Ergebnis benötigt ein Bit mehr. Das führt zu dem Problem, dass, wenn ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis, dass der Computer euch liefert, $164$ ist. Das gleich passiert bei einem Byte, wenn ihr zu $255$ die $1$ dazuzählt, das Ergebnis ist $0$!
 
-Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Einserkomplement'' (den Begriff müsst ihr euch natürlich nicht merken). Wichtig ist: dass höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
+Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Zweierkomplement'' (den Begriff müsst ihr euch natürlich nicht merken). Wichtig ist: dass höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
 \begin{lstlisting}
     10000000        -128
     10000001        -127
@@ -185,10 +200,10 @@ Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wen
 \end{lstlisting}
 Wie wird nun aus einer positiven Zahl eine Negative? Das passiert, indem man alle Bits invertiert (das heißt, aus 0 wird 1 und aus 1 eine 0) und 1 addiert:
 \begin{lstlisting}
-        10000001  ->  01111110
+(-127)  10000001  ->  01111110
                      +00000001
                       --------
-                      01111111
+                      01111111     (127)
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -197,9 +212,10 @@ Wie wird nun aus einer positiven Zahl eine Negative? Das passiert, indem man all
 \section{Hallo Welt!}
 \label{sec:hallo-welt}
 
-In alter Tradition, ist das erste Programm, das man zu sehen bekommt, gewöhnlich das ``Hallo Welt!'' Programm \cite{wikipedia:hallo-welt}:
+In alter Tradition ist das erste Programm, das man zu sehen bekommt, wenn man eine neue Programmiersprache lernt, gewöhnlich das ``Hallo Welt!'' Programm \cite{wikipedia:hallo-welt}. Da wir uns zunächst auf die Programmiersprache ``C'' beschränken, ist das:
 
 \begin{code}
+/* Das ``Hallo Welt''-Programm. */
 #include <stdio.h>
 
 int main() {
@@ -207,6 +223,91 @@ int main() {
   return 0;
 }
 \end{code}
+
+\section*{Zeile für Zeile erklärt}
+
+Schauen wir uns das Programm Schritt für Schritt an:
+
+\begin{description}
+    \item[\texttt{/* Das ``Hallo Welt''-Programm. */}]
+        Das ist ein \textbf{Kommentar}.
+        Der Computer ignoriert ihn völlig. Er ist nur für uns Menschen da,
+        um den Code zu erklären.
+
+        In C gibt es zwei Arten von Kommentaren:
+        \begin{itemize}
+            \item \texttt{/* ... */} — für längere Kommentare über mehrere Zeilen.
+            \item \texttt{// ...} — für kurze Kommentare in einer Zeile.
+        \end{itemize}
+
+    \item[\texttt{\#include <stdio.h>}]
+        Das ist eine \textbf{Header-Datei} (auf Deutsch auch \emph{Kopfdatei}).
+
+        \texttt{stdio.h} steht für \textit{Standard Input Output}.
+        Sie enthält Informationen über Funktionen wie \texttt{printf},
+        die wir später benutzen wollen.
+
+        \textbf{Merke:} Wenn wir eine Funktion benutzen wollen, die wir nicht
+        selbst geschrieben haben, müssen wir die dazugehörige Header-Datei
+        einbinden.
+
+    \item[\texttt{int main() \{ }]
+        Das ist die \textbf{Hauptfunktion} (englisch: \textit{main function}).
+
+        Jedes C-Programm startet hier. Der Computer führt den Code in den
+        geschweiften Klammern \texttt{\{ ... \}} aus.
+
+        \texttt{int} bedeutet, dass die Funktion eine ganze Zahl (Integer)
+        zurückgibt — das ist der Rückgabewert, der weiter unten kommt.
+
+    \item[\texttt{printf("Hallo Welt!$\backslash$n");}]
+        Das ist die \textbf{Ausgabe}.
+
+        \texttt{printf} steht für \textit{print formatted} und schreibt Text
+        auf den Bildschirm (genauer: in die Konsole).
+
+        Das \texttt{$\backslash$n} ist ein \textbf{Zeilenumbruch}.
+        Es sorgt dafür, dass der Cursor nach der Ausgabe in die nächste Zeile springt.
+
+        \textbf{Wichtig:} Jede Anweisung in C endet mit einem Semikolon \texttt{;}.
+
+    \item[\texttt{return 0;}]
+        Das ist die \textbf{Rückgabe}.
+
+        Sie sagt dem Betriebssystem: \textit{``Alles ist gut gelaufen.''}
+
+        \texttt{0} bedeutet in der Regel \textit{``kein Fehler''}.
+        Wenn ein Programm mit \texttt{return 0;} endet, weiß der Computer,
+        dass das Programm erfolgreich war.
+
+    \item[\texttt{\}} ]
+        Die schließende geschweifte Klammer beendet die \texttt{main}-Funktion.
+        Alles zwischen \texttt{\{} und \texttt{\}} gehört zur Funktion.
+\end{description}
+
+\section*{Zusammenfassung}
+
+\begin{itemize}
+    \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
+    \item \texttt{printf()} schreibt Text auf den Bildschirm.
+    \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
+    \item \texttt{return 0;} sagt dem Computer: ``Alles OK.''
+    \item Jede Anweisung endet mit \texttt{;}.
+\end{itemize}
+
+\section*{Aufgaben}
+
+\begin{enumerate}
+    \item Ändere das Programm so, dass es \texttt{``Guten Tag!''} ausgibt.
+    \item Ändere das Programm so, dass es deinen Namen ausgibt.
+    \item Ändere das Programm so, dass es zwei Zeilen ausgibt:
+        \begin{verbatim}
+        Hallo!
+        Welt!
+        \end{verbatim}
+    \item (Für Profis) Was passiert, wenn du das \texttt{$\backslash$n} weglässt?
+\end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -246,6 +347,22 @@ int main() {
 
     printf("Fibonacci %d: %d\n", i, a);
   }
+  return 0;
+}
+\end{code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Reihen}
+\label{sec:reihen}
+
+\begin{code}
+#include <stdio.h>
+
+int main() {
+
   return 0;
 }
 \end{code}

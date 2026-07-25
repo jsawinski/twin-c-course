@@ -42,6 +42,12 @@ encoding=UTF-8
 highlight=LaTeX
 mode=LaTeX
 
+[item:appendix/reference/hotkeys.tex]
+archive=true
+encoding=UTF-8
+highlight=LaTeX
+mode=LaTeX
+
 [item:appendix/software.tex]
 archive=true
 encoding=UTF-8

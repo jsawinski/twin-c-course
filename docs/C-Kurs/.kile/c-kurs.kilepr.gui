@@ -13,15 +13,19 @@ open=false
 order=-1
 
 [item:appendix/reference/c/printf.tex]
-open=true
+open=false
 order=3
 
 [item:appendix/reference/cpp.tex]
 open=false
 order=-1
 
+[item:appendix/reference/hotkeys.tex]
+open=false
+order=-1
+
 [item:appendix/software.tex]
-open=true
+open=false
 order=1
 
 [item:c-kurs.bib]
@@ -33,7 +37,7 @@ open=false
 order=-1
 
 [item:c-kurs.sty]
-open=true
+open=false
 order=2
 
 [item:c-kurs.tex]
@@ -45,7 +49,7 @@ open=true
 order=-1
 
 [view-settings,view=0,item:appendix/reference.tex]
-CursorColumn=32
+CursorColumn=33
 CursorLine=3
 
 [view-settings,view=0,item:appendix/reference/c.tex]
@@ -55,26 +59,30 @@ CursorLine=29
 [view-settings,view=0,item:appendix/reference/c/printf.tex]
 CursorColumn=0
 CursorLine=27
-ScrollLine=9
+ScrollLine=6
 
 [view-settings,view=0,item:appendix/reference/cpp.tex]
 CursorColumn=0
 CursorLine=2
 
+[view-settings,view=0,item:appendix/reference/hotkeys.tex]
+CursorColumn=69
+CursorLine=24
+
 [view-settings,view=0,item:appendix/software.tex]
-CursorColumn=67
-CursorLine=2
+CursorColumn=0
+CursorLine=5
 
 [view-settings,view=0,item:c-kurs.bib]
 CursorColumn=24
 CursorLine=1
 
 [view-settings,view=0,item:c-kurs.sty]
-CursorColumn=0
-CursorLine=123
-ScrollLine=106
+CursorColumn=28
+CursorLine=112
+ScrollLine=101
 
 [view-settings,view=0,item:c-kurs.tex]
-CursorColumn=152
-CursorLine=100
-ScrollLine=92
+CursorColumn=0
+CursorLine=15
+ScrollLine=9
