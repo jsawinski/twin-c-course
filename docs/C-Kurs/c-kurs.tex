@@ -67,7 +67,7 @@ Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größe
 
   % Bit-Positionen (0 bis 7) nebeneinander
   \foreach \i in {0,1,...,7} {
-      \node[cell] at (\i,0) (bit\i) {\i};
+      \node[cell] at (7-\i,0) (bit\i) {\i};
   }
 
   % Border around entire byte
@@ -98,7 +98,7 @@ Interessant ist nun die Frage, was $2^0$ ist. Wenn ihr genau hinschaut, dann mer
 \end{equation*}
 Übrigens, jede Zahl hoch $0$ hat als Ergebnis die $1$ (wir kommen später darauf zurück).
 
-Auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jeweils die Werte 1 bis 128 zugeordnet sind (siehe Abb.~\ref{fig:byte_values}).
+Um auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jeweils die Werte 1 bis 128 zugeordnet sind (siehe Abb.~\ref{fig:byte_values}).
 
 \begin{figure}[h]
   \centering
@@ -116,12 +116,12 @@ Auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jewei
 
   % Zeile 1: Bit-Positionen (0 bis 7)
   \foreach \i in {0,1,...,7} {
-      \node[cell] at (\i,0) (bit\i) {\i};
+      \node[cell] at (7-\i,0) (bit\i) {\i};
   }
 
   % Zeile 2: Werte (1, 2, 4, 8, 16, 32, 64, 128)
   \foreach \i in {0,1,...,7} {
-      \node[cell] at (\i,-1.2) (val\i) {\pgfmathparse{int(2^\i)}\pgfmathresult};
+      \node[cell] at (7-\i,-1.2) (val\i) {\pgfmathparse{int(2^\i)}\pgfmathresult};
   }
 
   % Border around
@@ -138,7 +138,58 @@ Auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jewei
   \label{fig:byte_values}
 \end{figure}
 
-Das funktioniert übrigens auch genau so, wie ihr es vom Zehnersystem kennt: FIXME
+\noindent
+Damit können wir nun die Zahlen 0 bis 255 darstellen, z.B.:
+\begin{align*}
+  00000000 &= 0\,, \\
+  00000011 &= 3\,, \\
+  01011000 &= 88\,, \\
+  11111111 &= 255\,.
+\end{align*}
+Das addieren funktioniert nun genauso, wie ihr es aus der Schule, in der ihr natürlich das Zehnersystem gelernt habt. Beispiel:
+\begin{lstlisting}
+      00100111       39
+    + 00000110     +  6
+          11         1     (Übertrag)
+     ---------      ---
+      00101101       45
+\end{lstlisting}
+Entsprechend lässt sich auch die Multiplikation durchführen:
+\begin{lstlisting}
+      00001010·00101010 =     10·42
+
+      00000000
+       00000000
+        00000000
+         00000000
+          00101010
+           00000000
+            00101010
+             00000000
+             1 1             (Übertrag)
+      ---------------
+            110100100        420
+\end{lstlisting}
+Wenn ihr genau hinschaut, dann seht ihr, dass wir zwei Bytes multipliziert haben. Aber das Ergebnis benötigt ein Bit mehr. Das führt zu dem Problem, dass, wenn ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis 164 ist. Das gleich passiert bei einem Byte, wenn ihr zu 255 die 1 dazuzählt, das Ergebnis ist 0!
+
+Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Einserkomplement'' (den Begriff müsst ihr euch natürlich nicht merken). Wichtig ist: dass höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
+\begin{lstlisting}
+    10000000        -128
+    10000001        -127
+    ...
+    11111111        -  1
+    00000000           0
+    00000001           1
+    ...
+    01111111         127
+\end{lstlisting}
+Wie wird nun aus einer positiven Zahl eine Negative? Das passiert, indem man alle Bits invertiert (das heißt, aus 0 wird 1 und aus 1 eine 0) und 1 addiert:
+\begin{lstlisting}
+        10000001  ->  01111110
+                     +00000001
+                      --------
+                      01111111
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,6 +204,48 @@ In alter Tradition, ist das erste Programm, das man zu sehen bekommt, gewöhnlic
 
 int main() {
   printf("Hallo Welt!\n");
+  return 0;
+}
+\end{code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Zahlen}
+\label{sec:zahlen}
+
+\begin{code}
+#include <stdio.h>
+
+int main() {
+  int zahl = 42;
+  printf("Die Zahl: %d\n", zahl);
+  return 0;
+}
+\end{code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Fibonacci}
+\label{sec:fibonacci}
+
+\begin{code}
+#include <stdio.h>
+
+int main() {
+  int a = 0;
+  int b = 1;
+
+  for(int i = 1; i <= 16; i = i+1) {
+    int next = a + b;
+    a = b;
+    b = next;
+
+    printf("Fibonacci %d: %d\n", i, a);
+  }
   return 0;
 }
 \end{code}
