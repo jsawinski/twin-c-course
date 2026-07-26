@@ -74,3 +74,11 @@ dkms.conf
 
 # Kile backup files
 *.backup
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake 
+build/
+.cache/
