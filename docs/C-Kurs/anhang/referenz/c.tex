@@ -14,13 +14,13 @@ C und C++ bieten verschiedene Datentypen für Ganzzahlen an, darunter \texttt{in
 Die Liste der ganzzahligen Datentypen in C und C++ ist wie folgt:
 \begin{description}
   \item[\texttt{int}]\hfill\\
-   Standard-Ganzzahltyp, in der Regel 4 Bytes groß, Wertebereich: -2.147.483.648 bis 2.147.483.647 (vorzeichenbehaftet) oder 0 bis 4.294.967.295 (vorzeichenlos).
+   Standard-Ganzzahltyp, in der Regel 4 Bytes (32 Bit) groß, Wertebereich: -2.147.483.648 bis 2.147.483.647 (vorzeichenbehaftet) oder 0 bis 4.294.967.295 (vorzeichenlos).
   \item[\texttt{short}]\hfill\\
-   Kürzere Ganzzahl, in der Regel 2 Bytes groß, Wertebereich: -32.768 bis 32.767 (vorzeichenbehaftet) oder 0 bis 65.535 (vorzeichenlos).
+   Kürzere Ganzzahl, in der Regel 2 Bytes (16 Bit) groß, Wertebereich: -32.768 bis 32.767 (vorzeichenbehaftet) oder 0 bis 65.535 (vorzeichenlos).
   \item[\texttt{long}]\hfill\\
-   Längere Ganzzahl, in der Regel 4 Bytes groß, Wertebereich: -2.147.483.648 bis 2.147.483.647 (vorzeichenbehaftet) oder 0 bis 4.294.967.295 (vorzeichenlos).
+   Längere Ganzzahl, in der Regel 4 Bytes (32 Bit) groß, Wertebereich: -2.147.483.648 bis 2.147.483.647 (vorzeichenbehaftet) oder 0 bis 4.294.967.295 (vorzeichenlos).
   \item[\texttt{long long}]\hfill\\
-   Noch längere Ganzzahl, in der Regel 8 Bytes groß, Wertebereich: -9.223.372.036.854.775.808 bis 9.223.372.036.854.775.807 (vorzeichenbehaftet) oder 0 bis 18.446.744.073.709.551.615 (vorzeichenlos).
+   Noch längere Ganzzahl, in der Regel 8 Bytes (64 Bit) groß, Wertebereich: -9.223.372.036.854.775.808 bis 9.223.372.036.854.775.807 (vorzeichenbehaftet) oder 0 bis 18.446.744.073.709.551.615 (vorzeichenlos).
 \end{description}
 
 \subparagraph{Gleitkommazahlen}
@@ -28,11 +28,11 @@ Die Liste der ganzzahligen Datentypen in C und C++ ist wie folgt:
 Gleitkommazahlen, also Zahlen mit Nachkommastellen, werden in C und C++ durch die Datentypen \texttt{float}, \texttt{double} und \texttt{long double} dargestellt. Diese Typen unterscheiden sich in der Genauigkeit und dem Wertebereich. Die Liste der Gleitkomma-Datentypen in C und C++ ist wie folgt:
 \begin{description}
   \item[\texttt{float}]\hfill\\
-   Einfachpräzisions-Gleitkommazahl, in der Regel 4 Bytes groß, Wertebereich: ca. 1.2E-38 bis 3.4E+38
+   Einfachpräzisions-Gleitkommazahl, in der Regel 4 Bytes (32 Bit) groß, Wertebereich: ca. 1.2E-38 bis 3.4E+38
   \item[\texttt{double}]\hfill\\
-   Doppelpräzisions-Gleitkommazahl, in der Regel 8 Bytes groß, Wertebereich: ca. 2.3E-308 bis 1.7E+308
+   Doppelpräzisions-Gleitkommazahl, in der Regel 8 Bytes (64 Bit) groß, Wertebereich: ca. 2.3E-308 bis 1.7E+308
   \item[\texttt{long double}]\hfill\\
-   Erweiterte Präzisions-Gleitkommazahl, in der Regel 10, 12 oder 16 Bytes groß, Wertebereich: abhängig von der Implementierung, aber in der Regel größer als \texttt{double}
+   Erweiterte Präzisions-Gleitkommazahl, in der Regel 10, 12 oder 16 Bytes (80, 96 oder 128 Bit) groß, Wertebereich: abhängig von der Implementierung, aber in der Regel größer als \texttt{double}
 \end{description}
 Hier wird eine eigenartige Darstellung von Gleitkommazahlen verwendet, die als \textbf{IEEE 754 Standard} bekannt ist. Diese Darstellung ermöglicht es, eine große Bandbreite von Zahlen darzustellen
 %, einschließlich sehr kleiner und sehr großer Werte, sowie spezieller Werte wie Unendlichkeit und NaN (Not a Number)

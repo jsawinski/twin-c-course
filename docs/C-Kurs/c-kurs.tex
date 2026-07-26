@@ -5,13 +5,10 @@
 
 \usepackage{polyglossia}
 \setdefaultlanguage{german}
-\setotherlanguage{english}\usepackage{graphicx} % allow embedded images
+\setotherlanguage{english}
+\usepackage{graphicx} % allow embedded images
   \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
   \graphicspath{{images/}} % set of paths to search for images
-
-\usepackage{newtxtext}
-\usepackage{newtxmath}
-\usepackage{couriers}
 
 \usepackage{amsmath}
 \usepackage{units}    % non-stacked fractions and better unit spacing
@@ -24,6 +21,7 @@
 %     colorlinks=false}
 \usepackage{tikz}
   \usetikzlibrary{positioning, fit, backgrounds}
+\usepackage[round, numbers]{natbib}
 
 \usepackage{c-kurs}
 
@@ -31,9 +29,9 @@
 \maketitle
 
     \begin{abstract}\noindent
-    Dieser Kurs ist gedacht für Kinder ab der Grundschule mit guten mathematischen Fähigkeiten und dem Drang, programmieren zu lernen. Er entstand, nachdem die Söhne des Autors ihn über ein Jahr beknieten, ein Spiel zu entwickeln.
+    Dieser Kurs ist gedacht für Kinder ab Ende der Grundschule, Anfang der 5. Klasse mit Begeisterung für Mathematik und Computer und dem Drang, programmieren zu lernen. 
 
-    Der erste Teil des Kurses beschäfigt sich damit, alle grundlegenden Kenntnisse zu erwerben, um eine Konsolen-basierte Regensimulation zu in C zu programmieren, was auch mathematische und physikalische Grundlagen beinhaltet.
+    Der erste Teil des Kurses beschäftigt sich damit, alle grundlegenden Kenntnisse zu erwerben, um eine Konsolen-basierte Regensimulation zu in C zu programmieren, was auch mathematische und physikalische Grundlagen beinhaltet.
 
     Der zweite Teil des Kurses wird das Ziel haben, das Spiel Tetris® in C++ umzusetzen, wobei das Hauptaugenmerk dabei auf die Grundlagen Objekt-orientierter Programmierung gelegt wird.
     \end{abstract}
@@ -44,17 +42,51 @@
 
 Dieser Kurs ist aus der gemeinsamen Arbeit des Autors mit seinen Söhnen entstanden.
 Die Idee, einen C/C++-Kurs für Kinder zu schreiben, kam von den Jungs selbst,
-die unbedingt programmieren lernen wollten.
+die unbedingt programmieren lernen wollten um ihre eigenen Spiele zu entwickeln
+zu können. 
+
+Die Mitschrift ist in erster Linie für Kinder gedacht, die den Kurs mit einer 
+Begleitperson zusammen durchlaufen und dient als Leitfaden sowie als 
+Nachschlagewerk für die behandelten Themen. 
 
 Der Autor hat die Inhalte erarbeitet, erklärt und in LaTeX festgehalten.
 Bei der Strukturierung des Materials und der Erstellung einiger LaTeX-Makros
-wurde er durch \textbf{DeepSeek}, ein KI-gestütztes Werkzeug, unterstützt.
+wurde er durch KI-gestützte Werkzeuge (\textbf{DeepSeek} und \textbf{GitHub Copilot}) 
+unterstützt.
 
 DeepSeek lieferte Vorschläge zur Gliederung, zur didaktischen Aufbereitung
-und zu technischen Umsetzungen in LaTeX. Alle Vorschläge wurden vom Autor
-geprüft, angepasst und auf die Bedürfnisse seiner Kinder zugeschnitten.
+und zu technischen Umsetzungen in LaTeX. Github Copilot wurde beim Schreiben von 
+LaTeX-Code und bei der Erstellung von C/C++-Codebeispielen eingesetzt. Alle 
+Vorschläge wurden vom Autor geprüft, angepasst und auf die Bedürfnisse seiner 
+Kinder zugeschnitten.
 
 \textit{-- Jürgen ``George'' Sawinski, \today}
+
+\vspace{1cm}
+
+\section*{Lizenz und Haftungsausschluss}
+
+Alle Inhalte dieses Kurses wurden vom Autor selbst erstellt und sind, 
+soweit nicht anders gekennzeichnet, frei von urheberrechtlich geschützten 
+Materialien Dritter. Die Beispiele und Übungen sind so gestaltet, dass sie 
+die Lernziele unterstützen und den Kindern helfen, die Konzepte zu verstehen 
+und anzuwenden.
+
+Dieses Werk wird unter der \textbf{MIT-Lizenz} veröffentlicht. 
+Das bedeutet: Ihr dürft es kopieren, verändern, weitergeben und 
+für eigene Zwecke nutzen — auch kommerziell. Die einzige Bedingung ist, 
+dass der Autor (Jürgen ``George'' Sawinski) in der Quellenangabe genannt wird.
+
+\textbf{Haftungsausschluss:} 
+Dieser Kurs wurde mit größter Sorgfalt erstellt. Dennoch übernimmt der Autor 
+keine Gewähr für die Richtigkeit, Vollständigkeit oder Aktualität der Inhalte. 
+Die Nutzung der Inhalte erfolgt auf eigene Verantwortung. Der Autor haftet nicht 
+für Schäden, die aus der Nutzung oder der Unfähigkeit zur Nutzung der Inhalte 
+entstehen.
+
+\vspace{1cm}
+\noindent
+\textbf{Projekt-Webseite:} \url{https://github.com/jsawinski/twin-c-course}
 
 \newpage
 
@@ -73,7 +105,7 @@ geprüft, angepasst und auf die Bedürfnisse seiner Kinder zugeschnitten.
 \include{anhang/software.tex}
 \include{anhang/referenz.tex}
 
-\bibliographystyle{unsrt}
+\bibliographystyle{unsrtnat}
 \bibliography{c-kurs}
 
 \end{document}

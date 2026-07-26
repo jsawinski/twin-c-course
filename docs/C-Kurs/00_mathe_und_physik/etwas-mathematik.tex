@@ -1,6 +1,12 @@
 \section{Etwas Mathematik}
 \label{sec:etwas-mathematik}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Das Binärsystem}
+\label{sec:etwas-mathematik:binärsystem}
+
 Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größere Zahlen darstellen zu können, werden mehrere dieser Nullen und Einsen, genannt ``\textbf{Bit}'' aneinandergereit. Am gebräuchlichsten dabei ist das ``\textbf{Byte}'' (siehe Abb.~\ref{fig:byte_bits}), das aus 8 Bit besteht.
 
 \begin{figure}[h]
@@ -109,20 +115,20 @@ Das Addieren funktioniert nun genauso, wie ihr es aus der Schule, in der natürl
 Entsprechend lässt sich auch die Multiplikation durchführen:
 \begin{lstlisting}
       00001010·00101010 =     10·42
-
-      00000000
-       00000000
-        00000000
-         00000000
-          00101010
-           00000000
-            00101010
-             00000000
-             1 1             (Übertrag)
-      ---------------
-            110100100        420
+               ..|.|.|.
+        00000000.|.|.|.
+         00000000|.|.|.
+          00001010.|.|.
+           00000000|.|.
+            00001010.|.
+             00000000|.
+              00001010.
+               00000000
+               1 1             (Übertrag)
+        ---------------
+              110100100        420
 \end{lstlisting}
-Wenn ihr genau hinseht, dann bemerkt ihr, dass wir zwei Bytes multipliziert haben, aber das Ergebnis benötigt ein Bit mehr. Das führt zu dem Problem, dass, wenn ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis, dass der Computer euch liefert, $164$ ist. Das gleich passiert bei einem Byte, wenn ihr zu $255$ die $1$ dazuzählt, das Ergebnis ist $0$!
+Wenn ihr genau hinseht, dann bemerkt ihr, dass wir zwei Bytes multipliziert haben, aber das Ergebnis benötigt ein Bit mehr. Das führt zu dem Problem, dass, wenn ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis, dass der Computer euch liefert, $164$ ist. Das gleiche passiert bei einem Byte, wenn ihr zu $255$ die $1$ dazuzählt, das Ergebnis ist $0$ (in der Fachsprache als \textbf{Überlauf} bezeichnet).
 
 Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Zweierkomplement'' (den Begriff müsst ihr euch natürlich nicht merken). Wichtig ist: dass höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
 \begin{lstlisting}
@@ -142,4 +148,76 @@ Wie wird nun aus einer positiven Zahl eine Negative? Das passiert, indem man all
                       --------
                       01111111     (127)
 \end{lstlisting}
+Das funktioniert auch umgekehrt, also aus einer negativen Zahl eine positive zu machen:
+\begin{lstlisting}
+(127)   01111111  ->  10000000
+                     +00000001
+                      --------
+                      10000001     (-127)
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Binäre Operationen — wie Computer rechnen}
+\label{sec:etwas-mathematik:binäre-operationen}
+
+Bevor wir in das Thema einsteigen, wie Computer rechnen, sollten wir kurz den 
+Begriff ``\textbf{Operation}'' klären.
+
+Eine \textbf{Operation} ist eine \emph{Ausführungshandlung}, also ein Vorgang, 
+bei dem aus einem oder mehreren Werten ein neuer Wert berechnet wird. Die 
+\textbf{Zeichen}, die diese Operationen beschreiben (wie \texttt{+}, \texttt{-}, 
+\texttt{\&}, \texttt{|}), nennt man \textbf{Operatoren}. Die Werte, mit denen 
+eine Operation arbeitet, heißen \textbf{Operanden}. Zum Beispiel sind die 
+Grundrechenarten, die ihr in der Schule gelernt habt, also Addition, Subtraktion, 
+Multiplikation und Division (Plus, Minus, Mal, Geteilt), sogenannte 
+\textbf{arithmetische Operationen}. 
+
+Obwohl Computer auch diese arithmetische Operationen durchführen können, arbeiten 
+die Schaltungen im Prozessor, dem Herzstück eines Computers, mit sogenannten 
+binären Operationen. Auch schon die ersten Computer, die in den 1940er Jahren 
+gebaut wurden, arbeiteten mit diesen \emph{binären Operationen}\footnote{%
+  Der Autor möchte an dieser Stelle darauf hinweisen, dass diese auch als ``logische
+  Operationen'' bezeichnet werden, die Begriffe ``binäre Operation'' und 
+  ``logische Operation'' jedoch nicht immer gleich verwendet  werden. Für die Programmiersprache 
+  C und C++ gibt es aber eine klare Unterscheidung, auf die wir erst später eingehen werden.} 
+(siehe z.B.\ \cite{wikipedia:computer}).
+
+\vskip 1em
+\noindent
+Die grundlegenden binären Operationen sind:
+\begin{description}
+  \item[\texttt{AND}]\hfill\\
+    Die \texttt{AND}-Operation (binäres UND) verknüpft zwei binäre Zahlen bitweise. Das Ergebnis ist 1, wenn beide Bits 1 sind, sonst ist das Ergebnis 0. Zum Beispiel:
+    \begin{lstlisting}
+      1101
+    & 1011
+    --------
+      1001
+    \end{lstlisting}
+  \item[\texttt{OR}]\hfill\\
+    Die \texttt{OR}-Operation (binäres ODER) verknüpft zwei binäre Zahlen bitweise. Das Ergebnis ist 1, wenn mindestens eines der Bits 1 ist, sonst ist das Ergebnis 0. Zum Beispiel:
+    \begin{lstlisting}
+       1101
+     | 1011
+    --------
+       1111
+    \end{lstlisting}
+  \item[\texttt{XOR}]\hfill\\
+    Die \texttt{XOR}-Operation (exklusives ODER) verknüpft zwei binäre Zahlen bitweise. Das Ergebnis ist 1, wenn genau eines der Bits 1 ist, sonst ist das Ergebnis 0. Zum Beispiel:
+    \begin{lstlisting}
+       1101
+     ^ 1011
+    --------
+       0110
+    \end{lstlisting}
+  \item[\texttt{NOT}]\hfill\\
+    Die \texttt{NOT}-Operation (binäres NICHT) invertiert die Bits einer binären Zahl. Das Ergebnis ist 1, wenn das Bit 0 ist, und 0, wenn das Bit 1 ist. Zum Beispiel:
+    \begin{lstlisting}
+     ~ 1101
+    --------
+       0010
+    \end{lstlisting}
+\end{description}
 
