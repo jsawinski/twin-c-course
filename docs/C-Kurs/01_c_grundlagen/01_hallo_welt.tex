@@ -1,0 +1,84 @@
+\subsection{Hallo Welt!}
+\label{sec:c:hallo-welt}
+
+In alter Tradition ist das erste Programm, das man zu sehen bekommt, wenn man eine neue Programmiersprache lernt, gewöhnlich das ``Hallo Welt!'' Programm \cite{wikipedia:hallo-welt}. Da wir uns zunächst auf die Programmiersprache ``C'' beschränken, ist das:
+
+\begin{code}
+/* Das ``Hallo Welt''-Programm. */
+#include <stdio.h>
+
+int main() {
+  printf("Hallo Welt!\n");
+  return 0;
+}
+\end{code}
+
+\paragraph{Erklärung:}
+
+\begin{description}
+    \item[\texttt{/* Das ``Hallo Welt''-Programm. */}]\hfill\\
+        Das ist ein \textbf{Kommentar}.
+        Der Computer ignoriert ihn völlig. Er ist nur für uns Menschen da,
+        um den Code zu erklären.
+
+        In C gibt es zwei Arten von Kommentaren:
+        \begin{itemize}
+            \item \texttt{/* ... */} — für längere Kommentare über mehrere Zeilen.
+            \item \texttt{// ...} — für kurze Kommentare in einer Zeile.
+        \end{itemize}
+
+    \item[\texttt{\#include <stdio.h>}]\hfill\\
+        Das ist eine \textbf{Header-Datei} (auf Deutsch auch \emph{Kopfdatei}).
+
+        \texttt{stdio.h} steht für \textit{Standard Input Output}.
+        Sie enthält Informationen über Funktionen wie \texttt{printf},
+        die wir später benutzen wollen.
+
+        \textbf{Merke:} Wenn wir eine Funktion benutzen wollen, die wir nicht
+        selbst geschrieben haben, müssen wir die dazugehörige Header-Datei
+        einbinden.
+
+    \item[\texttt{int main() \{ }]\hfill\\
+        Das ist die \textbf{Hauptfunktion} (englisch: \textit{main function}).
+
+        Jedes C-Programm startet hier. Der Computer führt den Code in den
+        geschweiften Klammern \texttt{\{ ... \}} aus.
+
+        \texttt{int} bedeutet, dass die Funktion eine ganze Zahl (Integer)
+        zurückgibt — das ist der Rückgabewert, der weiter unten kommt.
+
+    \item[\texttt{printf("Hallo Welt!$\backslash$n");}]\hfill\\
+        Das ist die \textbf{Ausgabe}.
+
+        \texttt{printf} steht für \textit{print formatted} und schreibt Text
+        auf den Bildschirm (genauer: in die Konsole).
+
+        Das \texttt{$\backslash$n} ist ein \textbf{Zeilenumbruch}.
+        Es sorgt dafür, dass der Cursor nach der Ausgabe in die nächste Zeile springt.
+
+        \textbf{Wichtig:} Jede Anweisung in C endet mit einem Semikolon \texttt{;}.
+
+    \item[\texttt{return 0;}]\hfill\\
+        Das ist die \textbf{Rückgabe}.
+
+        Sie sagt dem Betriebssystem: \textit{``Alles ist gut gelaufen.''}
+
+        \texttt{0} bedeutet in der Regel \textit{``kein Fehler''}.
+        Wenn ein Programm mit \texttt{return 0;} endet, weiß der Computer,
+        dass das Programm erfolgreich war.
+
+    \item[\texttt{\}} ]\hfill\\
+        Die schließende geschweifte Klammer beendet die \texttt{main}-Funktion.
+        Alles zwischen \texttt{\{} und \texttt{\}} gehört zur Funktion.
+\end{description}
+
+\paragraph{Zusammenfassung:}
+
+\begin{itemize}
+    \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
+    \item \texttt{printf()} schreibt Text auf den Bildschirm.
+    \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
+    \item \texttt{return 0;} sagt dem Computer: ``Alles OK.''
+    \item Jede Anweisung endet mit \texttt{;}.
+\end{itemize}
+

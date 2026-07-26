@@ -83,6 +83,5 @@ CursorLine=112
 ScrollLine=101
 
 [view-settings,view=0,item:c-kurs.tex]
-CursorColumn=0
-CursorLine=15
-ScrollLine=9
+CursorColumn=75
+CursorLine=163

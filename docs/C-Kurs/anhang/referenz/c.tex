@@ -1,0 +1,262 @@
+\subsection{C}
+\label{sec:referenz:c}
+
+\subsubsection{Grundlagen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Datentypen}
+\label{sec:referenz:c:datentypen}
+
+\subparagraph{Ganzzahlen}
+
+C und C++ bieten verschiedene Datentypen für Ganzzahlen an, darunter \texttt{int}, \texttt{short}, \texttt{long} und \texttt{long long}. Jeder dieser Typen hat eine unterschiedliche Größe und einen unterschiedlichen Wertebereich. Die Größe hängt von der Architektur des Computers ab, auf dem das Programm ausgeführt wird. Diese sind alle \textbf{vorzeichenbehaftet}, was bedeutet, dass sie sowohl positive als auch negative Werte darstellen können. Es gibt auch die vorzeichenlosen Varianten \texttt{unsigned int}, \texttt{unsigned short}, \texttt{unsigned long} und \texttt{unsigned long long}, die nur nicht-negative Werte darstellen können (vergleicht das nochmal mit dem Abschnitt \ref{sec:etwas-mathematik}).
+
+Die Liste der ganzzahligen Datentypen in C und C++ ist wie folgt:
+\begin{description}
+  \item[\texttt{int}]\hfill\\
+   Standard-Ganzzahltyp, in der Regel 4 Bytes groß, Wertebereich: -2.147.483.648 bis 2.147.483.647 (vorzeichenbehaftet) oder 0 bis 4.294.967.295 (vorzeichenlos).
+  \item[\texttt{short}]\hfill\\
+   Kürzere Ganzzahl, in der Regel 2 Bytes groß, Wertebereich: -32.768 bis 32.767 (vorzeichenbehaftet) oder 0 bis 65.535 (vorzeichenlos).
+  \item[\texttt{long}]\hfill\\
+   Längere Ganzzahl, in der Regel 4 Bytes groß, Wertebereich: -2.147.483.648 bis 2.147.483.647 (vorzeichenbehaftet) oder 0 bis 4.294.967.295 (vorzeichenlos).
+  \item[\texttt{long long}]\hfill\\
+   Noch längere Ganzzahl, in der Regel 8 Bytes groß, Wertebereich: -9.223.372.036.854.775.808 bis 9.223.372.036.854.775.807 (vorzeichenbehaftet) oder 0 bis 18.446.744.073.709.551.615 (vorzeichenlos).
+\end{description}
+
+\subparagraph{Gleitkommazahlen}
+
+Gleitkommazahlen, also Zahlen mit Nachkommastellen, werden in C und C++ durch die Datentypen \texttt{float}, \texttt{double} und \texttt{long double} dargestellt. Diese Typen unterscheiden sich in der Genauigkeit und dem Wertebereich. Die Liste der Gleitkomma-Datentypen in C und C++ ist wie folgt:
+\begin{description}
+  \item[\texttt{float}]\hfill\\
+   Einfachpräzisions-Gleitkommazahl, in der Regel 4 Bytes groß, Wertebereich: ca. 1.2E-38 bis 3.4E+38
+  \item[\texttt{double}]\hfill\\
+   Doppelpräzisions-Gleitkommazahl, in der Regel 8 Bytes groß, Wertebereich: ca. 2.3E-308 bis 1.7E+308
+  \item[\texttt{long double}]\hfill\\
+   Erweiterte Präzisions-Gleitkommazahl, in der Regel 10, 12 oder 16 Bytes groß, Wertebereich: abhängig von der Implementierung, aber in der Regel größer als \texttt{double}
+\end{description}
+Hier wird eine eigenartige Darstellung von Gleitkommazahlen verwendet, die als \textbf{IEEE 754 Standard} bekannt ist. Diese Darstellung ermöglicht es, eine große Bandbreite von Zahlen darzustellen
+%, einschließlich sehr kleiner und sehr großer Werte, sowie spezieller Werte wie Unendlichkeit und NaN (Not a Number)
+. Das ``E'' steht für ``Exponent'' und zeigt an, dass die Zahl in wissenschaftlicher Notation dargestellt wird. Zum Beispiel bedeutet \texttt{1.2E-38} die Zahl $1.2 \cdot 10^{-38}$, also eine sehr kleine Zahl, während \texttt{3.4E+38} die Zahl $3.4 \cdot 10^{38}$ ist, also eine sehr große Zahl. Man kann sagen, dass die Zahl nach ``E'' die Zahl der Stellen angibt, um die das Komma verschoben werden muss, um die Zahl in Standardform zu bringen. Ein negativer Exponent bedeutet, dass das Komma nach links verschoben wird, während ein positiver Exponent bedeutet, dass das Komma nach rechts verschoben wird. Damit wird, z.B. die Zahl \texttt{1.23E+3} zu $1230$ und die Zahl \texttt{4.56E-2} zu $0.0456$.
+
+\subparagraph{Zeichen und Zeichenketten}
+Zeichen werden in C und C++ durch den Datentyp \texttt{char} dargestellt. Eine Zeichenvariable speichert ein einzelnes Zeichen und belegt in der Regel 1 Byte. Zeichenketten sind Arrays von Zeichen, die durch das Nullzeichen \texttt{'\textbackslash0'} terminiert sind. Sie werden durch den Datentyp \texttt{char[]} oder \texttt{char*} dargestellt.
+% FIXME
+
+\subparagraph{\texttt{void}}
+Der Datentyp \texttt{void} wird verwendet, um anzugeben, dass eine Funktion keinen Rückgabewert hat. Er kann auch in Zeigern verwendet werden, um einen Zeiger auf einen unbekannten Datentyp zu deklarieren.
+
+\subparagraph{Zeiger}
+% FIXME
+
+\subparagraph{\texttt{const}}
+% FIXME
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Strukturen}
+\label{sec:referenz:c:struct}
+
+Um komplexere Daten zu speichern, können wir in C und C++ \textbf{Strukturen} verwenden. Eine Struktur ist eine Sammlung von Variablen, die unter einem gemeinsamen Namen zusammengefasst sind. Jede Variable innerhalb einer Struktur wird als \textbf{Mitglied} bezeichnet. Strukturen ermöglichen es uns, verschiedene Datentypen in einer einzigen Einheit zu kombinieren.
+Hier ist ein Beispiel für eine Struktur, die einen Punkt im zweidimensionalen Raum darstellt:
+\begin{code}
+struct Point {
+    int x; // x-Koordinate
+    int y; // y-Koordinate
+};
+\end{code}
+Wir können dann eine Variable vom Typ \texttt{Point} erstellen und auf ihre Mitglieder zugreifen:
+\begin{code}
+struct Point p1; // Erstellen einer Point-Variable
+p1.x = 10; // Setzen der x-Koordinate
+p1.y = 20; // Setzen der y-Koordinate
+printf("Punkt: (%d, %d)\n", p1.x, p1.y); // Ausgabe
+\end{code}
+Alternativ können wir auch die Struktur direkt bei der Deklaration initialisieren:
+\begin{code}
+struct Point p2 = {30, 40}; // Erstellen mit Initialisierung
+printf("Punkt: (%d, %d)\n", p2.x, p2.y); // Ausgabe
+\end{code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Anweisungsblock}
+\label{sec:referenz:c:block}
+
+Ein Anweisungsblock (englisch: \textit{block}) ist eine Gruppe von Anweisungen, die zusammengefasst und als eine Einheit behandelt werden. In C und C++ wird ein Anweisungsblock durch geschweifte Klammern \texttt{\{ ... \}} definiert. Ein Anweisungsblock kann überall dort verwendet werden, wo eine einzelne Anweisung erwartet wird, z.B. in Kontrollstrukturen wie \texttt{if}, \texttt{for} oder \texttt{while}. Innerhalb eines Anweisungsblocks können Variablen deklariert werden, die nur innerhalb dieses Blocks sichtbar sind (lokale Variablen). Dies ermöglicht eine bessere Organisation des Codes und verhindert Namenskonflikte.
+
+Blöcke können auch verschachtelt werden, d.h. ein Anweisungsblock kann innerhalb eines anderen Anweisungsblocks enthalten sein. Dies ist besonders nützlich, um den Gültigkeitsbereich von Variablen zu begrenzen und die Lesbarkeit des Codes zu verbessern.
+
+Aufpassen solltet ihr jedoch mit der Benennung von Variablen in verschachtelten Blöcken. Wenn ihr in einem inneren Block eine Variable mit dem gleichen Namen wie in einem äußeren Block deklariert, wird die äußere Variable innerhalb des inneren Blocks "verdeckt" (englisch: \textit{shadowed}). Das bedeutet, dass ihr innerhalb des inneren Blocks nur auf die innere Variable zugreifen könnt, während die äußere Variable vorübergehend nicht zugänglich ist. Dies kann zu Verwirrung führen und sollte vermieden werden, indem ihr eindeutige Namen für Variablen verwendet.Beispiel:
+\begin{code}
+int main() {
+    int x = 10; // äußere Variable
+    {
+        int x = 20; // innere Variable verdeckt die Äußere
+        printf("Innere x: %d\n", x); // Ausgabe: 20
+    }
+    printf("Äußere x: %d\n", x); // Ausgabe: 10
+    return 0;
+}
+\end{code}
+Es sollte angemerkt werden, dass moderne C- und C++-Compiler in der Regel Warnungen ausgeben, wenn Variablen in verschachtelten Blöcken verdeckt werden. Es ist eine gute Praxis, eindeutige Namen für Variablen zu verwenden, um Verwirrung zu vermeiden.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Kontrollstrukturen}
+\label{sec:referenz:c:kontrollstrukturen}
+
+Sowohl in C als auch in C++ gibt es verschiedene Kontrollstrukturen, die den Ablauf eines Programms steuern. Dazu gehören bedingte Anweisungen wie \texttt{if}, \texttt{else if} und \texttt{else}, sowie Schleifen im folgenden Abschnitt. Diese Strukturen ermöglichen es, Entscheidungen zu treffen und bestimmte Codeabschnitte wiederholt auszuführen, basierend auf Bedingungen oder Zählvariablen.
+
+\begin{description}
+    \item[\texttt{if}]\hfill\\
+        Die \texttt{if}-Anweisung wird verwendet, um eine Bedingung zu überprüfen und einen Codeblock auszuführen, wenn die Bedingung wahr ist. Die Syntax lautet:
+\begin{code}
+if (Bedingung) {
+    // Code, der ausgeführt wird, wenn die Bedingung wahr ist
+}
+\end{code}
+
+    \item[\texttt{else if}]\hfill\\
+        Die \texttt{else if}-Anweisung wird verwendet, um eine weitere Bedingung zu überprüfen, wenn die vorherige \texttt{if}-Bedingung falsch war. Die Syntax lautet:
+\begin{code}
+if (Bedingung1) {
+    // Code, der ausgeführt wird, wenn Bedingung1 wahr ist
+} else if (Bedingung2) {
+    // Code, der ausgeführt wird, wenn Bedingung2 wahr ist
+}
+\end{code}
+    \item[\texttt{else}]\hfill\\
+        Die \texttt{else}-Anweisung wird verwendet, um einen Codeblock auszuführen, wenn keine der vorherigen Bedingungen wahr ist. Die Syntax lautet:
+\begin{code}
+if (Bedingung1) {
+    // Code, der ausgeführt wird, wenn Bedingung1 wahr ist
+} else if (Bedingung2) {
+    // Code, der ausgeführt wird, wenn Bedingung2 wahr ist
+} else {
+    // Code, der ausgeführt wird, wenn keine der Bedingungen wahr ist
+}
+\end{code}
+\end{description}
+Eine \textbf{Bedingung} ist ein Ausdruck, der entweder \texttt{true} (wahr) oder \texttt{false} (falsch) ergibt. In C und C++ werden Bedingungen durch Vergleiche oder sogenannte logische Ausdrücke gebildet. 
+
+Ein Vergleich bildet sich aus zwei Werten und einem Vergleichsoperator. Wenn wir zum Beispiel feststellen wollen ob zwei Zahlen \texttt{a} und \texttt{b} gleich sind, dann schreiben wir \texttt{a == b}. Dabei wird \texttt{==} als Operator bezeichnet (um genau zu sein, als Vergleichsoperator). 
+
+Liste aller Vergleichsoperatoren:
+Mögliche Vergleiche sind:
+\begin{description}
+    \item[\texttt{==}]\hfill\\
+        Gleichheit: Überprüft, ob zwei Werte gleich sind.
+    \item[\texttt{!=}]\hfill\\
+        Ungleichheit: Überprüft, ob zwei Werte ungleich sind.
+    \item[\texttt{<}]\hfill\\
+        Kleiner als: Überprüft, ob der linke Wert kleiner als der rechte Wert ist.
+    \item[\texttt{>}]\hfill\\
+        Größer als: Überprüft, ob der linke Wert größer als der rechte Wert ist.
+    \item[\texttt{<=}]\hfill\\
+        Kleiner oder gleich: Überprüft, ob der linke Wert kleiner oder gleich dem rechten Wert ist.
+    \item[\texttt{>=}]\hfill\\
+        Größer oder gleich: Überprüft, ob der linke Wert größer oder gleich dem rechten Wert ist.
+\end{description}
+
+Logische Operatoren werden verwendet, um mehrere Bedingungen zu kombinieren oder zu negieren. Die wichtigsten logischen Operatoren in C und C++ sind:
+\begin{description}
+    \item[\texttt{\&\&}]\hfill\\
+        Logisches UND: Gibt \texttt{true} zurück, wenn beide Bedingungen wahr sind.
+    \item[\texttt{||}]\hfill\\
+        Logisches ODER: Gibt \texttt{true} zurück, wenn mindestens eine der Bedingungen wahr ist.
+    \item[\texttt{!}]\hfill\\
+        Logisches NICHT: Negiert die Bedingung, d.h. gibt \texttt{true} zurück, wenn die Bedingung falsch ist, und \texttt{false} zurück, wenn die Bedingung wahr ist.
+\end{description}   
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Schleifen}
+\label{sec:referenz:c:schleifen}
+
+C und C++ bieten drei Arten von Schleifen an: \texttt{for}, \texttt{while} und \texttt{do-while}. Jede Schleife hat ihre eigenen Anwendungsfälle und Syntax.
+
+\begin{description}
+    \item[\texttt{for}-Schleife]\hfill\\
+        Die \texttt{for}-Schleife wird verwendet, wenn die Anzahl der Schritte im Voraus bekannt ist. Sie hat die folgende Syntax:
+\begin{code}
+for(Initialisierung; Bedingung; Inkrement) {
+    // Code, der wiederholt ausgeführt wird
+}
+\end{code}
+    
+    \item[\texttt{while}-Schleife]\hfill\\
+        Die \texttt{while}-Schleife wird verwendet, wenn die Anzahl der Schritte nicht im Voraus bekannt ist und die Schleife so lange ausgeführt werden soll, wie eine bestimmte Bedingung erfüllt ist. Sie hat die folgende Syntax:
+\begin{code}
+while(Bedingung) {
+    // Code, der wiederholt ausgeführt wird
+}
+\end{code}
+
+    \item[\texttt{do-while}-Schleife]\hfill\\
+        Die \texttt{do-while}-Schleife ist ähnlich wie die \texttt{while}-Schleife, aber der Code innerhalb der Schleife wird mindestens einmal ausgeführt, bevor die Bedingung überprüft wird. Sie hat die folgende Syntax:
+\begin{code}
+do {
+    // Code, der wiederholt ausgeführt wird
+} while(Bedingung);
+\end{code}
+\end{description}
+
+Die \texttt{for}-Schleife nimmt hier eine besondere Stellung ein. Am besten erklärt man die \texttt{for}-Schleife, indem man sie in eine \texttt{while}-Schleife umwandelt. Die \texttt{for}-Schleife
+\begin{code}
+for(Initialisierung; Bedingung; Inkrement) {
+    // Code, der wiederholt ausgeführt wird
+}
+\end{code}
+ist äquivalent zu:
+\begin{code}
+{
+    Initialisierung;
+    while(Bedingung) {
+        // Code, der wiederholt ausgeführt wird
+        Inkrement;
+    }
+}
+\end{code}
+Die \textbf{Initialisierung} wird nur einmal zu Beginn der Schleife ausgeführt. Sie dient gewöhnlich dazu, eine Zählvariable zu deklarieren und zu initialisieren. Die \textbf{Bedingung} wird vor jedem Durchlauf überprüft, und das \textbf{Inkrement} wird am Ende jedes Durchlaufs ausgeführt (Inkrement heißt wörtlich "Erhöhung"). Wenn wir zum Beispiel 1 bis 10 zählen wollen, dann schreiben wir:
+\begin{code}
+for(int i = 1; i <= 10; i++) {
+    printf("%d\n", i);
+}
+\end{code}
+oder von 100 in 10-er Schritten bis 0 zählen wollen, dann schreiben wir:
+\begin{code}
+for(int i = 100; i >= 0; i -= 10) {
+    printf("%d\n", i);
+}       
+\end{code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Funktionen}
+
+Um ein Programm in kleinere, wiederverwendbare Teile zu zerlegen, können wir in C und C++ \textbf{Funktionen} verwenden. Eine Funktion ist ein benannter Codeblock, der eine bestimmte Aufgabe ausführt und optional Werte zurückgeben kann. Funktionen ermöglichen es uns, den Code zu organisieren, die Lesbarkeit zu verbessern und die Wiederverwendbarkeit zu erhöhen.
+
+Eine Funktion besteht aus einem Funktionskopf, der den Namen der Funktion, die Parameter und den Rückgabewert definiert, und einem Funktionskörper, der die Anweisungen enthält, die ausgeführt werden, wenn die Funktion aufgerufen wird. Die Syntax für die Definition einer Funktion lautet:
+\begin{code}
+Rückgabewert Funktionsname(Parameterliste) {
+    // Anweisungen
+}
+\end{code}
+Der \textbf{Rückgabewert} gibt den Datentyp des Wertes an, den die Funktion zurückgibt (siehe oben \ref{sec:referenz:c:datentypen}). Wenn die Funktion keinen Wert zurückgibt, wird der Rückgabewert als \texttt{void} angegeben. Die \textbf{Parameterliste} enthält die Eingabewerte, die an die Funktion übergeben werden, und kann leer sein, wenn keine Eingaben erforderlich sind. Ein Parameter, häufig auch als Argument bezeichnet, ist eine Variable, die innerhalb der Funktion verwendet wird und deren Wert beim Aufruf der Funktion übergeben wird. Ein Argument setzt sich aus Datentype und Variablendamen zusammen. Die Parameterliste kann mehrere Parameter enthalten, die durch Kommas getrennt sind.
+
+Zum Beispiel definieren wir eine Funktion, die zwei ganze Zahlen addiert und das Ergebnis zurückgibt:
+\begin{code}
+int addiere(int a, int b) {
+    return a + b; // Rückgabe der Summe
+}
+\end{code}
+Wir können diese Funktion dann in unserem Hauptprogramm aufrufen:
+\begin{code}
+int main() {
+    int ergebnis = addiere(5, 3); // Aufruf der Funktion
+    printf("Ergebnis: %d\n", ergebnis); // Ausgabe
+    return 0;
+}
+\end{code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsubsection{Referenz}
+\label{sec:referenz:kommandos}
+
+\IncludeSorted{anhang/referenz/c}

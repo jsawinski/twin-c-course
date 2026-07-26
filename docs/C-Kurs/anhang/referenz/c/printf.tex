@@ -26,21 +26,25 @@
         \end{tabular}
     \end{desc}
 
-    \textbf{Beispiel:}
-    \begin{code}
-    #include <stdio.h>
+    \begin{example}
+        \begin{code}
+#include <stdio.h>
 
-    int main() {
-        int zahl = 42;
-        printf("Die Zahl ist: %d\n", zahl);
-        printf("Adresse: %p\n", (void*)&zahl);
-        return 0;
-    }
-    \end{code}
+int main() {
+    int zahl = 42;
+    printf("Die Zahl ist: %d\n", zahl);
+    printf("Adresse: %p\n", (void*)&zahl);
+    return 0;
+}
+        \end{code}
+    \end{example}
 
-    \textbf{Rückgabewert:}
-    Die Anzahl der ausgegebenen Zeichen, oder \codeinline{-1} bei Fehler.
+    \begin{returns}
+        Die Anzahl der ausgegebenen Zeichen, oder \codeinline{-1} bei Fehler.
+    \end{returns}
 
-    \textbf{Siehe auch:} \codeinline{scanf()}, \codeinline{sprintf()}, \codeinline{fprintf()}
+    \begin{seealso}
+        \codeinline{scanf()}, \codeinline{sprintf()}, \codeinline{fprintf()}
+    \end{seealso}
 \end{man}
 

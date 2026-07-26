@@ -1,0 +1,145 @@
+\section{Etwas Mathematik}
+\label{sec:etwas-mathematik}
+
+Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größere Zahlen darstellen zu können, werden mehrere dieser Nullen und Einsen, genannt ``\textbf{Bit}'' aneinandergereit. Am gebräuchlichsten dabei ist das ``\textbf{Byte}'' (siehe Abb.~\ref{fig:byte_bits}), das aus 8 Bit besteht.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+      cell/.style={
+          draw,
+          rectangle,
+          minimum width=0.8cm,
+          minimum height=0.8cm,
+          font=\ttfamily\large,
+          outer sep=0pt,          % Kein Abstand zwischen Zellen
+          anchor=base,
+      }
+  ]
+
+  % Bit-Positionen (0 bis 7) nebeneinander
+  \foreach \i in {0,1,...,7} {
+      \node[cell] at (7-\i,0) (bit\i) {\i};
+  }
+
+  % Border around entire byte
+  \node[draw=black, thick, inner sep=4pt, fit=(bit0)(bit7)] (bytebox) {};
+
+  % Etikett "Bit" darüber
+  \node[font=\sffamily, left=0.1cm of bytebox] {\textbf{Bit}};
+
+  \end{tikzpicture}
+  \caption{Ein Byte mit den Bit-Positionen 0 bis 7.}
+  \label{fig:byte_bits}
+\end{figure}
+
+\noindent
+Jedem Bit wird nun ein Wert zugeordnet. Das erfolgt mathematisch gemäß:
+\begin{equation*}
+  2^b
+\end{equation*}
+wobei $b$ die Nummer des Bits ist. Das ist eine sogenannte ``Potenz'', eine mathematische Operation die sagt, wie oft eine Zahl mit sich selbst multipliziert wird. In diesem Fall wird die ``2'' $b$-mal mit sich selbst multipliziert, zum Beispiel:
+\begin{align*}
+  2^1 &= 2              &= 2\\
+  2^2 &= 2\cdot2        &= 4\\
+  2^3 &= 2\cdot2\cdot2  &= 8
+\end{align*}
+Interessant ist nun die Frage, was $2^0$ ist. Wenn ihr genau hinschaut, dann merkt ihr, dass, um in die nächste Zeile zu kommen, ihr das Ergebnis mit $2$ multipliziern müsst. Umgekehrt genauso: um in die vorhergehende Zeile zu kommen, muss man durch $2$ teilen. Wenn also $2^1$ zwei ist und man, um zu $2^0$ zu kommen durch zwei Teilen muss, dann ergibt sich
+\begin{equation*}
+  2^0 = 1\,.
+\end{equation*}
+Übrigens, jede Zahl hoch $0$ hat als Ergebnis die $1$ (wir kommen später darauf zurück).
+
+Um auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jeweils die Werte 1 bis 128 zugeordnet sind (siehe Abb.~\ref{fig:byte_values}).
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+      cell/.style={
+          draw,
+          rectangle,
+          minimum width=0.8cm,
+          minimum height=0.8cm,
+          font=\ttfamily\large,
+          outer sep=0pt,          % Kein Abstand zwischen Zellen
+          anchor=base,
+      }
+  ]
+
+  % Zeile 1: Bit-Positionen (0 bis 7)
+  \foreach \i in {0,1,...,7} {
+      \node[cell] at (7-\i,0) (bit\i) {\i};
+  }
+
+  % Zeile 2: Werte (1, 2, 4, 8, 16, 32, 64, 128)
+  \foreach \i in {0,1,...,7} {
+      \node[cell] at (7-\i,-1.2) (val\i) {\pgfmathparse{int(2^\i)}\pgfmathresult};
+  }
+
+  % Border around
+  \node[draw=black, thick, inner sep=4pt, fit=(bit0)(bit7)] (bytebox) {};
+  \node[draw=black, thick, inner sep=4pt, fit=(val0)(val7)] (valbox) {};
+
+
+  % Etiketten "Bit" und "Wert" darüber
+  \node[font=\sffamily, left=0.1cm of bytebox] {\textbf{Bit}};
+  \node[font=\sffamily, left=0.1cm of valbox] {\textbf{Wert}};
+
+  \end{tikzpicture}
+  \caption{Ein Byte mit Bit-Positionen und den zugehörigen Werten ($2^b$).}
+  \label{fig:byte_values}
+\end{figure}
+
+\noindent
+Damit können wir nun die Zahlen 0 bis 255 darstellen, z.B.:
+\begin{align*}
+  00000000 &\rightarrow 0\,, \\
+  00000011 &\rightarrow 3\,, \\
+  01011000 &\rightarrow 88\,, \\
+  11111111 &\rightarrow 255\,.
+\end{align*}
+Das Addieren funktioniert nun genauso, wie ihr es aus der Schule, in der natürlich das Zehnersystem verwendet wird, gelernt habt. Beispiel:
+\begin{lstlisting}
+      00100111       39
+    + 00000110     +  6
+          11         1     (Übertrag)
+     ---------      ---
+      00101101       45
+\end{lstlisting}
+Entsprechend lässt sich auch die Multiplikation durchführen:
+\begin{lstlisting}
+      00001010·00101010 =     10·42
+
+      00000000
+       00000000
+        00000000
+         00000000
+          00101010
+           00000000
+            00101010
+             00000000
+             1 1             (Übertrag)
+      ---------------
+            110100100        420
+\end{lstlisting}
+Wenn ihr genau hinseht, dann bemerkt ihr, dass wir zwei Bytes multipliziert haben, aber das Ergebnis benötigt ein Bit mehr. Das führt zu dem Problem, dass, wenn ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis, dass der Computer euch liefert, $164$ ist. Das gleich passiert bei einem Byte, wenn ihr zu $255$ die $1$ dazuzählt, das Ergebnis ist $0$!
+
+Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Zweierkomplement'' (den Begriff müsst ihr euch natürlich nicht merken). Wichtig ist: dass höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
+\begin{lstlisting}
+    10000000        -128
+    10000001        -127
+    ...
+    11111111        -  1
+    00000000           0
+    00000001           1
+    ...
+    01111111         127
+\end{lstlisting}
+Wie wird nun aus einer positiven Zahl eine Negative? Das passiert, indem man alle Bits invertiert (das heißt, aus 0 wird 1 und aus 1 eine 0) und 1 addiert:
+\begin{lstlisting}
+(-127)  10000001  ->  01111110
+                     +00000001
+                      --------
+                      01111111     (127)
+\end{lstlisting}
+
