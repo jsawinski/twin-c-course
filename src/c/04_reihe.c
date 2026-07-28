@@ -4,7 +4,7 @@
 
 int main() {
     double pi = 1.0;
-    for (int i = 1; i < 1000000000; i++) {
+    for (int i = 1; i <= 1000000000; i++) {
         double n = 2*i + 1;     // 3, 5, 7, 9, ...
         n = 1.0 / n;            // 1/n
 
