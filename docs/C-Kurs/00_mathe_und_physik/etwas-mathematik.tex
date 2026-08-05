@@ -220,4 +220,47 @@ Die grundlegenden binären Operationen sind:
        0010
     \end{lstlisting}
 \end{description}
+\par
 
+\noindent
+In der Tat wird auch, auf elektronischer Ebene im Prozessor, eine Addition mit binären Operationen durchgeführt. 
+
+\begin{exercise}
+    Wir haben oben die Addition von zwei binären Zahlen durchgeführt. Für die erste Stelle (ganz rechts) haben wir die beiden Bits addiert und das Ergebnis, aber auch den Übertrag notiert. Finde heraus, wie man die Addition der beiden Bits und den Übertrag mit den binären Operationen \texttt{AND}, \texttt{OR} und \texttt{XOR} berechnen kann. 
+    % \begin{solution}
+    %     Lösung...
+    % \end{solution}
+\end{exercise}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Logische Operationen}
+\label{sec:etwas-mathematik:logische-operationen}
+
+Wie der Autor schon oben erwähnt hat, werden die Begriffe ``binäre Operation'' und ``logische Operation'' nicht immer gleich verwendet. In der Programmiersprache C und C++ gibt es aber eine klare Unterscheidung. Die logischen Operationen sind:
+\begin{description}
+  \item[\texttt{\&\&}]\hfill\\
+    Die \texttt{\&\&}-Operation (logisches UND) verknüpft zwei boolesche Werte. Das Ergebnis ist \texttt{true}, wenn beide Werte \texttt{true} sind, sonst ist das Ergebnis \texttt{false}. Zum Beispiel:
+    \begin{lstlisting}
+       true
+    && false
+    --------
+      false
+    \end{lstlisting}
+  \item[\texttt{||}]\hfill\\
+    Die \texttt{||}-Operation (logisches ODER) verknüpft zwei boolesche Werte. Das Ergebnis ist \texttt{true}, wenn mindestens einer der Werte \texttt{true} ist, sonst ist das Ergebnis \texttt{false}. Zum Beispiel:
+    \begin{lstlisting}
+       true
+     || false
+    --------
+       true
+    \end{lstlisting}
+  \item[\texttt{!}]\hfill\\
+    Die \texttt{!}-Operation (logisches NICHT) invertiert einen booleschen Wert. Das Ergebnis ist \texttt{true}, wenn der Wert \texttt{false} ist, und \texttt{false}, wenn der Wert \texttt{true} ist. Zum Beispiel:
+    \begin{lstlisting}
+     ! true
+    --------
+       false
+    \end{lstlisting}
+\end{description}

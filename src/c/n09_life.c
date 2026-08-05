@@ -25,8 +25,8 @@ void konsole_cursor_an() {
 
 void konsole_initialisieren() {
     /* Konsolen einstellen */
-    struct termios neue_einstellungen = einstellungen;
     tcgetattr(STDIN_FILENO, &einstellungen);
+    struct termios neue_einstellungen = einstellungen;
 
     neue_einstellungen.c_lflag &= ~(ICANON | ECHO /*| ISIG*/); // Deaktiviert Canonical Mode und Echo
     neue_einstellungen.c_cc[VMIN] = 0;  // Mindestens 1 Zeichen zum Lesen

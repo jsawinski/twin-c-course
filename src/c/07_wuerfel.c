@@ -3,17 +3,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define BREITE 60
-#define HOEHE 30
-
-void konsole_start() { 
-    printf("\x1b[H"); 
-}
-
-void konsole_loeschen() { 
-    printf("\x1b[2J"); 
-}
-
 int main() {
     for(int i = 1; i <= 10; i++) {
         int zahl = rand();

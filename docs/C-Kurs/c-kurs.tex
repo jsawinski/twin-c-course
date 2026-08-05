@@ -4,17 +4,16 @@
 \author{Jürgen ``George'' Sawinski}
 
 \usepackage{polyglossia}
-\setdefaultlanguage{german}
-\setotherlanguage{english}
-\usepackage{graphicx} % allow embedded images
+  \setdefaultlanguage[babelshorthands=true]{german}
+  \setotherlanguage{english}
+\usepackage{graphicx}
   \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
-  \graphicspath{{images/}} % set of paths to search for images
-
+  \graphicspath{{images/}} 
 \usepackage{amsmath}
-\usepackage{units}    % non-stacked fractions and better unit spacing
-\usepackage{multicol} % multiple column layout facilities
-\usepackage{fancyvrb} % extended verbatim environments
-  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+\usepackage{units}
+\usepackage{multicol}
+\usepackage{fancyvrb}
+  \fvset{fontsize=\normalsize}
 \usepackage{hyperref}
 %   \hypersetup{
 %     pdfborder=1 1 1,
@@ -22,6 +21,15 @@
 \usepackage{tikz}
   \usetikzlibrary{positioning, fit, backgrounds}
 \usepackage[round, numbers]{natbib}
+
+\usepackage{fontspec}
+  \setmainfont{Libertinus Serif}[
+      Extension=.otf,
+      UprightFont=*-Regular,
+      BoldFont=*-Bold,
+      ItalicFont=*-Italic,
+      BoldItalicFont=*-BoldItalic,
+  ]
 
 \usepackage{c-kurs}
 
@@ -40,6 +48,7 @@
 
 \tableofcontents
 
+\newpage
 \section*{Vorwort}
 
 Dieser Kurs ist aus der gemeinsamen Arbeit des Autors mit seinen Söhnen entstanden.
@@ -106,8 +115,10 @@ entstehen.
 \appendix
 \include{anhang/software.tex}
 \include{anhang/referenz.tex}
+\newpage\subsection{Lösungen zu den Übungen}
+\printsolutions
 
-\bibliographystyle{unsrtnat}
+\newpage\bibliographystyle{unsrtnat}
 \bibliography{c-kurs}
 
 \end{document}

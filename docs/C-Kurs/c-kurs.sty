@@ -1,5 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Code display
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{listings}
 \usepackage{xcolor}
@@ -10,7 +14,7 @@
 }
 
 % Define colors
-\definecolor{codegreen}{rgb}{0.0, 0.5, 0.0}      % green
+\definecolor{codegreen}{rgb}{0.0, 0.5, 0.0}     % green
 \definecolor{codegray}{rgb}{0.5, 0.5, 0.5}      % gray
 \definecolor{codepurple}{rgb}{0.58, 0.0, 0.82}  % purple
 \definecolor{codeblue}{rgb}{0.0, 0.0, 1.0}      % blue
@@ -23,6 +27,7 @@
 % C++ style
 \lstdefinestyle{cppstyle}{
     language=C++,
+    % framerule=1.0pt,
     backgroundcolor=\color{codebg},
     commentstyle=\color{codegray}\itshape,
     keywordstyle=\color{codeblue}\bfseries,
@@ -110,7 +115,11 @@
 %\lstset{style=cppstyle}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Long tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{array}
 \usepackage{longtable}
@@ -125,7 +134,11 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Man-like entries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcounter{manpage}
@@ -270,10 +283,6 @@ end
 -- Expose the function to TeX
 \end{luacode*}
 
-% ============================================================
-% TeX Macros
-% ============================================================
-
 % \IncludeSorted{commands}
 %   Includes all .tex files from the given directory, sorted alphabetically.
 %   Each file becomes a subsection with automatic label.
@@ -310,3 +319,118 @@ end
         end
     }%
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Exercise environments for C/C++ course
+% (Compatible with polyglossia + lualatex)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Required packages
+\usepackage{polyglossia}
+\usepackage{hyperref}
+\usepackage{etoolbox}
+\usepackage{environ}
+
+% ============================================
+% Counters
+% ============================================
+\newcounter{exercise}[section]
+
+% ============================================
+% Storage macros
+% ============================================
+\def\exercise@storage{}
+\def\solution@storage{}
+
+% ============================================
+% Language-dependent strings
+% ============================================
+\def\exercise@exercise@name{Übung}
+\def\exercise@solution@name{Lösung}
+\def\exercise@solutions@name{Lösungen zu den Übungen}
+\def\exercise@see@name{siehe S.}
+
+% ============================================
+% Helper: Generate exercise reference with full hierarchy
+% (handles section, subsection, and subsubsection)
+% ============================================
+\def\exercise@make@ref{%
+  \ifnum\value{subsubsection}=0 %
+    \ifnum\value{subsection}=0 %
+      \thesection\alph{exercise}%
+    \else
+      \thesubsection\alph{exercise}%
+    \fi
+  \else
+    \thesubsubsection\alph{exercise}%
+  \fi
+}
+
+% ============================================
+% Exercise environment
+% ============================================
+\RequirePackage{mdframed}
+\definecolor{exercise@bg}{RGB}{235, 245, 255}
+\definecolor{exercise@border}{RGB}{100, 150, 220} % Medium blue
+
+\newmdenv[%
+  backgroundcolor=exercise@bg,
+  linecolor=exercise@border,
+%   linewidth=1pt,
+  roundcorner=4pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  skipabove=0.5em,
+  skipbelow=0.5em
+]{exercisebox}
+
+\NewEnviron{exercise}{%
+  \refstepcounter{exercise}%
+  \edef\current@exercise@ref{\exercise@make@ref}%
+  \begin{exercisebox}%
+    \par\noindent%
+    \textbf{\exercise@exercise@name\ \current@exercise@ref)}%
+    \hspace{0.5em}%
+    \BODY%
+  \end{exercisebox}%
+  % Store exercise in storage
+%   \xappto{\exercise@storage}{%
+%     \noexpand\item[\textbf{\current@exercise@ref}] %
+%     \unexpanded{\expandafter\BODY}%
+%   }%
+}
+
+% ============================================
+% Solution environment (used inside exercise)
+% ============================================
+\newenvironment{solution}{%
+  \textbf{(\exercise@solution@name\ \exercise@see@name\ \pageref{sec:solutions})}%
+%   \collect@solution
+}{%
+  \par
+}
+
+% \long\def\collect@solution#1\end{solution}{%
+%   \xappto{\solution@storage}{%
+%     \noexpand\item[\textbf{\current@exercise@ref}] %
+%     \unexpanded{#1}%
+%   }%
+% }
+
+% ============================================
+% Print all solutions
+% ============================================
+\def\printsolutions{%
+  \label{sec:solutions}%
+%   \begin{description}%
+    \solution@storage
+%   \end{description}%
+}
+
