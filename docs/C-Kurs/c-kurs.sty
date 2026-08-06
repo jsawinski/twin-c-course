@@ -330,6 +330,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 % Required packages
 \usepackage{polyglossia}
 \usepackage{hyperref}
@@ -374,7 +375,7 @@ end
 % ============================================
 % Exercise environment
 % ============================================
-\RequirePackage{mdframed}
+\usepackage{mdframed}
 \definecolor{exercise@bg}{RGB}{235, 245, 255}
 \definecolor{exercise@border}{RGB}{100, 150, 220} % Medium blue
 
@@ -400,37 +401,32 @@ end
     \hspace{0.5em}%
     \BODY%
   \end{exercisebox}%
-  % Store exercise in storage
-%   \xappto{\exercise@storage}{%
-%     \noexpand\item[\textbf{\current@exercise@ref}] %
-%     \unexpanded{\expandafter\BODY}%
-%   }%
+  \xappto{\exercise@storage}{%
+    \noexpand\item[\noexpand\textbf{\current@exercise@ref}] %
+    \unexpanded\expandafter{\BODY}%
+  }%
 }
 
 % ============================================
 % Solution environment (used inside exercise)
 % ============================================
-\newenvironment{solution}{%
+\NewEnviron{solution}{%
+  \par\raggedleft%
   \textbf{(\exercise@solution@name\ \exercise@see@name\ \pageref{sec:solutions})}%
-%   \collect@solution
-}{%
+  \xappto{\solution@storage}{%
+    \noexpand\item[\noexpand\textbf{\current@exercise@ref}] %
+    \unexpanded\expandafter{\BODY}%
+  }%
   \par
 }
-
-% \long\def\collect@solution#1\end{solution}{%
-%   \xappto{\solution@storage}{%
-%     \noexpand\item[\textbf{\current@exercise@ref}] %
-%     \unexpanded{#1}%
-%   }%
-% }
 
 % ============================================
 % Print all solutions
 % ============================================
 \def\printsolutions{%
   \label{sec:solutions}%
-%   \begin{description}%
+  \begin{description}%
     \solution@storage
-%   \end{description}%
+  \end{description}%
 }
 
