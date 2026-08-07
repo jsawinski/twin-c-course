@@ -50,11 +50,12 @@ wobei $b$ die Nummer des Bits ist. Das ist eine sogenannte ``Potenz'', eine math
   2^2 &= 2\cdot2        &= 4\\
   2^3 &= 2\cdot2\cdot2  &= 8
 \end{align*}
-Interessant ist nun die Frage, was $2^0$ ist. Wenn ihr genau hinschaut, dann merkt ihr, dass, um in die nächste Zeile zu kommen, ihr das Ergebnis mit $2$ multipliziern müsst. Umgekehrt genauso: um in die vorhergehende Zeile zu kommen, muss man durch $2$ teilen. Wenn also $2^1$ zwei ist und man, um zu $2^0$ zu kommen durch zwei Teilen muss, dann ergibt sich
+Interessant ist nun die Frage, was $2^0$ ist. Wenn Ihr genau hinschaut, dann merkt Ihr, dass, um in die nächste Zeile zu kommen, Ihr das Ergebnis mit $2$ multipliziern müsst. Umgekehrt genauso: um in die vorhergehende Zeile zu kommen, muss man durch $2$ teilen. Wenn also $2^1$ zwei ist und man, um zu $2^0$ zu kommen durch zwei Teilen muss, dann ergibt sich
 \begin{equation*}
   2^0 = 1\,.
 \end{equation*}
-Übrigens, jede Zahl hoch $0$ hat als Ergebnis die $1$ (wir kommen später darauf zurück).
+Übrigens, jede Zahl hoch $0$ hat als Ergebnis die $1$ (wir kommen später darauf zurück).\footnote{%
+  Es gibt ein Ausnahme und das ist $0^0$. Wenn Ihr diese Rechnung auf dem Computer ausführt, dann erhaltet Ihr als Ergebnis höchstwahrscheinlich auch die $1$. Die Mathematik dahinter kommt allerdings nicht zu einem eindeutigen Ergebnis.}
 
 Um auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jeweils die Werte 1 bis 128 zugeordnet sind (siehe Abb.~\ref{fig:byte_values}).
 
@@ -104,7 +105,7 @@ Damit können wir nun die Zahlen 0 bis 255 darstellen, z.B.:
   01011000 &\rightarrow 88\,, \\
   11111111 &\rightarrow 255\,.
 \end{align*}
-Das Addieren funktioniert nun genauso, wie ihr es aus der Schule, in der natürlich das Zehnersystem verwendet wird, gelernt habt. Beispiel:
+Das Addieren funktioniert nun genauso, wie Ihr es aus der Schule, in der natürlich das Zehnersystem verwendet wird, gelernt habt. Beispiel:
 \begin{lstlisting}
       00100111       39
     + 00000110     +  6
@@ -128,9 +129,9 @@ Entsprechend lässt sich auch die Multiplikation durchführen:
         ---------------
               110100100        420
 \end{lstlisting}
-Wenn ihr genau hinseht, dann bemerkt ihr, dass wir zwei Bytes multipliziert haben, aber das Ergebnis benötigt ein Bit mehr. Das führt zu dem Problem, dass, wenn ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis, dass der Computer euch liefert, $164$ ist. Das gleiche passiert bei einem Byte, wenn ihr zu $255$ die $1$ dazuzählt, das Ergebnis ist $0$ (in der Fachsprache als \textbf{Überlauf} bezeichnet).
+Wenn Ihr genau hinseht, dann bemerkt Ihr, dass wir zwei Bytes multipliziert haben, aber das Ergebnis benötigt 9 Bits, also ein Bit mehr als ein Byte. Das führt zu dem Problem, dass, wenn Ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis, dass der Computer euch liefert, $164$ ist. Das gleiche passiert bei einem Byte, wenn Ihr zu $255$ die $1$ dazuzählt, das Ergebnis ist $0$ (in der Fachsprache als \textbf{Überlauf} bezeichnet).
 
-Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Zweierkomplement'' (den Begriff müsst ihr euch natürlich nicht merken). Wichtig ist: dass höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
+Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Zweierkomplement'' (den Begriff müsst Ihr euch natürlich nicht merken). Wichtig ist: dass höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
 \begin{lstlisting}
     10000000        -128
     10000001        -127
@@ -170,7 +171,7 @@ bei dem aus einem oder mehreren Werten ein neuer Wert berechnet wird. Die
 \textbf{Zeichen}, die diese Operationen beschreiben (wie \texttt{+}, \texttt{-}, 
 \texttt{\&}, \texttt{|}), nennt man \textbf{Operatoren}. Die Werte, mit denen 
 eine Operation arbeitet, heißen \textbf{Operanden}. Zum Beispiel sind die 
-Grundrechenarten, die ihr in der Schule gelernt habt, also Addition, Subtraktion, 
+Grundrechenarten, die Ihr in der Schule gelernt habt, also Addition, Subtraktion, 
 Multiplikation und Division (Plus, Minus, Mal, Geteilt), sogenannte 
 \textbf{arithmetische Operationen}. 
 
@@ -188,7 +189,7 @@ gebaut wurden, arbeiteten mit diesen \emph{binären Operationen}\footnote{%
 \noindent
 Die grundlegenden binären Operationen sind:
 \begin{description}
-  \item[\texttt{AND}]\hfill\\
+  \item[\texttt{\&}]\hfill\\
     Die \texttt{AND}-Operation (binäres UND) verknüpft zwei binäre Zahlen bitweise. Das Ergebnis ist 1, wenn beide Bits 1 sind, sonst ist das Ergebnis 0. Zum Beispiel:
     \begin{lstlisting}
       1101
@@ -239,7 +240,7 @@ In der Tat wird auch, auf elektronischer Ebene im Prozessor, eine Addition mit b
       1 & 1 & 1 \\
       \end{tabular}
     \end{center}
-    Macht das für \texttt{AND} und \texttt{XOR} genauso. Dann überlegt Euch, wie man die Addition von zwei Bits und den Übertrag mit diesen drei Operationen berechnen kann. Am Besten fangt ihr damit an, Euch auch eine Wahrheitstabelle für die Addition von zwei Bits und den Übertrag zu erstellen:
+    Macht das für \texttt{AND} und \texttt{XOR} genauso. Dann überlegt Euch, wie man die Addition von zwei Bits und den Übertrag mit diesen drei Operationen berechnen kann. Am Besten fangt Ihr damit an, Euch auch eine Wahrheitstabelle für die Addition von zwei Bits und den Übertrag zu erstellen:
     \begin{center}
       \begin{tabular}{c|c!{\vrule width 1pt}c|c}
       A & B & S & C \\\Xhline{1pt}
@@ -259,7 +260,7 @@ In der Tat wird auch, auf elektronischer Ebene im Prozessor, eine Addition mit b
         1 & 1 & 0 & 1 \\
         \end{tabular}
       \end{center}
-      Wenn Ihr die Wahrheitstabellen für \texttt{AND} und \texttt{XOR} erstellt habt, dann könnt ihr sehen, dass die Summe S mit der \texttt{XOR}-Operation berechnet werden kann und der Übertrag C mit der \texttt{AND}-Operation.
+      Wenn Ihr die Wahrheitstabellen für \texttt{AND} und \texttt{XOR} erstellt habt, dann könnt Ihr sehen, dass die Summe S mit der \texttt{XOR}-Operation berechnet werden kann und der Übertrag C mit der \texttt{AND}-Operation.
     \end{solution}
 \end{exercise}
 
