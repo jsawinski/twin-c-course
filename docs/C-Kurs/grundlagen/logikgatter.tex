@@ -1,0 +1,103 @@
+\subsection{Logikgatter — wie Computer rechnen}
+\label{sec:etwas-mathematik:binäre-operationen}
+
+Bevor wir in das Thema einsteigen, wie Computer rechnen, sollten wir kurz den 
+Begriff ``\textbf{Operation}'' klären.
+
+Eine \textbf{Operation} ist eine \emph{Ausführungshandlung}, also ein Vorgang, 
+bei dem aus einem oder mehreren Werten ein neuer Wert berechnet wird. Die 
+\textbf{Zeichen}, die diese Operationen beschreiben (wie \texttt{+}, \texttt{-}, 
+\texttt{\&}, \texttt{|}), nennt man \textbf{Operatoren}. Die Werte, mit denen 
+eine Operation arbeitet, heißen \textbf{Operanden}. Zum Beispiel sind die 
+Grundrechenarten, die Ihr in der Schule gelernt habt, also Addition, Subtraktion, 
+Multiplikation und Division (Plus, Minus, Mal, Geteilt), sogenannte 
+\textbf{arithmetische Operationen}. 
+
+Obwohl Computer auch diese arithmetische Operationen durchführen können, arbeiten 
+die Schaltungen im Prozessor, dem Herzstück eines Computers, mit sogenannten 
+binären Operationen. Auch schon die ersten Computer, die in den 1940er Jahren 
+gebaut wurden, arbeiteten mit diesen \emph{binären Operationen}\footnote{%
+  Der Autor möchte an dieser Stelle darauf hinweisen, dass diese auch als ``logische
+  Operationen'' bezeichnet werden, die Begriffe ``binäre Operation'' und 
+  ``logische Operation'' jedoch nicht immer gleich verwendet  werden. Für die Programmiersprache 
+  C und C++ gibt es aber eine klare Unterscheidung, auf die wir erst später eingehen werden.} 
+(siehe z.B.\ \cite{wikipedia:computer}).
+
+\vskip 1em
+\noindent
+Die grundlegenden binären Operationen sind:
+\begin{description}
+  \item[\texttt{\&}]\hfill\\
+    Die \texttt{AND}-Operation (binäres UND) verknüpft zwei binäre Zahlen bitweise. Das Ergebnis ist 1, wenn beide Bits 1 sind, sonst ist das Ergebnis 0. Zum Beispiel:
+    \begin{lstlisting}
+      1101
+    & 1011
+    --------
+      1001
+    \end{lstlisting}
+  \item[\texttt{OR}]\hfill\\
+    Die \texttt{OR}-Operation (binäres ODER) verknüpft zwei binäre Zahlen bitweise. Das Ergebnis ist 1, wenn mindestens eines der Bits 1 ist, sonst ist das Ergebnis 0. Zum Beispiel:
+    \begin{lstlisting}
+       1101
+     | 1011
+    --------
+       1111
+    \end{lstlisting}
+  \item[\texttt{XOR}]\hfill\\
+    Die \texttt{XOR}-Operation (exklusives ODER) verknüpft zwei binäre Zahlen bitweise. Das Ergebnis ist 1, wenn genau eines der Bits 1 ist, sonst ist das Ergebnis 0. Zum Beispiel:
+    \begin{lstlisting}
+       1101
+     ^ 1011
+    --------
+       0110
+    \end{lstlisting}
+  \item[\texttt{NOT}]\hfill\\
+    Die \texttt{NOT}-Operation (binäres NICHT) invertiert die Bits einer binären Zahl. Das Ergebnis ist 1, wenn das Bit 0 ist, und 0, wenn das Bit 1 ist. Zum Beispiel:
+    \begin{lstlisting}
+     ~ 1101
+    --------
+       0010
+    \end{lstlisting}
+\end{description}
+\par
+
+\noindent
+In der Tat wird auch, auf elektronischer Ebene im Prozessor, eine Addition mit binären Operationen durchgeführt. 
+
+\begin{exercise}
+    Wir haben oben die Addition von zwei binären Zahlen durchgeführt. Für die erste Stelle (ganz rechts) haben wir die beiden Bits addiert und das Ergebnis, aber auch den Übertrag notiert. Finde heraus, wie man die Addition der beiden Bits und den Übertrag mit den binären Operationen \texttt{AND}, \texttt{OR} und \texttt{XOR} berechnen kann. 
+
+    \vskip 1em
+    \noindent\textit{Hinweise}: Macht Euch sogenannte Wahrheitstabellen. Für \texttt{OR} sieht diese zum Beispiel so aus:
+    \begin{center}
+      \begin{tabular}{c|c!{\vrule width 1pt}c}
+      A & B & A \texttt{|} B \\\Xhline{1pt}
+      0 & 0 & 0 \\
+      0 & 1 & 1 \\
+      1 & 0 & 1 \\    
+      1 & 1 & 1 \\
+      \end{tabular}
+    \end{center}
+    Macht das für \texttt{AND} und \texttt{XOR} genauso. Dann überlegt Euch, wie man die Addition von zwei Bits und den Übertrag mit diesen drei Operationen berechnen kann. Am Besten fangt Ihr damit an, Euch auch eine Wahrheitstabelle für die Addition von zwei Bits und den Übertrag zu erstellen:
+    \begin{center}
+      \begin{tabular}{c|c!{\vrule width 1pt}c|c}
+      A & B & S & C \\\Xhline{1pt}
+      0 & 0 & 0 & 0 \\
+      ... & ... & ... & ... \\
+      \end{tabular}
+    \end{center}
+    Das ``S'' steht für die Summe (Englisch ``sum'') und das ``C'' für den Übertrag (Englisch ``carry'').
+    \begin{solution}
+      Die Wahrheitstabelle für die Addition von zwei Bits und den Übertrag sieht so aus:
+      \begin{center}
+        \begin{tabular}{c|c!{\vrule width 1pt}c|c}
+        A & B & S & C \\\Xhline{1pt}
+        0 & 0 & 0 & 0 \\
+        0 & 1 & 1 & 0 \\
+        1 & 0 & 1 & 0 \\
+        1 & 1 & 0 & 1 \\
+        \end{tabular}
+      \end{center}
+      Wenn Ihr die Wahrheitstabellen für \texttt{AND} und \texttt{XOR} erstellt habt, dann könnt Ihr sehen, dass die Summe S mit der \texttt{XOR}-Operation berechnet werden kann und der Übertrag C mit der \texttt{AND}-Operation.
+    \end{solution}
+\end{exercise}

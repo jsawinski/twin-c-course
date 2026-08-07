@@ -6,33 +6,6 @@
 \usepackage{polyglossia}
   \setdefaultlanguage[babelshorthands=true]{german}
   \setotherlanguage{english}
-\usepackage{graphicx}
-  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
-  \graphicspath{{images/}} 
-\usepackage{amsmath}
-\usepackage{array}
-\usepackage{makecell}
-\usepackage{units}
-\usepackage{multicol}
-\usepackage{fancyvrb}
-  \fvset{fontsize=\normalsize}
-\usepackage{hyperref}
-%   \hypersetup{
-%     pdfborder=1 1 1,
-%     colorlinks=false}
-\usepackage{tikz}
-  \usetikzlibrary{positioning, fit, backgrounds}
-\usepackage[round, numbers]{natbib}
-
-\usepackage{fontspec}
-  \setmainfont{Libertinus Serif}[
-      Extension=.otf,
-      UprightFont=*-Regular,
-      BoldFont=*-Bold,
-      ItalicFont=*-Italic,
-      BoldItalicFont=*-BoldItalic,
-  ]
-
 \usepackage{c-kurs}
 
 \begin{document}
@@ -103,7 +76,10 @@ entstehen.
 
 \newpage
 
-\include{00_mathe_und_physik/etwas-mathematik.tex}
+\section{Ein paar Grundlagen}
+\label{sec:grundagen}
+
+% \include{00_mathe_und_physik/etwas-mathematik.tex}
 
 \section{C-Grundlagen}
 \input{01_c_grundlagen/01_hallo_welt.tex}
