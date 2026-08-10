@@ -74,6 +74,7 @@ dkms.conf
 *.idx
 *.ilg
 *.ind
+*-SAVE-ERROR
 
 # Kile backup files
 *.backup

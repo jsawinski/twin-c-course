@@ -22,6 +22,7 @@
 \PassOptionsToPackage{style=authoryear,backend=biber}{biblatex}
 \documentclass[%
   justified,
+  notoc,
   hyperref]{xtufte-book}
 
 \usepackage{c-kurs}
@@ -31,9 +32,13 @@
 \author{Jürgen ``George'' Sawinski}
 % \publisher{}
 
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 
-\begin{document}
+\let\paragraphorig\paragraph
+\renewcommand{\paragraph}[1]{\paragraphorig{#1}\hfill\mbox{}} % FIXME unskip
+
+\begin{document} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frontmatter
 
@@ -190,6 +195,11 @@ entstehen.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Erste Schritte in C}
+\input{01_c_grundlagen/01_hallo_welt}
+\input{01_c_grundlagen/02_zahlen}
+\input{01_c_grundlagen/03_fibonacci}
+\input{01_c_grundlagen/04_reihe}
+\input{01_c_grundlagen/05_lauflicht}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -207,5 +217,9 @@ entstehen.
 \appendix
 \part{Anhang}
 
+\input{anhang/software.tex}
+\input{anhang/referenz.tex}
+\newpage\chapter{Lösungen zu den Übungen}
+\printsolutions
 
 \end{document}

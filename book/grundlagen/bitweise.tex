@@ -1,65 +1,50 @@
 \section{Bitweise Operationen in C}
 \label{sec:grundlagen:bitweise-operationen}
 
-In der Programmiersprache C könnt ihr diese Logikgatter direkt benutzen.
-Die Operatoren dafür heißen \textbf{bitweise Operatoren}, weil sie auf den
-einzelnen Bits einer Zahl arbeiten.
-
+Die Logikgatter, die wir im vorhergehenden Abschnitt kennengelernt haben, sind die Bausteine, aus denen Computer aufgebaut sind. In C und C++, sowie vielen anderer Programmiersprachen, stehen diese als sogenannte \textbf{bitweise Operationen} zur Verfügung. Mit ihnen lassen sich die gleichen Operationen durchführen, wie mit den Logikgattern. Das bedeutet, dass Ihr mit diesen Operatoren auf den einzelnen Bits einer Zahl arbeiten könnt.
+Die Liste der bitweisen Operatoren in C und C++ ist:
 \begin{description}
-  \item[\texttt{\&} (bitweises UND)]\hfill\\
-    Arbeitet wie das UND-Gatter, aber auf jedem Bit einzeln.
-    \begin{lstlisting}
-      1101
-    & 1011
-    --------
-      1001
-    \end{lstlisting}
-
-  \item[\texttt{|} (bitweises ODER)]\hfill\\
-    Arbeitet wie das ODER-Gatter, aber auf jedem Bit einzeln.
-    \begin{lstlisting}
-       1101
-     | 1011
-    --------
-       1111
-    \end{lstlisting}
-
-  \item[\texttt{\^} (bitweises XOR)]\hfill\\
-    Arbeitet wie das XOR-Gatter, aber auf jedem Bit einzeln.
-    \begin{lstlisting}
-       1101
-     ^ 1011
-    --------
-       0110
-    \end{lstlisting}
-
-  \item[\texttt{\~} (bitweise Negation)]\hfill\\
-    Arbeitet wie das NOT-Gatter, aber auf jedem Bit einzeln.
-    \begin{lstlisting}
-     ~ 1101
-    --------
-       0010
-    \end{lstlisting}
+  \item[\texttt{\&} (and)]\hfill\\
+    Beispiel: \codeinline{1101 & 1011 = 1001}
+  \item[\texttt{|} (or)]\hfill\\
+    Beispiel: \codeinline{1101 \| 1011 = 1111}
+  \item[\texttt{\^} (xor)]\hfill\\
+    Beispiel: \codeinline{1101 \^ 1011 = 0110}
+  \item[\texttt{\~} (not)]\hfill\\
+    Beispiel: \codeinline{\~1101 = 0010}
+\end{description}
+Darüber hinaus gibt es noch die sogenannten \textbf{Schiebe-Operatoren}\footnote{Englisch: \textbf{shift}}, mit denen Ihr die Bits einer Zahl nach links\footnote{Englisch: \textbf{left}} oder rechts\footnote{Englisch: \textbf{right}} verschieben könnt. Das ist zum Beispiel nützlich, wenn Ihr eine Zahl mit 2 multiplizieren oder durch 2 teilen wollt. Die Shift-Operatoren sind:
+\begin{description}
+  \item[\texttt{<<} (shift left)]\hfill\\
+    Beispiel: \codeinline{00000011 << 2 = 00001100}
+  \item[\texttt{>>} (shift right)]\hfill\\
+    Beispiel: \codeinline{11000101 >> 2 = 00110001}
 \end{description}
 
-\textbf{Wichtige Unterscheidung:}
-In C gibt es auch \textbf{logische Operatoren} (\texttt{\&\&}, \texttt{||}, \texttt{!}).
-Die arbeiten nicht auf Bits, sondern auf \emph{Wahrheitswerten} (true/false).
-Wir werden sie später in Bedingungen (if, while) benutzen.
+\noindent
+\newthought{Vermutlich werdet Ihr Euch jetzt fragen}, wozu diese bitweisen Operationen überhaupt gut sind. Es gibt eine Vielzahl von Anwendungsmöglichkeiten, zum Beispiel werden wir später sehen, dass sich damit sehr einfach überprüfen lässt, ob eine Zahl gerade oder ungerade ist. Darüber hinaus kann auch eine Vielzahl von Ein- und Ausgabekanälen eines Computers sehr einfach angesteuert werden, ohne dass dafür komplexe Berechnungen notwendig wären. Es gibt aber viele Algorithmen\footnote{%
+  Ein Algorithmus ist eine \emph{genaue, endliche Abfolge von eindeutigen Anweisungen} 
+  zur Lösung eines Problems. Ein Kochrezept, eine Bauanleitung oder die Anleitung 
+  für ein Videospiel sind alles Algorithmen – in der Informatik sind sie die 
+  \emph{Baupläne} für Programme. 
+}, die sich mit nur mit bitweisen Operationen gut umsetzen lassen.
 
-\textbf{Wozu sind bitweise Operatoren gut?}
-\begin{itemize}
-    \item Sie sind \textbf{sehr schnell} – viel schneller als normale Rechenoperationen.
-    \item Man kann damit \textbf{mehrere Zustände in einer einzigen Zahl} speichern (Bitmasken).
-    \item Sie werden gebraucht, um \textbf{GPIO-Pins am Raspberry Pi} zu steuern.
-\end{itemize}
-
-Ein erstes Beispiel:
-\begin{lstlisting}[language=C]
-int zahl = 42;
-
-if (zahl & 1) {
-    printf("Die Zahl ist ungerade.\n");
-}
-\end{lstlisting}
-...
+\begin{exercise}
+    Wir haben oben die Addition von zwei binären Zahlen an folgendem Beispiel durchgeführt:
+% \begin{lstlisting}
+%       00100111       39
+%     + 00000110     +  6
+%           11         1     (Übertrag)
+%      ---------      ---
+%       00101101       45
+% \end{lstlisting}
+    Aus der letzten Übunt wisst Ihr bereits, dass Ihr für das 0-te Bit (ganz rechts), aus den Zahlen $A$ und $B$ durch \textbf{xor} die Summe und durch \textbf{and} den Übertrag berechnen könnt. In Form eines Algorithmus lässt sich die das folgendermaßen darstellen:
+% \begin{verbatim}
+%     S = A xor B
+%     C = A and B    
+% \end{verbatim}
+    Versucht nun herauszufinden, welchen weiteren Schritte notwendig sind, um die Summe von $A+B$ zu berechnen.
+    \begin{solution}
+        ...
+    \end{solution}
+\end{exercise}

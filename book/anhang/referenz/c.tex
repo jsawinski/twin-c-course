@@ -1,15 +1,15 @@
-\subsection{C}
+\section{C}
 \label{sec:referenz:c}
 
-\subsubsection{Grundlagen}
+\subsection{Grundlagen}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Datentypen}
+\subsection{Datentypen}
 \label{sec:referenz:c:datentypen}
 
-\subparagraph{Ganzzahlen}
+\paragraph{Ganzzahlen}
 
-C und C++ bieten verschiedene Datentypen für Ganzzahlen an, darunter \texttt{int}, \texttt{short}, \texttt{long} und \texttt{long long}. Jeder dieser Typen hat eine unterschiedliche Größe und einen unterschiedlichen Wertebereich. Die Größe hängt von der Architektur des Computers ab, auf dem das Programm ausgeführt wird. Diese sind alle \textbf{vorzeichenbehaftet}, was bedeutet, dass sie sowohl positive als auch negative Werte darstellen können. Es gibt auch die vorzeichenlosen Varianten \texttt{unsigned int}, \texttt{unsigned short}, \texttt{unsigned long} und \texttt{unsigned long long}, die nur nicht-negative Werte darstellen können (vergleicht das nochmal mit dem Abschnitt \ref{sec:etwas-mathematik}).
+C und C++ bieten verschiedene Datentypen für Ganzzahlen an, darunter \texttt{int}, \texttt{short}, \texttt{long} und \texttt{long long}. Jeder dieser Typen hat eine unterschiedliche Größe und einen unterschiedlichen Wertebereich. Die Größe hängt von der Architektur des Computers ab, auf dem das Programm ausgeführt wird. Diese sind alle \textbf{vorzeichenbehaftet}, was bedeutet, dass sie sowohl positive als auch negative Werte darstellen können. Es gibt auch die vorzeichenlosen Varianten \texttt{unsigned int}, \texttt{unsigned short}, \texttt{unsigned long} und \texttt{unsigned long long}, die nur nicht-negative Werte darstellen können (vergleicht das nochmal mit dem Abschnitt \ref{sec:grundlagen}).
 
 Die Liste der ganzzahligen Datentypen in C und C++ ist wie folgt:
 \begin{description}
@@ -23,7 +23,7 @@ Die Liste der ganzzahligen Datentypen in C und C++ ist wie folgt:
    Noch längere Ganzzahl, in der Regel 8 Bytes (64 Bit) groß, Wertebereich: -9.223.372.036.854.775.808 bis 9.223.372.036.854.775.807 (vorzeichenbehaftet) oder 0 bis 18.446.744.073.709.551.615 (vorzeichenlos).
 \end{description}
 
-\subparagraph{Gleitkommazahlen}
+\paragraph{Gleitkommazahlen}
 
 Gleitkommazahlen, also Zahlen mit Nachkommastellen, werden in C und C++ durch die Datentypen \texttt{float}, \texttt{double} und \texttt{long double} dargestellt. Diese Typen unterscheiden sich in der Genauigkeit und dem Wertebereich. Die Liste der Gleitkomma-Datentypen in C und C++ ist wie folgt:
 \begin{description}
@@ -38,21 +38,26 @@ Hier wird eine eigenartige Darstellung von Gleitkommazahlen verwendet, die als \
 %, einschließlich sehr kleiner und sehr großer Werte, sowie spezieller Werte wie Unendlichkeit und NaN (Not a Number)
 . Das ``E'' steht für ``Exponent'' und zeigt an, dass die Zahl in wissenschaftlicher Notation dargestellt wird. Zum Beispiel bedeutet \texttt{1.2E-38} die Zahl $1.2 \cdot 10^{-38}$, also eine sehr kleine Zahl, während \texttt{3.4E+38} die Zahl $3.4 \cdot 10^{38}$ ist, also eine sehr große Zahl. Man kann sagen, dass die Zahl nach ``E'' die Zahl der Stellen angibt, um die das Komma verschoben werden muss, um die Zahl in Standardform zu bringen. Ein negativer Exponent bedeutet, dass das Komma nach links verschoben wird, während ein positiver Exponent bedeutet, dass das Komma nach rechts verschoben wird. Damit wird, z.B. die Zahl \texttt{1.23E+3} zu $1230$ und die Zahl \texttt{4.56E-2} zu $0.0456$.
 
-\subparagraph{Zeichen und Zeichenketten}
+\paragraph{Zeichen und Zeichenketten}
+
 Zeichen werden in C und C++ durch den Datentyp \texttt{char} dargestellt. Eine Zeichenvariable speichert ein einzelnes Zeichen und belegt in der Regel 1 Byte. Zeichenketten sind Arrays von Zeichen, die durch das Nullzeichen \texttt{'\textbackslash0'} terminiert sind. Sie werden durch den Datentyp \texttt{char[]} oder \texttt{char*} dargestellt.
 % FIXME
 
-\subparagraph{\texttt{void}}
+\paragraph{\texttt{void}}
+
 Der Datentyp \texttt{void} wird verwendet, um anzugeben, dass eine Funktion keinen Rückgabewert hat. Er kann auch in Zeigern verwendet werden, um einen Zeiger auf einen unbekannten Datentyp zu deklarieren.
 
-\subparagraph{Zeiger}
-% FIXME
+\paragraph{Zeiger}
 
-\subparagraph{\texttt{const}}
-% FIXME
+Zeiger sind FIXME
+
+\paragraph{\texttt{const}}
+
+Eine der schwierigsten Themen in C und C++ ist die Verwendung von \texttt{const}. 
+FIXME
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Strukturen}
+\subsection{Strukturen}
 \label{sec:referenz:c:struct}
 
 Um komplexere Daten zu speichern, können wir in C und C++ \textbf{Strukturen} verwenden. Eine Struktur ist eine Sammlung von Variablen, die unter einem gemeinsamen Namen zusammengefasst sind. Jede Variable innerhalb einer Struktur wird als \textbf{Mitglied} bezeichnet. Strukturen ermöglichen es uns, verschiedene Datentypen in einer einzigen Einheit zu kombinieren.
@@ -77,7 +82,7 @@ printf("Punkt: (%d, %d)\n", p2.x, p2.y); // Ausgabe
 \end{code}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Anweisungsblock}
+\subsection{Anweisungsblock}
 \label{sec:referenz:c:block}
 
 Ein Anweisungsblock (englisch: \textit{block}) ist eine Gruppe von Anweisungen, die zusammengefasst und als eine Einheit behandelt werden. In C und C++ wird ein Anweisungsblock durch geschweifte Klammern \texttt{\{ ... \}} definiert. Ein Anweisungsblock kann überall dort verwendet werden, wo eine einzelne Anweisung erwartet wird, z.B. in Kontrollstrukturen wie \texttt{if}, \texttt{for} oder \texttt{while}. Innerhalb eines Anweisungsblocks können Variablen deklariert werden, die nur innerhalb dieses Blocks sichtbar sind (lokale Variablen). Dies ermöglicht eine bessere Organisation des Codes und verhindert Namenskonflikte.
@@ -99,7 +104,7 @@ int main() {
 Es sollte angemerkt werden, dass moderne C- und C++-Compiler in der Regel Warnungen ausgeben, wenn Variablen in verschachtelten Blöcken verdeckt werden. Es ist eine gute Praxis, eindeutige Namen für Variablen zu verwenden, um Verwirrung zu vermeiden.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Kontrollstrukturen}
+\subsection{Kontrollstrukturen}
 \label{sec:referenz:c:kontrollstrukturen}
 
 Sowohl in C als auch in C++ gibt es verschiedene Kontrollstrukturen, die den Ablauf eines Programms steuern. Dazu gehören bedingte Anweisungen wie \texttt{if}, \texttt{else if} und \texttt{else}, sowie Schleifen im folgenden Abschnitt. Diese Strukturen ermöglichen es, Entscheidungen zu treffen und bestimmte Codeabschnitte wiederholt auszuführen, basierend auf Bedingungen oder Zählvariablen.
@@ -166,7 +171,7 @@ Logische Operatoren werden verwendet, um mehrere Bedingungen zu kombinieren oder
 \end{description}   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Schleifen}
+\subsection{Schleifen}
 \label{sec:referenz:c:schleifen}
 
 C und C++ bieten drei Arten von Schleifen an: \texttt{for}, \texttt{while} und \texttt{do-while}. Jede Schleife hat ihre eigenen Anwendungsfälle und Syntax.
@@ -227,7 +232,7 @@ for(int i = 100; i >= 0; i -= 10) {
 \end{code}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Funktionen}
+\subsection{Funktionen}
 
 Um ein Programm in kleinere, wiederverwendbare Teile zu zerlegen, können wir in C und C++ \textbf{Funktionen} verwenden. Eine Funktion ist ein benannter Codeblock, der eine bestimmte Aufgabe ausführt und optional Werte zurückgeben kann. Funktionen ermöglichen es uns, den Code zu organisieren, die Lesbarkeit zu verbessern und die Wiederverwendbarkeit zu erhöhen.
 
@@ -256,7 +261,7 @@ int main() {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\subsubsection{Referenz}
+\subsection{Referenz}
 \label{sec:referenz:kommandos}
 
 \IncludeSorted{anhang/referenz/c}

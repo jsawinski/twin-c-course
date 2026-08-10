@@ -1,18 +1,13 @@
 \section{Logikgatter — die Bausteine des Prozessors}
 \label{sec:grundlagen:logikgatter}
 
-Bevor wir verstehen, wie Computer rechnen, müssen wir wissen, woraus sie gebaut sind.
-Das Herzstück eines Computers ist der Prozessor (die CPU). Er besteht aus vielen
-kleinen Schaltungen, die mit nur zwei Zuständen arbeiten: \textbf{0} und \textbf{1}.
-
-Diese Schaltungen nennt man \textbf{Logikgatter}. Die wichtigsten sind:
-
+Im vorhergehenden Abschnitt haben wir gesehen, dass Computer im Binärsystem rechnen. Das bedeutet, dass sie nur mit den Zahlen 0 und 1 arbeiten. Aber wie kann ein Computer damit rechnen? Wie kann er zum Beispiel die Zahl 2 mit der Zahl 3 multiplizieren? Bevor wir das verstehen, müssen wir uns anschauen, wie Computer aufgebaut sind: die zentrale Recheneinheit (CPU) besteht aus vielen kleinen Schaltungen, die mit nur zwei Zuständen arbeiten: \textbf{0} und \textbf{1}. Diese Schaltungen nennt man \textbf{Logikgatter}. Die wichtigsten sind:
 \begin{description}
-  \item[UND-Gatter (AND)]\hfill\\
+  \item[UND-Gatter]\footnote{Englisch: \textbf{and}}\hfill\\
     Das UND-Gatter liefert nur dann eine 1, wenn beide Eingänge 1 sind.
     \begin{center}
     \begin{tabular}{c|c|c}
-    A & B & A AND B \\
+    A & B & A \texttt{and} B \\
     \hline
     0 & 0 & 0 \\
     0 & 1 & 0 \\
@@ -21,11 +16,11 @@ Diese Schaltungen nennt man \textbf{Logikgatter}. Die wichtigsten sind:
     \end{tabular}
     \end{center}
 
-  \item[ODER-Gatter (OR)]\hfill\\
+  \item[ODER-Gatter]\footnote{Englisch: \textbf{or}}\hfill\\
     Das ODER-Gatter liefert eine 1, wenn mindestens einer der Eingänge 1 ist.
     \begin{center}
     \begin{tabular}{c|c|c}
-    A & B & A OR B \\
+    A & B & A \texttt{or} B \\
     \hline
     0 & 0 & 0 \\
     0 & 1 & 1 \\
@@ -34,11 +29,11 @@ Diese Schaltungen nennt man \textbf{Logikgatter}. Die wichtigsten sind:
     \end{tabular}
     \end{center}
 
-  \item[XOR-Gatter (exklusives ODER)]\hfill\\
+  \item[XOR-Gatter (exklusives ODER)]\footnote{Englisch (kurz): \textbf{xor}}\hfill\\
     Das XOR-Gatter liefert eine 1, wenn genau einer der Eingänge 1 ist.
     \begin{center}
     \begin{tabular}{c|c|c}
-    A & B & A XOR B \\
+    A & B & A \texttt{xor} B \\
     \hline
     0 & 0 & 0 \\
     0 & 1 & 1 \\
@@ -47,11 +42,11 @@ Diese Schaltungen nennt man \textbf{Logikgatter}. Die wichtigsten sind:
     \end{tabular}
     \end{center}
 
-  \item[NICHT-Gatter (NOT)]\hfill\\
-    Das NOT-Gatter invertiert den Eingang: aus 0 wird 1, aus 1 wird 0.
+  \item[NICHT-Gatter]\footnote{Englisch: \textbf{not}}\hfill\\
+    Das NICHT-Gatter invertiert den Eingang: aus 0 wird 1, aus 1 wird 0.
     \begin{center}
     \begin{tabular}{c|c}
-    A & NOT A \\
+    A & \texttt{not} A \\
     \hline
     0 & 1 \\
     1 & 0 \\
@@ -59,7 +54,43 @@ Diese Schaltungen nennt man \textbf{Logikgatter}. Die wichtigsten sind:
     \end{center}
 \end{description}
 
-Aus diesen einfachen Gattern kann man alles bauen – sogar eine Addition!
-% \begin{exercise}
-% ...
-% \end{exercise}
+\noindent
+Aus der Kombination dieser Logikgatter kann man dann auch komplexere Schaltungen bauen, die zum Beispiel alle Grundrechenarten (Addition, Subtraktion, Multiplikation und Division) von zwei Zahlen durchführen können. 
+
+\begin{exercise}
+    Wir haben oben die Addition von zwei binären Zahlen durchgeführt. Für die erste Stelle (ganz rechts) haben wir die beiden Bits addiert und das Ergebnis, aber auch den Übertrag notiert. Finde heraus, wie man die Addition der beiden Bits und den Übertrag mit den binären Operationen \texttt{AND}, \texttt{OR} und \texttt{XOR} berechnen kann. 
+
+    \vskip 1em
+    \noindent\textit{Hinweise}: Macht Euch sogenannte Wahrheitstabellen. Für \texttt{OR} sieht diese zum Beispiel so aus:
+    \begin{center}
+      \begin{tabular}{c|c!{\vrule width 1pt}c}
+      A & B & A \texttt{|} B \\\Xhline{1pt}
+      0 & 0 & 0 \\
+      0 & 1 & 1 \\
+      1 & 0 & 1 \\    
+      1 & 1 & 1 \\
+      \end{tabular}
+    \end{center}
+    Macht das für \texttt{AND} und \texttt{XOR} genauso. Dann überlegt Euch, wie man die Addition von zwei Bits und den Übertrag mit diesen drei Operationen berechnen kann. Am Besten fangt Ihr damit an, Euch auch eine Wahrheitstabelle für die Addition von zwei Bits und den Übertrag zu erstellen:
+    \begin{center}
+      \begin{tabular}{c|c!{\vrule width 1pt}c|c}
+      A & B & S & C \\\Xhline{1pt}
+      0 & 0 & 0 & 0 \\
+      ... & ... & ... & ... \\
+      \end{tabular}
+    \end{center}
+    Das ``S'' steht für die Summe (Englisch ``sum'') und das ``C'' für den Übertrag (Englisch ``carry'').
+    \begin{solution}
+      Die Wahrheitstabelle für die Addition von zwei Bits und den Übertrag sieht so aus:
+      \begin{center}
+        \begin{tabular}{c|c!{\vrule width 1pt}c|c}
+        A & B & S & C \\\Xhline{1pt}
+        0 & 0 & 0 & 0 \\
+        0 & 1 & 1 & 0 \\
+        1 & 0 & 1 & 0 \\
+        1 & 1 & 0 & 1 \\
+        \end{tabular}
+      \end{center}
+      Wenn Ihr die Wahrheitstabellen für \texttt{AND} und \texttt{XOR} erstellt habt, dann könnt Ihr sehen, dass die Summe S mit der \texttt{XOR}-Operation berechnet werden kann und der Übertrag C mit der \texttt{AND}-Operation.
+    \end{solution}
+\end{exercise}
