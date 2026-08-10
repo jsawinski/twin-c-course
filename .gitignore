@@ -71,6 +71,9 @@ dkms.conf
 *.dvi
 *.xdv
 *.fdb_latexmk
+*.idx
+*.ilg
+*.ind
 
 # Kile backup files
 *.backup
