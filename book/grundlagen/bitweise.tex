@@ -1,0 +1,65 @@
+\section{Bitweise Operationen in C}
+\label{sec:grundlagen:bitweise-operationen}
+
+In der Programmiersprache C könnt ihr diese Logikgatter direkt benutzen.
+Die Operatoren dafür heißen \textbf{bitweise Operatoren}, weil sie auf den
+einzelnen Bits einer Zahl arbeiten.
+
+\begin{description}
+  \item[\texttt{\&} (bitweises UND)]\hfill\\
+    Arbeitet wie das UND-Gatter, aber auf jedem Bit einzeln.
+    \begin{lstlisting}
+      1101
+    & 1011
+    --------
+      1001
+    \end{lstlisting}
+
+  \item[\texttt{|} (bitweises ODER)]\hfill\\
+    Arbeitet wie das ODER-Gatter, aber auf jedem Bit einzeln.
+    \begin{lstlisting}
+       1101
+     | 1011
+    --------
+       1111
+    \end{lstlisting}
+
+  \item[\texttt{\^} (bitweises XOR)]\hfill\\
+    Arbeitet wie das XOR-Gatter, aber auf jedem Bit einzeln.
+    \begin{lstlisting}
+       1101
+     ^ 1011
+    --------
+       0110
+    \end{lstlisting}
+
+  \item[\texttt{\~} (bitweise Negation)]\hfill\\
+    Arbeitet wie das NOT-Gatter, aber auf jedem Bit einzeln.
+    \begin{lstlisting}
+     ~ 1101
+    --------
+       0010
+    \end{lstlisting}
+\end{description}
+
+\textbf{Wichtige Unterscheidung:}
+In C gibt es auch \textbf{logische Operatoren} (\texttt{\&\&}, \texttt{||}, \texttt{!}).
+Die arbeiten nicht auf Bits, sondern auf \emph{Wahrheitswerten} (true/false).
+Wir werden sie später in Bedingungen (if, while) benutzen.
+
+\textbf{Wozu sind bitweise Operatoren gut?}
+\begin{itemize}
+    \item Sie sind \textbf{sehr schnell} – viel schneller als normale Rechenoperationen.
+    \item Man kann damit \textbf{mehrere Zustände in einer einzigen Zahl} speichern (Bitmasken).
+    \item Sie werden gebraucht, um \textbf{GPIO-Pins am Raspberry Pi} zu steuern.
+\end{itemize}
+
+Ein erstes Beispiel:
+\begin{lstlisting}[language=C]
+int zahl = 42;
+
+if (zahl & 1) {
+    printf("Die Zahl ist ungerade.\n");
+}
+\end{lstlisting}
+...

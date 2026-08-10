@@ -1,0 +1,65 @@
+\section{Logikgatter — die Bausteine des Prozessors}
+\label{sec:grundlagen:logikgatter}
+
+Bevor wir verstehen, wie Computer rechnen, müssen wir wissen, woraus sie gebaut sind.
+Das Herzstück eines Computers ist der Prozessor (die CPU). Er besteht aus vielen
+kleinen Schaltungen, die mit nur zwei Zuständen arbeiten: \textbf{0} und \textbf{1}.
+
+Diese Schaltungen nennt man \textbf{Logikgatter}. Die wichtigsten sind:
+
+\begin{description}
+  \item[UND-Gatter (AND)]\hfill\\
+    Das UND-Gatter liefert nur dann eine 1, wenn beide Eingänge 1 sind.
+    \begin{center}
+    \begin{tabular}{c|c|c}
+    A & B & A AND B \\
+    \hline
+    0 & 0 & 0 \\
+    0 & 1 & 0 \\
+    1 & 0 & 0 \\
+    1 & 1 & 1 \\
+    \end{tabular}
+    \end{center}
+
+  \item[ODER-Gatter (OR)]\hfill\\
+    Das ODER-Gatter liefert eine 1, wenn mindestens einer der Eingänge 1 ist.
+    \begin{center}
+    \begin{tabular}{c|c|c}
+    A & B & A OR B \\
+    \hline
+    0 & 0 & 0 \\
+    0 & 1 & 1 \\
+    1 & 0 & 1 \\
+    1 & 1 & 1 \\
+    \end{tabular}
+    \end{center}
+
+  \item[XOR-Gatter (exklusives ODER)]\hfill\\
+    Das XOR-Gatter liefert eine 1, wenn genau einer der Eingänge 1 ist.
+    \begin{center}
+    \begin{tabular}{c|c|c}
+    A & B & A XOR B \\
+    \hline
+    0 & 0 & 0 \\
+    0 & 1 & 1 \\
+    1 & 0 & 1 \\
+    1 & 1 & 0 \\
+    \end{tabular}
+    \end{center}
+
+  \item[NICHT-Gatter (NOT)]\hfill\\
+    Das NOT-Gatter invertiert den Eingang: aus 0 wird 1, aus 1 wird 0.
+    \begin{center}
+    \begin{tabular}{c|c}
+    A & NOT A \\
+    \hline
+    0 & 1 \\
+    1 & 0 \\
+    \end{tabular}
+    \end{center}
+\end{description}
+
+Aus diesen einfachen Gattern kann man alles bauen – sogar eine Addition!
+% \begin{exercise}
+% ...
+% \end{exercise}
