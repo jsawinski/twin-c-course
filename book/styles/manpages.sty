@@ -1,0 +1,182 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Man-like entries
+
+\newcounter{manpage}
+\setcounter{manpage}{0}
+
+\newenvironment{man}[2][libc]{%
+    \newenvironment{synopsis}{%
+        \textbf{Syntax}:%
+    }{}
+    \newenvironment{desc}{%
+        \textbf{Beschreibung}:\newline\noindent%
+    }{}
+    \newenvironment{example}{%
+        \textbf{Beispiel}:\newline\noindent%
+    }{}
+    \newenvironment{returns}{%
+        \textbf{Rückgabewert}:\newline\noindent%
+    }{}
+    \newenvironment{seeother}{%
+        \textbf{Siehe auch}:\newline\noindent%
+    }{}
+
+    \refstepcounter{manpage}%
+
+    % Man page header
+    \par\noindent%
+    \begin{minipage}{\textwidth}
+        \setlength{\parindent}{0pt}
+        \setlength{\parskip}{0pt}
+
+        % Header: command on left, manual section on right
+        \begin{flushleft}
+            \large\bfseries\ttfamily%
+            #2%
+            \label{man:#1:#2}%
+        \end{flushleft}
+
+        % Content area (indented)
+        \begin{flushright}
+            \begin{minipage}{0.95\textwidth}
+                \setlength{\parindent}{0pt}
+                \setlength{\parskip}{0.5\baselineskip}
+                \vspace{0.2\baselineskip}
+
+                \ignorespaces
+}%
+{%
+            \end{minipage}
+        \end{flushright}
+    \end{minipage}
+    \par\vspace{0.8\baselineskip}%
+}
+
+% include_sorted.tex
+% LuaLaTeX macro for sorted file inclusion
+% Usage: \IncludeSorted{commands}   (includes all .tex files in ./commands/)
+
+\usepackage{luacode}
+
+\begin{luacode*}
+-- ============================================================
+-- Sorted file inclusion for LaTeX
+-- ============================================================
+
+-- Function to get sorted list of .tex files in a directory
+function get_sorted_tex_files(directory)
+    local files = {}
+    local pattern = directory .. "/*.tex"
+
+    -- Use lfs (Lua File System) for directory listing
+    local lfs = require("lfs")
+
+    -- Check if directory exists
+    local attr = lfs.attributes(directory)
+    if not attr then
+        tex.print("\\textbf{Error: Directory '" .. directory .. "' not found!}")
+        return {}
+    end
+
+    -- Iterate through directory
+    for file in lfs.dir(directory) do
+        if file:match("%.tex$") then
+            table.insert(files, file)
+        end
+    end
+
+    -- Sort alphabetically
+    table.sort(files)
+    return files
+end
+
+-- Function to generate section title from filename
+function generate_title(filename)
+    -- Remove .tex extension
+    local name = filename:gsub("%.tex$", "")
+    -- Replace underscores with spaces
+    name = name:gsub("_", " ")
+    -- Capitalize each word
+    name = name:gsub("(%l)(%w*)", function(a, b)
+        return string.upper(a) .. b
+    end)
+    return name
+end
+
+-- Function to generate label from filename
+function generate_label(directory, filename)
+    local name = filename:gsub("%.tex$", "")
+    local label = directory .. ":" .. name
+    -- Remove special characters
+    label = label:gsub("[^%w:-]", "-")
+    return label
+end
+
+-- Main inclusion function
+function include_sorted(directory)
+    local files = get_sorted_tex_files(directory)
+
+    if #files == 0 then
+        tex.print("\\textbf{No .tex files found in '" .. directory .. "'}")
+        return
+    end
+
+    -- Add category section
+    local category = directory:gsub("^./", ""):gsub("/", " ")
+
+    -- Process each file
+    for _, filename in ipairs(files) do
+        -- Generate title and label
+        local title = generate_title(filename)
+        local label = generate_label(category, filename)
+
+        -- Include the file content
+        tex.print("\\input{" .. directory .. "/" .. filename .. "}")
+        tex.print("")
+
+        -- Add a small space between entries
+        tex.print("\\vspace{0.5\\baselineskip}")
+        tex.print("")
+    end
+end
+
+-- Expose the function to TeX
+\end{luacode*}
+
+% \IncludeSorted{commands}
+%   Includes all .tex files from the given directory, sorted alphabetically.
+%   Each file becomes a subsection with automatic label.
+%
+% \IncludeSortedAll{dir1}{dir2}{...}
+%   Includes all directories in order (useful for main document).
+%
+% \label{cmd:dir:filename}
+%   Cross-reference a specific command.
+
+\newcommand{\IncludeSorted}[1]{%
+    \directlua{include_sorted("#1")}%
+}
+
+% Alternative: Include multiple directories in order
+\newcommand{\IncludeSortedAll}[1]{%
+    \directlua{%
+        local dirs = {"#1"}
+        for _, dir in ipairs(dirs) do
+            include_sorted(dir)
+        end
+    }%
+}
+
+% Helper macro to check if directory exists
+\newcommand{\CheckDirectory}[1]{%
+    \directlua{%
+        local lfs = require("lfs")
+        local attr = lfs.attributes("#1")
+        if attr then
+            tex.print("\\textbf{Directory '" .. "#1" .. "' exists!}")
+        else
+            tex.print("\\textbf{Directory '" .. "#1" .. "' NOT found!}")
+        end
+    }%
+}
+

@@ -1,0 +1,16 @@
+% Section numbering scheme (including TOC): a.b.c
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\usepackage{titlesec}
+
+\titleformat{\paragraph}[block]
+  {\normalfont\normalsize\itshape}
+  {\theparagraph}
+  {1em}
+  {}
+
+\titlespacing*{\paragraph}
+  {0pt}    % left indentation
+  {3.25ex plus 1ex minus .2ex} % space before
+  {1ex}    % space after

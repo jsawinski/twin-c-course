@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Empty page (without header/footer)
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Long tables (spanning multiple pages)
+\usepackage{array}
+\usepackage{longtable}
+
+\newenvironment{multipagetable}[1]{%
+    \par\noindent
+    \setlength{\LTleft}{0pt}%
+    \setlength{\LTright}{\fill}%
+    \begin{longtable}{#1}%
+}{%
+    \end{longtable}%
+}
+

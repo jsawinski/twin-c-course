@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Boxes for high-lighting special topics
+
+\usepackage{mdframed}
+
+% Colors
+\definecolor{cbblue}{RGB}{0, 114, 178}
+\definecolor{cborange}{RGB}{230, 159, 0}
+\definecolor{cbgreen}{RGB}{0, 158, 115}
+
+% ... and aliases
+\colorlet{blue@bg}{cbblue!15}
+\colorlet{blue@border}{cbblue}
+
+\colorlet{orange@bg}{cborange!15}
+\colorlet{orange@border}{cborange}
+
+\colorlet{green@bg}{cbgreen!15}
+\colorlet{green@border}{cbgreen}
+
+% Plain
+\mdfsetup{
+  roundcorner=4pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  skipabove=0.5em,
+  skipbelow=0.5em
+}
+
+\newmdenv[
+  backgroundcolor=blue@bg,
+  linecolor=blue@border
+]{exercisebox}
+
+% \newmdenv[
+%   backgroundcolor=note@bg,
+%   linecolor=note@border
+% ]{notebox}
+%
+% \newmdenv[
+%   backgroundcolor=warning@bg,
+%   linecolor=warning@border
+% ]{warningbox}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Exercises
+%
+% TODO
+% - expand the code so that it is possible to have \printexercises, which prints
+%   exercises with solutions (but it must handle formatting as if withing the exercisebox!)
+
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+
+% Files
+\def\exercisedir{anhang/exercises}
+
+\def\theexercisesfile{\exercisedir/\jobname.exercises.tex} % FIXME currently unused, see TODO
+\newwrite\exercisesfile
+\immediate\openout\exercisesfile=\theexercisesfile
+
+\def\thesolusionsfile{\exercisedir/\jobname.solutions.tex}
+\newwrite\solutionsfile
+\immediate\openout\solutionsfile=\thesolusionsfile
+
+% Counters and Ifs
+\newcounter{exercise}[chapter]
+\renewcommand{\theexercise}{\alph{exercise}}
+
+\newcounter{solution}
+
+\newif\ifexercises
+\newif\ifsolutions
+
+\exercisesfalse
+\solutionsfalse
+
+% Output files
+\newenvironment{exercise}{%
+    \refstepcounter{exercise}%
+    \edef\current@exercise@number{\thechapter\theexercise}%
+
+    % Display the exercise
+    \begin{exercisebox}%
+        \par\noindent%
+        \textbf{\exercise@name~\current@exercise@number:}%
+        \label{\jobname:exercise:\current@exercise@number}%
+        \hspace{0.5em}%
+}{%
+        \vskip0pt\hfill\textbf{(\solution@name~\pageabbr~\pageref{\jobname:solution:\current@exercise@number})}
+    \end{exercisebox}
+}
+
+\newenvironment{solution}{%
+    \refstepcounter{solution}%
+    \edef\current@solutionfile{\jobname.solution-\arabic{solution}.tex}
+
+    \immediate\write\solutionsfile{%
+        \string\vskip1.5em%
+        \string\par\string\noindent%
+        \string\textbf{\solution@name\ \current@exercise@number}%
+        \string\label{\jobname:solution:\current@exercise@number}%
+        \string\par\string\noindent%
+        \string\input{\current@solutionfile}
+    }%
+
+    \VerbatimEnvironment
+    \VerbatimOut{\current@solutionfile}%
+}{%
+    \endVerbatimOut
+}
+
+\def\printsolutions{%
+    \solutionstrue%
+    \immediate\closeout\solutionsfile%
+    \input{\thesolusionsfile}%
+}
+

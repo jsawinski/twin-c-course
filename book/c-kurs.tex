@@ -10,9 +10,6 @@
 \usepackage{xspace}
 \usepackage{amsmath}
 \usepackage{siunitx}
-% \usepackage{polyglossia}
-%   \setdefaultlanguage[babelshorthands=true]{german}
-%   \setotherlanguage{english}
 \usepackage{makeidx}\makeindex
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -20,23 +17,19 @@
 \end{filecontents}
 
 \PassOptionsToPackage{style=authoryear,backend=biber}{biblatex}
+
 \documentclass[%
   justified,
   notoc,
   hyperref]{xtufte-book}
 
 \usepackage{c-kurs}
-\addbibresource{c-kurs.bib}
 
 \title{C/C++-Kurs für Kinder ab der 5. Klasse}
 \author{Jürgen ``George'' Sawinski}
 % \publisher{}
 
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
-
-\let\paragraphorig\paragraph
-\renewcommand{\paragraph}[1]{\paragraphorig{#1}\hfill\mbox{}} % FIXME unskip
+\addbibresource{c-kurs.bib}
 
 \begin{document} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

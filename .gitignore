@@ -75,6 +75,8 @@ dkms.conf
 *.ilg
 *.ind
 *-SAVE-ERROR
+*.exercises
+*.solutions
 
 # Kile backup files
 *.backup
