@@ -101,7 +101,7 @@
     \ifinsideexercise{}\else\PackageError{challenge}{Solution outside exercise}{...}\fi%
 
     \refstepcounter{solution}%
-    \edef\current@solutionfile{\jobname.solution-\arabic{solution}.tex}
+    \edef\current@solutionfile{\exercisedir/\jobname.solution-\arabic{solution}.tex}
 
     \immediate\write\solutionsfile{%
         \string\vskip1.5em%

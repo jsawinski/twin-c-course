@@ -1,0 +1,61 @@
+      Vermutlich wird Euch schon einmal jemand gesagt haben, dass man bei der Lösung einer Aufgabe alle Zwischenschritte aufschreiben soll. Wenn der Autor ehrlich ist: Er hat selbst schon Punkte in Klassenarbeiten verloren, weil er die Zwischenschritte nicht aufgeschrieben hat. Das war ärgerlich – und hätte sich mit einem klaren Plan vermeiden lassen. Das ist aber genau der Punkt bei der Lösung der Aufgabe: ein klarer Plan (oder, wie die Informatiker sagen: ein Algorithmus).
+
+      In der Aufgabe wurden die ersten Schritte bereits vorgegeben:
+\begin{verbatim}
+    S = A xor B
+    C = A and B
+\end{verbatim}
+      Das sieht zunächst folgendermaßen aus:
+\begin{lstlisting}
+    A  00100111       39
+    B  00000110     +  6
+       --------
+    S  00100001       33
+    C  00000110        6
+\end{lstlisting}
+      Das macht jetzt natürlich noch keine Sinn, denn wir wissen ja, dass der \textit{Übertrag} nicht an der gleichen Stelle wie die Summe steht, sondern zum nächsten Bit weiter links gehört. Das bedeutet, dass wir den Übertrag um eine Stelle nach links verschieben müssen:
+\begin{lstlisting}
+    A     00100111       39
+    B     00000110     +  6
+          --------
+    S     00100001       33
+    C<<1  00001100       12
+\end{lstlisting}
+      Auf den ersten Blick sieht das jetzt schon besser aus, aber wir wissen ja, dass wir die Summe und den Übertrag noch einmal addieren müssen. Das bedeutet, dass wir die beiden Zahlen $S$ und $C<<1$ wieder addieren müssen. Das können wir wieder mit den gleichen Schritten tun:
+\begin{verbatim}
+    S = S xor (C<<1)
+    C = S and (C<<1)
+\end{verbatim}
+      Das sieht dann folgendermaßen aus:
+\begin{lstlisting}
+    S     00100001       33
+    C<<1  00001100       12
+          --------
+    S     00101101       45
+    C<<1  00000000        0
+\end{lstlisting}
+      Jetzt ist der Übertrag $C$ gleich 0, das bedeutet, dass wir die Summe berechnet haben. Die Summe von $A+B$ ist also $S=00101101$ oder dezimal $45$.
+
+      Ihr fragt Euch jetzt vielleicht, warum jetzt nochmal eine Addition? Im Kopf macht ihr das mit zweistelligen Zahlen ja auch nicht mehr. Aber schauen wir uns den Algorithmus noch einmal an, indem wir 7 und 3 addieren:
+\begin{lstlisting}
+    A     00000111        7
+    B     00000011      + 3
+          --------
+    S     00000100        4    Schritt 1
+    C<<1  00000110        6
+          --------
+    S     00000010        2    Schritt 2
+    C<<1  00001000        8
+\end{lstlisting}
+      Jetzt könntet Ihr vermutlich denken, dass wir den Schritt der Berechnung von S und C so lange wiederholen müssen, bis der Übertrag gleich 0 ist, aber tatsächlich ist das nicht notwendig, so dass wir nur noch einmal die beiden Schritte ausführen müssen.
+\begin{verbatim}
+    S = A xor B
+    C = A and B
+
+    S = S xor (C<<1)
+    C = S and (C<<1)
+
+    S = S xor (C<<1)
+\end{verbatim}
+      Bemerkt hier, dass der Übertrag $C$ in der letzten Zeile nicht mehr berechnet wird, da wir ja wissen, dass er 0 ist (eigentlich müsste man das mathematisch beweisen, aber das lassen wir hier weg). Das bedeutet, dass wir die Summe von $A+B$ mit bitweisen Operation in fünf Schritten berechnen können.\footnote{%
+        In der Praxis ist es allerding so, dass man auf elektronischer Ebene, also mithilfe von Logikgattern, die Addition in einem Schritt berechnet. Wenn Ihr Zeit habt, dann sucht mal im Internet nach dem Begriff \textbf{Volladdierer}.}
