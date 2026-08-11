@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """
-resolve_tex.py
+makeall.py
 
 Recursively resolves all \input and \include commands in a LaTeX file.
 Writes the complete document to a single file.
 
+Default input:  c-kurs.tex
+Default output: all.tex
+
 Usage:
-    python3 resolve_tex.py c-kurs.tex all.tex
+    python3 makeall.py                    # Uses defaults
+    python3 makeall.py main.tex           # Custom input, default output
+    python3 makeall.py main.tex out.tex   # Custom input and output
 """
 
 import re
@@ -18,6 +23,10 @@ from pathlib import Path
 # Configuration
 # ============================================================
 
+# Default file names
+DEFAULT_INPUT = 'c-kurs.tex'
+DEFAULT_OUTPUT = 'all.txt'
+
 # Track visited files to avoid infinite loops
 visited_files = set()
 
@@ -28,7 +37,7 @@ VERBOSE = False
 # Core Functions
 # ============================================================
 
-def resolve_tex(filepath, depth=0):
+def makeall(filepath, depth=0):
     """
     Recursively resolve \input and \include commands in a LaTeX file.
     
@@ -92,16 +101,16 @@ def resolve_tex(filepath, depth=0):
         # Check if resolved path exists
         if os.path.exists(full_path):
             # Recursively resolve the included file
-            return resolve_tex(full_path, depth + 1)
+            return makeall(full_path, depth + 1)
         
-        # Try alternative: maybe it's in the same directory as the main file?
+        # Try alternative: maybe it's in the main file's directory?
         # (This is a fallback for some LaTeX setups)
         if depth > 0:
             # Try the main file's directory
-            main_dir = os.path.dirname(sys.argv[1]) if len(sys.argv) > 1 else '.'
+            main_dir = os.path.dirname(main_file) if 'main_file' in globals() else '.'
             alt_path = os.path.join(main_dir, sub_path)
             if os.path.exists(alt_path):
-                return resolve_tex(alt_path, depth + 1)
+                return makeall(alt_path, depth + 1)
         
         # If file not found, leave the original command
         if VERBOSE:
@@ -119,41 +128,39 @@ def resolve_tex(filepath, depth=0):
 # ============================================================
 
 def main():
-    global VERBOSE
+    global VERBOSE, main_file
     
     # Parse command line arguments
-    if len(sys.argv) < 2:
-        print("Usage: python3 resolve_tex.py <main.tex> [output.tex]")
-        print("")
-        print("Examples:")
-        print("  python3 resolve_tex.py c-kurs.tex all.tex")
-        print("  python3 resolve_tex.py c-kurs.tex > all.tex")
-        sys.exit(1)
+    if len(sys.argv) >= 2:
+        input_file = sys.argv[1]
+    else:
+        input_file = DEFAULT_INPUT
     
-    main_file = sys.argv[1]
-    output_file = sys.argv[2] if len(sys.argv) > 2 else None
+    if len(sys.argv) >= 3:
+        output_file = sys.argv[2]
+    else:
+        output_file = DEFAULT_OUTPUT
+    
+    main_file = input_file
     
     # Enable verbose mode if requested
     if '-v' in sys.argv or '--verbose' in sys.argv:
         VERBOSE = True
     
     # Resolve the main file
+    print(f"📖 Resolving: {input_file}")
     try:
-        resolved = resolve_tex(main_file)
+        resolved = makeall(input_file)
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"❌ Error: {e}")
         sys.exit(1)
     
     # Write output
-    if output_file:
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(resolved)
-        print(f"✅ Resolved document written to: {output_file}")
-        print(f"   Processed {len(visited_files)} files")
-    else:
-        # Print to stdout
-        print(resolved)
-        print(f"\n% Processed {len(visited_files)} files", file=sys.stderr)
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(resolved)
+    
+    print(f"✅ Resolved document written to: {output_file}")
+    print(f"   Processed {len(visited_files)} files")
 
 
 # ============================================================
