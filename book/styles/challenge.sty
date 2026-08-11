@@ -74,12 +74,14 @@
 
 \newif\ifexercises
 \newif\ifsolutions
+\newif\ifinsideexercise
 
 \exercisesfalse
 \solutionsfalse
 
 % Output files
 \newenvironment{exercise}{%
+    \insideexercisetrue%
     \refstepcounter{exercise}%
     \edef\current@exercise@number{\thechapter\theexercise}%
 
@@ -91,10 +93,13 @@
         \hspace{0.5em}%
 }{%
         \vskip0pt\hfill\textbf{(\solution@name~\pageabbr~\pageref{\jobname:solution:\current@exercise@number})}
-    \end{exercisebox}
+    \end{exercisebox}%
+    \insideexercisefalse%
 }
 
 \newenvironment{solution}{%
+    \ifinsideexercise{}\else\PackageError{challenge}{Solution outside exercise}{...}\fi%
+
     \refstepcounter{solution}%
     \edef\current@solutionfile{\jobname.solution-\arabic{solution}.tex}
 
