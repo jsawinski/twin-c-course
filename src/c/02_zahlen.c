@@ -1,3 +1,4 @@
+/* Deklaration einer Zahl. */
 #include <stdio.h>
 
 int main() {

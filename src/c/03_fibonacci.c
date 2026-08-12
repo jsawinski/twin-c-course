@@ -1,3 +1,4 @@
+/* Die Fibonacci-Sequenz. */
 #include <stdio.h>
 
 int main() {

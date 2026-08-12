@@ -1,3 +1,4 @@
+/* Das "Hallo Welt"-Programm. */
 #include <stdio.h>
 
 int main() {

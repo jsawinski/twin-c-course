@@ -3,25 +3,35 @@
 
 Im folgenden C-Programm wird ein sogenanntes ``Lauf"|licht'' erzeugt. Dabei wird ein Sternchen von links nach rechts über den Bildschirm bewegt. Das Programm läuft dabei unendlich lange, bis es mit \texttt{Strg+C} abgebrochen wird.
 
-\begin{code}
-#define __GNU_SOURCE
-#include <stdio.h>
-#include <unistd.h>
+\cppinput{c/05_lauflicht.c}
 
-int main() {
-    while(1) {
-        for (int i = 0; i < 20; i++) {
-            printf("\r");
-            for (int j = 0; j < 20; j++) {
-                if (i == j)
-                    printf("*");
-                else
-                    printf(" ");
-            }
-            usleep(100000);
-        }
-    }
+% \paragraph{Erklärung:}
 
-    return 0;
-}
-\end{code}
+% \begin{description}
+%   \item[\texttt{int a = 0;}] \hfill\\
+%     Wir initialisieren die erste Fibonacci-Zahl mit 0.
+%   \item[\texttt{int b = 1;}] \hfill\\
+%     Wir initialisieren die zweite Fibonacci-Zahl mit 1.
+%   \item[\texttt{for(int i = 1; i <= 16; i = i+1) \{ … \} }] \hfill\\
+%     Wir starten eine Schleife, die 16 Mal durchläuft, um die ersten 16 Fibonacci-Zahlen zu berechnen.
+%     Seht auch mal den Abschnitt \ref{sec:referenz:c:schleifen} in der Referenz, um mehr über Schleifen zu erfahren.
+%   \item[\texttt{int next = a + b;}] \hfill\\
+%     Wir berechnen die nächste Fibonacci-Zahl, indem wir die beiden vorhergehenden Zahlen addieren.
+%   \item[\texttt{a = b;}] \hfill\\
+%     Wir verschieben die Werte: Die aktuelle zweite Zahl wird zur ersten Zahl.
+%   \item[\texttt{b = next;}] \hfill\\
+%     Wir verschieben die Werte: Die berechnete nächste Zahl wird zur zweiten Zahl.
+%   \item[\texttt{printf("Fibonacci \%d: \%d$\backslash$n", i, a);}] \hfill\\
+%     Wir geben die aktuelle Fibonacci-Zahl auf dem Bildschirm aus. Das \texttt{\%d} ist ein Platzhalter für die aktuelle Zahl, die an dieser Stelle ausgegeben wird. 
+% \end{description}
+
+
+% \paragraph{Merke:}
+
+% \begin{itemize}
+%     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
+%     \item \texttt{printf()} schreibt Text auf den Bildschirm.
+%     \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
+%     \item \texttt{return 0;} sagt dem Computer: ``Alles OK.''
+%     \item Jede Anweisung endet mit \texttt{;}.
+% \end{itemize}

@@ -7,21 +7,35 @@ Die Zahl $\pi$ ist eine sehr wichtige Zahl in der Mathematik. Sie lässt sich au
 \end{equation*}
 Die Reihe geht also unendlich weiter. In der Praxis kann man aber nur endlich viele Terme berechnen. Je mehr Terme man berechnet, desto genauer wird das Ergebnis. In der folgenden C-Datei wird die Reihe bis zum Term $1/1999999$ berechnet (das sind etwa sechs Stellen nach dem Komma). Das Ergebnis wird dann mit 4 multipliziert, um $\pi$ zu erhalten.
 
-\begin{code}
-#include <stdio.h>
+\cppinput{c/04_reihe.c}
 
-int main() {
-    double pi = 1.0;
-    for (int i = 1; i < 1000000; i++) {
-        double n = 2*i + 1;     // 3, 5, 7, 9, ...
+% \paragraph{Erklärung:}
 
-        if (i & 1)
-            pi -= 1.0/n;
-        else
-            pi += 1.0/n;
-    }   
+% \begin{description}
+%   \item[\texttt{int a = 0;}] \hfill\\
+%     Wir initialisieren die erste Fibonacci-Zahl mit 0.
+%   \item[\texttt{int b = 1;}] \hfill\\
+%     Wir initialisieren die zweite Fibonacci-Zahl mit 1.
+%   \item[\texttt{for(int i = 1; i <= 16; i = i+1) \{ … \} }] \hfill\\
+%     Wir starten eine Schleife, die 16 Mal durchläuft, um die ersten 16 Fibonacci-Zahlen zu berechnen.
+%     Seht auch mal den Abschnitt \ref{sec:referenz:c:schleifen} in der Referenz, um mehr über Schleifen zu erfahren.
+%   \item[\texttt{int next = a + b;}] \hfill\\
+%     Wir berechnen die nächste Fibonacci-Zahl, indem wir die beiden vorhergehenden Zahlen addieren.
+%   \item[\texttt{a = b;}] \hfill\\
+%     Wir verschieben die Werte: Die aktuelle zweite Zahl wird zur ersten Zahl.
+%   \item[\texttt{b = next;}] \hfill\\
+%     Wir verschieben die Werte: Die berechnete nächste Zahl wird zur zweiten Zahl.
+%   \item[\texttt{printf("Fibonacci \%d: \%d$\backslash$n", i, a);}] \hfill\\
+%     Wir geben die aktuelle Fibonacci-Zahl auf dem Bildschirm aus. Das \texttt{\%d} ist ein Platzhalter für die aktuelle Zahl, die an dieser Stelle ausgegeben wird. 
+% \end{description}
 
-    printf("Pi: %f\n", 4*pi);
-    return 0;
-}
-\end{code}
+
+% \paragraph{Merke:}
+
+% \begin{itemize}
+%     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
+%     \item \texttt{printf()} schreibt Text auf den Bildschirm.
+%     \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
+%     \item \texttt{return 0;} sagt dem Computer: ``Alles OK.''
+%     \item Jede Anweisung endet mit \texttt{;}.
+% \end{itemize}

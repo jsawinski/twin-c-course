@@ -1,4 +1,4 @@
-/** Berechnung von Pi/4 aus der Reihe 1 - 1/3 + 1/5 - 1/7 + ... */
+/* Berechnung von Pi/4 aus der Reihe 1 - 1/3 + 1/5 - 1/7 + ... */
 
 #include <stdio.h>
 

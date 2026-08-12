@@ -1,7 +1,7 @@
 \section{Fibonacci}
 \label{sec:c:fibonacci}
 
-Die Fibonacci-Zahlen \cite{wikipedia:fibonacci} sind eine Folge von Zahlen, bei der jede Zahl die Summe der beiden vorhergehenden ist. Die Folge beginnt mit den Zahlen 0 und 1. Die ersten paar Fibonacci-Zahlen sind:
+Die Fibonacci-Zahlen\margincite{wikipedia:fibonacci} sind eine Folge von Zahlen, bei der jede Zahl die Summe der beiden vorhergehenden ist. Die Folge beginnt mit den Zahlen 0 und 1. Die ersten paar Fibonacci-Zahlen sind:
 \begin{align*}
   F(0) &= 0, \\
   F(1) &= 1, \\
@@ -17,23 +17,7 @@ und so weiter. Die Fibonacci-Zahlen haben viele interessante Eigenschaften und A
 
 Die Fibonacci-Zahlen werden folgendermaßen berechnet: Die ersten beiden Zahlen der Folge sind 0 und 1. Jede weitere Zahl ist die Summe der beiden vorhergehenden Zahlen. Hier ist ein Beispielprogramm, das die ersten 16 Fibonacci-Zahlen berechnet und ausgibt:
 
-\begin{code}
-#include <stdio.h>
-
-int main() {
-  int a = 0;
-  int b = 1;
-
-  for(int i = 1; i <= 16; i = i+1) {
-    int next = a + b;
-    a = b;
-    b = next;
-
-    printf("Fibonacci %d: %d\n", i, a);
-  }
-  return 0;
-}
-\end{code}
+\cppinput{c/03_fibonacci.c}
 
 \paragraph{Erklärung:}
 
@@ -54,3 +38,11 @@ int main() {
   \item[\texttt{printf("Fibonacci \%d: \%d$\backslash$n", i, a);}] \hfill\\
     Wir geben die aktuelle Fibonacci-Zahl auf dem Bildschirm aus. Das \texttt{\%d} ist ein Platzhalter für die aktuelle Zahl, die an dieser Stelle ausgegeben wird. 
 \end{description}
+
+\paragraph{Merke:}
+
+\begin{itemize}
+    \item Ein Programm braucht Funktionen und Variablen.
+    \item Eine Variable wird durch Datentype und einen Namen \textbf{deklariert}.
+    \item Die erste Zuweisung eines Wertes heißt \textbf{Initialisierung}.
+\end{itemize}

@@ -1,24 +1,14 @@
 \section{Hallo Welt!}
 \label{sec:c:hallo-welt}
 
-In alter Tradition ist das erste Programm, das man zu sehen bekommt, wenn man eine neue Programmiersprache lernt, gewöhnlich das ``Hallo Welt!'' Programm \cite{wikipedia:hallo-welt}. Da wir uns zunächst auf die Programmiersprache ``C'' beschränken, ist das:
+In alter Tradition ist das erste Programm, das man zu sehen bekommt, wenn man eine neue Programmiersprache lernt, gewöhnlich das ``Hallo Welt!'' Programm.\margincite{wikipedia:hallo-welt} Da wir uns zunächst auf die Programmiersprache ``C'' beschränken, ist das:
     
-% \lstinputlisting[language=C]{../src/c/01_hallo_welt.c}
-
-\begin{code}
-/* Das "Hallo Welt"-Programm. */
-#include <stdio.h>
-
-int main() {
-  printf("Hallo Welt!\n");
-  return 0;
-}
-\end{code}
+\cppinput{c/01_hallo_welt.c}
 
 \paragraph{Erklärung:}
 
 \begin{description}
-    \item[\texttt{/* Das ``Hallo Welt''-Programm. */}]\hfill\\
+    \item[\texttt{/* Das "Hallo Welt"{}-Programm. */}]\hfill\\
         Das ist ein \textbf{Kommentar}.
         Der Computer ignoriert ihn völlig. Er ist nur für uns Menschen da,
         um den Code zu erklären.
@@ -74,7 +64,7 @@ int main() {
         Alles zwischen \texttt{\{} und \texttt{\}} gehört zur Funktion.
 \end{description}
 
-\paragraph{Zusammenfassung:}
+\paragraph{Merke:}
 
 \begin{itemize}
     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.

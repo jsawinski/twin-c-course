@@ -44,7 +44,6 @@
     showtabs=false,
     tabsize=4,
     frame=single,
-%     frameround=tttt,
     framesep=5pt,
     rulecolor=\color{black!20},
     morekeywords={alignas, alignof, and, and_eq, asm, atomic_cancel,
@@ -108,5 +107,5 @@
     \lstset{#1}%
 }{}
 
-%\lstset{style=cppstyle}
-
+% Load C/C++ code from file
+\def\cppinput#1{\lstinputlisting[style=cppstyle]{../src/#1}}

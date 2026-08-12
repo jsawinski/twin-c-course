@@ -1,38 +1,31 @@
 \section{Zahlen}
 \label{sec:c:zahlen}
 
-Um einen Computer dazu zu bringen, etwas zu tun, müssen wir ihm sagen, was er tun soll. Dazu benutzen wir \textbf{Variablen}. Eine Variable ist ein Platzhalter für einen Wert. Wir können ihr einen Namen geben und ihr einen Wert zuweisen. Beispiel: Wir wollen eine Variable namens \texttt{zahl} erstellen und ihr den Wert 42 zuweisen. In C sieht das so aus:
+Um einen Computer dazu zu bringen, etwas zu tun, müssen wir ihm sagen, was er tun soll. Dazu brauchen wir Funktionen und Variablen. Eine \textbf{Variable} ist ein Platzhalter für einen Wert. Wir können ihr einen Namen geben und ihr einen Wert zuweisen. Beispiel: Wir wollen eine Variable namens \texttt{zahl} erstellen und ihr den Wert 42 zuweisen. In C sieht das so aus:
 
-\begin{code}
-#include <stdio.h>
-
-int main() {
-  int zahl = 42;
-  printf("Die Zahl: %d\n", zahl);
-  return 0;
-}
-\end{code}
-
-Dabei ist \texttt{int} der Datentyp der Variable, in diesem Fall eine ganze Zahl (Integer). Der Wert 42 wird der Variable \texttt{zahl} zugewiesen. Mit \texttt{printf} geben wir den Wert der Variable auf dem Bildschirm aus. Das \texttt{\%d} ist ein Platzhalter für eine ganze Zahl, die an dieser Stelle ausgegeben wird.
+\cppinput{c/02_zahlen.c}
 
 \paragraph{Erklärung:}
 
 \begin{description}
     \item[\texttt{int zahl = 42;}]\hfill\\
-        Das ist die \textbf{Deklaration} und \textbf{Initialisierung} einer Variablen.
+        Das ist die \textbf{Deklaration}\protect\footnote{%
+        } (Festlegung des Namens und um was es sich handelt) und 
+        \textbf{Initialisierung}\protect\footnote{%
+        } (die erste Zuweisung eines Wertes) einer Variablen.
 
         \texttt{int} ist der Datentyp, in diesem Fall eine ganze Zahl (Integer).\\
         \texttt{zahl} ist der Name der Variable.\\
         \texttt{42} ist der Wert, der der Variable zugewiesen wird.
 
-        Es ist auch möglich, eine Variable zu deklarieren, ohne ihr sofort einen Wert zuzuweisen:\\
-        \begin{code}
+        Es ist auch möglich, eine Variable folgendermaßen zu deklarieren:
+\begin{code}
   int zahl; // Deklaration ohne Initialisierung
-        \end{code}
-        und zu einem späteren Zeitpunkt einen Wert zuzuweisen:\\
-        \begin{code}
+\end{code}
+        und ihr zu einem späteren Zeitpunkt einen Wert zuzuweisen:
+\begin{code}
   zahl = 42; // Zuweisung eines Wertes
-        \end{code}
+\end{code}
     \item[\texttt{printf("Die Zahl: \%d$\backslash$n", zahl);}]\hfill\\
         Das ist die \textbf{Ausgabe}.
 
@@ -43,3 +36,13 @@ Dabei ist \texttt{int} der Datentyp der Variable, in diesem Fall eine ganze Zahl
         Das \texttt{$\backslash$n} ist ein \textbf{Zeilenumbruch}.
         Es sorgt dafür, dass der Cursor nach der Ausgabe in die nächste Zeile springt.
 \end{description}
+
+% \paragraph{Merke:}
+
+% \begin{itemize}
+%     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
+%     \item \texttt{printf()} schreibt Text auf den Bildschirm.
+%     \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
+%     \item \texttt{return 0;} sagt dem Computer: ``Alles OK.''
+%     \item Jede Anweisung endet mit \texttt{;}.
+% \end{itemize}
