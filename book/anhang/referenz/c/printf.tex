@@ -1,8 +1,9 @@
-\begin{man}[stdio]{printf}
+\begin{man}{printf}
     \begin{synopsis}
         \begin{plaincode}[gobble=8]
-        #include <stdio.h>
-        int printf(const char *format, ...);
+            #include <stdio.h>
+
+            int printf(const char *format, ...);
         \end{plaincode}
     \end{synopsis}
 
@@ -10,10 +11,10 @@
         \codeinline{printf()} schreibt formattierten Text in die Standardausgabe (stdout). Der \codeinline{format}-String enthält:
         \begin{itemize}
             \item Normale Zeichen (werden direkt ausgegeben)
-            \item Format-Specifiers (beginnen mit \codeinline{\%})
+            \item Format-Spezifizierungen (beginnen mit \codeinline{\%})
         \end{itemize}
 
-        \textbf{Die wichtigsten Format-Specifiers:}
+        \textbf{Die wichtigsten Format-Spezifizierungen:}
 
         \begin{tabular}{ll}
         \texttt{\%d} & Ganzzahl (dezimal) \\
@@ -44,7 +45,7 @@ int main() {
     \end{returns}
 
     \begin{seeother}
-        \codeinline{scanf()}, \codeinline{sprintf()}, \codeinline{fprintf()}
+        \manref{scanf}, \manref{sprintf}, \manref{fprintf}
     \end{seeother}
 \end{man}
 

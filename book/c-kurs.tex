@@ -16,8 +16,8 @@
 \babelprovide[hyphenrules=ngerman-x-latest]{ngerman}
 \end{filecontents}
 
-\PassOptionsToPackage{style=authoryear,backend=biber}{biblatex}
 
+\PassOptionsToPackage{style=reading,backref,backend=biber}{biblatex} % FIXME does not work
 \documentclass[%
   justified,
   notoc,
@@ -30,6 +30,7 @@
 % \publisher{}
 
 \addbibresource{c-kurs.bib}
+\bibliography{}
 
 \begin{document} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,7 +51,7 @@ Copyright \copyright\ \the\year\ \thanklessauthor
 
 \par\url{https://github.com/jsawinski/twin-c-course}
 
-\par Licensed under the MIT License
+\par Licensed under the MIT License\index{Lizenz}
 
 \noindent
 Copyright (c) 2026 Jürgen ``George'' Sawinski
@@ -122,6 +123,7 @@ Kinder zugeschnitten.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Lizenz und Haftungsausschluss}
+\index{Lizenz}
 
 Alle Inhalte dieses Kurses wurden vom Autor selbst erstellt und sind, 
 soweit nicht anders gekennzeichnet, frei von urheberrechtlich geschützten 
@@ -144,7 +146,6 @@ entstehen.
 \vspace{1cm}
 \noindent
 \textbf{Projekt-Webseite:} \url{https://github.com/jsawinski/twin-c-course}
-
 
 \mainmatter
 
@@ -191,5 +192,20 @@ entstehen.
 \input{anhang/referenz.tex}
 \newpage\chapter{Lösungen zu den Übungen}
 \printsolutions
+
+\backmatter
+
+% \section{Support}\label{sec:support}
+
+% The website for the Tufte-\LaTeX\ packages is located at
+% \url{http://code.google.com/p/tufte-latex/}.  On this website, you'll find
+% links to the \smallcaps{svn} repository, mailing lists, bug tracker, and documentation.
+
+% Questions or problems to the \XeLaTeX/\LuaLaTeX-version write to
+% \url{mailto:hvoss@tug.org}.
+
+\printbibliography
+
+\printindex
 
 \end{document}

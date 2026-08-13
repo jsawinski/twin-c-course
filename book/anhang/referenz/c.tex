@@ -32,23 +32,26 @@ Gleitkommazahlen, also Zahlen mit Nachkommastellen, werden in C und C++ durch di
   \item[\texttt{long double}]\hfill\\
    Erweiterte Präzisions-Gleitkommazahl, in der Regel 10, 12 oder 16 Bytes (80, 96 oder 128 Bit) groß, Wertebereich: abhängig von der Implementierung, aber in der Regel größer als \texttt{double}
 \end{description}
-Hier wird eine eigenartige Darstellung von Gleitkommazahlen verwendet, die als \textbf{IEEE 754 Standard} bekannt ist. Diese Darstellung ermöglicht es, eine große Bandbreite von Zahlen darzustellen
+Hier wird eine eigenartige Darstellung von Gleitkommazahlen verwendet, die als \textbf{IEEE 754 Standard} bekannt ist. Diese Darstellung ermöglicht es, eine große Bandbreite von Zahlen darzustellen%
 %, einschließlich sehr kleiner und sehr großer Werte, sowie spezieller Werte wie Unendlichkeit und NaN (Not a Number)
 . Das ``E'' steht für ``Exponent'' und zeigt an, dass die Zahl in wissenschaftlicher Notation dargestellt wird. Zum Beispiel bedeutet \texttt{1.2E-38} die Zahl $1.2 \cdot 10^{-38}$, also eine sehr kleine Zahl, während \texttt{3.4E+38} die Zahl $3.4 \cdot 10^{38}$ ist, also eine sehr große Zahl. Man kann sagen, dass die Zahl nach ``E'' die Zahl der Stellen angibt, um die das Komma verschoben werden muss, um die Zahl in Standardform zu bringen. Ein negativer Exponent bedeutet, dass das Komma nach links verschoben wird, während ein positiver Exponent bedeutet, dass das Komma nach rechts verschoben wird. Damit wird, z.B. die Zahl \texttt{1.23E+3} zu $1230$ und die Zahl \texttt{4.56E-2} zu $0.0456$.
 
 \paragraph{Zeichen und Zeichenketten}
-Zeichen werden in C und C++ durch den Datentyp \texttt{char} dargestellt. Eine Zeichenvariable speichert ein einzelnes Zeichen und belegt in der Regel 1 Byte. Zeichenketten sind Arrays von Zeichen, die durch das Nullzeichen \texttt{'\textbackslash0'} terminiert sind. Sie werden durch den Datentyp \texttt{char[]} oder \texttt{char*} dargestellt.
+Zeichen werden in C und C++ durch den Datentyp \texttt{char} dargestellt. Eine Zeichenvariable speichert ein einzelnes Zeichen und belegt in der Regel 1 Byte.\footnote{%
+    Bei den Prozessoren, die heutzutage gebaut werden, kann man sich darauf verlassen, dass ein \texttt{char} immer 1 einzelnes Byte belegt. Dies war aber in der Geschichte der Computer nicht immer der Fall. Das genau zu beschreiben ist aber ein sehr kompliziertes Thema und eher geeignet für einen Fortgeschrittenenkurs.%
+} Zeichenketten sind Arrays von Zeichen, die durch das Nullzeichen \texttt{'\textbackslash0'} terminiert sind. Sie werden durch den Datentyp \texttt{char[]} oder \texttt{char*} dargestellt.
 % FIXME
 
 \paragraph{\texttt{void}}
-Der Datentyp \texttt{void} wird verwendet, um anzugeben, dass eine Funktion keinen Rückgabewert hat. Er kann auch in Zeigern verwendet werden, um einen Zeiger auf einen unbekannten Datentyp zu deklarieren.
+Der Datentyp \texttt{void}, was so viel wie ``Leere'' oder ``Lücke'' bedeutet, wird verwendet, um anzugeben, dass eine Funktion keinen Rückgabewert hat. Er kann auch in Zeigern verwendet werden, um einen Zeiger auf einen unbekannten Datentyp zu deklarieren.
 
 \paragraph{Zeiger}
-Zeiger sind FIXME
+Zeiger sind Speicheradressen. 
+%FIXME
 
 \paragraph{\texttt{const}}
 Eine der schwierigsten Themen in C und C++ ist die Verwendung von \texttt{const}. 
-FIXME
+%FIXME
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Strukturen}
@@ -252,6 +255,16 @@ int main() {
     return 0;
 }
 \end{code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Namen}
+\label{sec:referenz:c:namen}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FIXME
+% "Die Definition ist der Bauplan für ein Haus (der Code). Die Implementierung ist der ganze Vorgang, das Haus tatsächlich zu bauen – vom ersten Ziegel bis zur Prüfung, ob es fertig ist. Und die Deklaration ist nur die Ankündigung: 'Hier soll ein Haus hin!'"
+% siehe "Programm: Zahlen"
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage

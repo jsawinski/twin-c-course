@@ -88,6 +88,7 @@
     % Display the exercise
     \begin{exercisebox}%
         \par\noindent%
+        \phantomsection%
         \textbf{\exercise@name~\current@exercise@number:}%
         \label{\jobname:exercise:\current@exercise@number}%
         \hspace{0.5em}%
@@ -106,6 +107,7 @@
     \immediate\write\solutionsfile{%
         \string\vskip1.5em%
         \string\par\string\noindent%
+        \string\phantomsection
         \string\textbf{\solution@name\ \current@exercise@number}%
         \string\label{\jobname:solution:\current@exercise@number}%
         \string\par\string\noindent%

@@ -6,9 +6,9 @@ int main() {
   int b = 1;
 
   for(int i = 1; i <= 16; i = i+1) {
-    int next = a + b;
+    int c = a + b;
     a = b;
-    b = next;
+    b = c;
 
     printf("Fibonacci %d: %d\n", i, a);
   }

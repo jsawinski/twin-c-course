@@ -5,5 +5,5 @@ project(CppCourseKids VERSION 1.0
         LANGUAGES C CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-
+add_definitions(-Wall)
 add_subdirectory(src)

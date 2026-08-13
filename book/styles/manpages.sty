@@ -4,6 +4,14 @@
 \newcounter{manpage}
 \setcounter{manpage}{0}
 
+\newcommand{\manref}[2][libc]{%
+    \hyperref[man:#1:#2]{\texttt{#2} (#1)}%
+}
+
+\newcommand{\manrefpage}[2][libc]{%
+    \pageref{man:#1:#2}%
+}
+
 \newenvironment{man}[2][libc]{%
     \newenvironment{synopsis}{%
         \textbf{Syntax}:%
@@ -30,6 +38,7 @@
         \setlength{\parskip}{0pt}
 
         % Header: command on left, manual section on right
+        \phantomsection%
         \begin{flushleft}
             \large\bfseries\ttfamily%
             #2%
@@ -44,8 +53,7 @@
                 \vspace{0.2\baselineskip}
 
                 \ignorespaces
-}%
-{%
+}{%
             \end{minipage}
         \end{flushright}
     \end{minipage}

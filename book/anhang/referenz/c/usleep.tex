@@ -1,0 +1,26 @@
+\begin{man}{usleep}
+    \begin{synopsis}
+        \begin{plaincode}[gobble=8]
+            #define __GNU_SOURCE
+            #include <unistd.h>
+
+            int usleep(useconds_t usec);
+        \end{plaincode}
+    \end{synopsis}
+
+    \begin{desc}
+        \codeinline{usleep()} unterbricht die Ausführung des Programms mindestens \texttt{usec} Mikrosekunden.
+        Die genau Wartezeit kann jedoch mehr sein, wenn der Computer sehr viel zu tun hat.
+    \end{desc}
+
+    % \begin{example}
+    % \end{example}
+
+    \begin{returns}
+        War der Funktionsaufruf erfolgreich, wird 0 zurückgegeben, \codeinline{-1} jedoch wenn ein Fehler aufgetreten ist.
+    \end{returns}
+
+    % \begin{seeother}
+    % \end{seeother}
+\end{man}
+

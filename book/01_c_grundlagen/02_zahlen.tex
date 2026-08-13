@@ -1,4 +1,4 @@
-\section{Zahlen}
+\section{Programm: Zahlen}
 \label{sec:c:zahlen}
 
 Um einen Computer dazu zu bringen, etwas zu tun, müssen wir ihm sagen, was er tun soll. Dazu brauchen wir Funktionen und Variablen. Eine \textbf{Variable} ist ein Platzhalter für einen Wert. Wir können ihr einen Namen geben und ihr einen Wert zuweisen. Beispiel: Wir wollen eine Variable namens \texttt{zahl} erstellen und ihr den Wert 42 zuweisen. In C sieht das so aus:
@@ -10,12 +10,16 @@ Um einen Computer dazu zu bringen, etwas zu tun, müssen wir ihm sagen, was er t
 \begin{description}
     \item[\texttt{int zahl = 42;}]\hfill\\
         Das ist die \textbf{Deklaration}\protect\footnote{%
+            Eine \textbf{Deklaration} ist eine Mitteilung an den Compiler: ``Es gibt etwas mit diesem Namen und diesm Typ''. Auch ist \codeinline{int main();} eine Deklaration, allerdings fehlt die Definition oder Implementation, also der Code.
         } (Festlegung des Namens und um was es sich handelt) und 
         \textbf{Initialisierung}\protect\footnote{%
+            Die \textbf{Initialisierung} einer Variable ist die erste Zuweisung eines Wertes. Es ist generell empfehlenswert, jede Variable zu initialisieren (wenn man sich nicht sicher ist, nimmt man die \texttt{0}), da ansonsten die Variable einen zufälligen Wert haben kann (siehe dazu Kapitel~\ref{sec:c:warnungen}).
         } (die erste Zuweisung eines Wertes) einer Variablen.
 
         \texttt{int} ist der Datentyp, in diesem Fall eine ganze Zahl (Integer).\\
-        \texttt{zahl} ist der Name der Variable.\\
+        \texttt{zahl} ist der Name der Variable.\protect\footnote{
+            Variablenamen sind nicht beliebig. Es gibt eine ganze Reihe von Regeln, die man befolgen muss. Für den Anfang sollte folgendes gelten: die Variable beginnt mit einem Buchstaben (groß oder klein), danach folgen Buchstaben (groß und klein), Zahlen und das ``underscore'' (der Unterstrich \texttt{\_}). Wenn Ihr es genauer wissen wollt, dann lest im Anhang nach (Kap.~\ref{sec:referenz:c:namen}).
+        }\\
         \texttt{42} ist der Wert, der der Variable zugewiesen wird.
 
         Es ist auch möglich, eine Variable folgendermaßen zu deklarieren:
@@ -32,17 +36,17 @@ Um einen Computer dazu zu bringen, etwas zu tun, müssen wir ihm sagen, was er t
         \texttt{printf} steht für \textit{print formatted} und schreibt Text
         auf den Bildschirm (genauer: in die Konsole).
 
-        Das \texttt{\%d} ist ein Platzhalter für eine ganze Zahl, die an dieser Stelle ausgegeben wird.\\
+        Das \texttt{\%d} ist ein Platzhalter\footnote{%
+            Um genau zu sein, es ist eine \textbf{Formatierungsanweisung}. Eine ausführliche Erklärung findet Ihr im Anhang unter \manref{printf} auf S.~\manrefpage{printf}.
+        } für eine ganze Zahl, die an dieser Stelle ausgegeben wird.
+
         Das \texttt{$\backslash$n} ist ein \textbf{Zeilenumbruch}.
         Es sorgt dafür, dass der Cursor nach der Ausgabe in die nächste Zeile springt.
 \end{description}
 
-% \paragraph{Merke:}
+\paragraph{Merke:}
 
-% \begin{itemize}
-%     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
-%     \item \texttt{printf()} schreibt Text auf den Bildschirm.
-%     \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
-%     \item \texttt{return 0;} sagt dem Computer: ``Alles OK.''
-%     \item Jede Anweisung endet mit \texttt{;}.
-% \end{itemize}
+\begin{itemize}[noitemsep]
+    \item Eine Variable wird deklariert und initialisiert. Dabei wird ihr ein Datentyp zugewiesen.
+    \item \texttt{printf()} kann auch den Inhalt von Variable in von Menschen lesbarer Form ausgeben.
+\end{itemize}

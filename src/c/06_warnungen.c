@@ -1,5 +1,8 @@
-/* Warnungen des Kompilers */
+/* Warnungen des Compilers */
+#include <stdio.h>
 
 int main() {
-    return 0;
+  int zahl;
+  printf("Die Zahl: %d\n", zahl);
+  return 0;
 }

@@ -1,9 +1,22 @@
-\section{Warnungen des Kompilers}
+\section{Warnungen des Compilers}
 \label{sec:c:warnungen}
 
 FIXME
 
 \cppinput{c/06_warnungen.c}
+
+\small
+\begin{verbatim}
+/home/sawinski/Workspace/kids/twin-c-course/src/c/06_warnungen.c: In Funktion »main«:
+/home/sawinski/Workspace/kids/twin-c-course/src/c/06_warnungen.c:6:3: Warnung: »zahl« ist nicht initialisiert, 
+                                                                      wird aber benutzt [-Wuninitialized]
+    6 |   printf("Die Zahl: %d\n", zahl);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/sawinski/Workspace/kids/twin-c-course/src/c/06_warnungen.c:5:7: Anmerkung: »zahl« wurde hier deklariert
+    5 |   int zahl;
+      |       ^~~~
+\end{verbatim}
+\normalsize
 
 \paragraph{Erklärung:}
 
@@ -38,7 +51,7 @@ FIXME
 
 \paragraph{Merke:}
 
-% \begin{itemize}
+% \begin{itemize}[noitemsep]
 %     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
 %     \item \texttt{printf()} schreibt Text auf den Bildschirm.
 %     \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
