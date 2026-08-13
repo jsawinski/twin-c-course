@@ -14,7 +14,6 @@ int main() {
             }
             fflush(stdout);
             usleep(100000);
-            // printf("\n");
         }
     }
 

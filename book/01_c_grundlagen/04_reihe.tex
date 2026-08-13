@@ -31,33 +31,50 @@ n = 1.0/n;
   \end{solution}
 \end{exercise}
 
-% \paragraph{Erklärung:}
+\paragraph{Erklärung:}
 
-% \begin{description}
-%   \item[\texttt{int a = 0;}] \hfill\\
-%     Wir initialisieren die erste Fibonacci-Zahl mit 0.
-%   \item[\texttt{int b = 1;}] \hfill\\
-%     Wir initialisieren die zweite Fibonacci-Zahl mit 1.
-%   \item[\texttt{for(int i = 1; i <= 16; i = i+1) \{ … \} }] \hfill\\
-%     Wir starten eine Schleife, die 16 Mal durchläuft, um die ersten 16 Fibonacci-Zahlen zu berechnen.
-%     Seht auch mal den Abschnitt \ref{sec:referenz:c:schleifen} in der Referenz, um mehr über Schleifen zu erfahren.
-%   \item[\texttt{int next = a + b;}] \hfill\\
-%     Wir berechnen die nächste Fibonacci-Zahl, indem wir die beiden vorhergehenden Zahlen addieren.
-%   \item[\texttt{a = b;}] \hfill\\
-%     Wir verschieben die Werte: Die aktuelle zweite Zahl wird zur ersten Zahl.
-%   \item[\texttt{b = next;}] \hfill\\
-%     Wir verschieben die Werte: Die berechnete nächste Zahl wird zur zweiten Zahl.
-%   \item[\texttt{printf("Fibonacci \%d: \%d$\backslash$n", i, a);}] \hfill\\
-%     Wir geben die aktuelle Fibonacci-Zahl auf dem Bildschirm aus. Das \texttt{\%d} ist ein Platzhalter für die aktuelle Zahl, die an dieser Stelle ausgegeben wird. 
-% \end{description}
+\begin{description}
+  \item[\texttt{double pi = 1.0;}] \hfill\\
+    Wir initialisieren die erste Fibonacci-Zahl mit 0. Es handelt sich dabei um eine Gleitkommazahl, also eine Zahl mit Kommastellen.
+  \item[\texttt{for (int i = 1; i <= 1000000; i++)}] \hfill\\
+    Das ist eine Schleifenanweisung, die wir schon im vorhergehenden Kapitel kennengelernt haben. Neu ist hier allerdings, wie $i$ gezählt wird. Der Operator \texttt{++} sagt, dass $i$ um eins erhöht werden soll. Wie er genau funktioniert, werden wir aber später noch kennen lernen.
+  \item[\texttt{double n = 2*i + 1}] \hfill\\
+    Oben wurde beschrieben, wie man $\pi$ aus einer Summe berechnen kann. Wenn nochmal schaut, dann sind in der Reihe immer die ungeraden Zahlen $3$, $5$, $7$, usw. Unser Zähler $i$ liefert jedoch die Zahlen $1$, $2$, $3$, ... Die Rechnung $2\cdot i + 1$ liefert nun genau diese ungeraden Zahlen, da wir $\pi$ aber mit einer Gleitkommazahl berechnen muss auch das eine Gleitkommazahl sein.
+  \item[\texttt{n = 1.0 / n}] \hfill\\
+    Was wir addieren oder subtrahieren müssen, ist aber nicht $3$, $5$, $7$, usw. sondern $1/3$, $1/5$, $1/7$, usw.,
+    wir bilden also hier den Kehrwert $n\leftarrow \frac{1}{n}$ (in Worten: $n$ wird der Kehrwert $\frac{1}{n}$ zugeordnet).
+  \item[if (i \& 1)] \hfill\\
+    Da wir abwechselnd addieren und subtrahieren müssen, muss eine Entscheidung getroffen werden, was von beidem stattfindet. Das macht man mit dem \texttt{if}:
+\begin{verbatim}
+if (Bedingung) {
+    // Befehle, die ausgeführt werden, 
+    // wenn die Bedingung "wahr" (true) ist.
+}
+else {
+    // Befehle, die ausgeführt werden, 
+    // wenn die Bedingung "falsch" (false) ist.
+}
+\end{verbatim}
+    Bemerkt, dass wir die geschweiften Klammern im Code weglassen konnten, weil es nur ein einziger Befehl ist
+    (das gleiche gilt übrigens auch für die \texttt{for}-Schleife).
 
+    Die Bedingung ist nun \texttt{i \& 1}. Wenn ihr Euch an das Kapitel über ``Bitweise Operationen'' erinnert, dann prüft diese Bedingung ob das 0-te Bit eine 1 ist. Das ist genau dann der Fall, wenn $i$ ungerade ist.
+    Bildlich sieht das so aus:
+\begin{verbatim}
+      i              i & 1
+    0    00000000    00000000
+    1    00000001    00000001
+    2    00000010    00000000
+    3    00000011    00000001
+    4    00000100    00000000
+    ...
+\end{verbatim}
 
-% \paragraph{Merke:}
+\end{description}
 
-% \begin{itemize}[noitemsep]
-%     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
-%     \item \texttt{printf()} schreibt Text auf den Bildschirm.
-%     \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
-%     \item \texttt{return 0;} sagt dem Computer: ``Alles OK.''
-%     \item Jede Anweisung endet mit \texttt{;}.
-% \end{itemize}
+\paragraph{Merke:}
+
+\begin{itemize}[noitemsep]
+    \item Für Gleitkommazahlen verwenden wir den Datentyp \codeinline{double}.
+    \item Mit bitweisen Operationen kann man z.B.\ feststellen, ob eine Zahl gerade oder ungerade ist.
+\end{itemize}

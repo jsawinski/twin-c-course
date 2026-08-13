@@ -1,0 +1,32 @@
+\begin{man}{stdin, stdout, stderr}
+    \begin{synopsis}
+        \begin{plaincode}[gobble=8]
+            #include <stdio.h>
+
+            extern FILE *stdin;
+            extern FILE *stdout;
+            extern FILE *stderr;
+        \end{plaincode}
+    \end{synopsis}
+
+    \begin{desc}
+        Unter normalen Bedingungen hat jedes UNIX-Betriebssystem drei Kanäle offen, die es erlauben,
+        Daten mit einem Benutzer auszutauschen, nämlich
+        \begin{itemize}[noitemsep]
+            \item den Eingabekanal (z.B. für Tastatureingabe),
+            \item den Ausgabekanal (z.B. für Textausgabe auf der Konsole) und
+            \item den Fehlerkanal (der nur für die Ausgabe von Fehlertexten bestimmt ist, meistens auch auf der Konsole).
+        \end{itemize}
+        FIXME
+    \end{desc}
+
+    % \begin{example}
+    % \end{example}
+
+    % \begin{returns}
+    % \end{returns}
+
+    % \begin{seeother}
+    % \end{seeother}
+\end{man}
+
