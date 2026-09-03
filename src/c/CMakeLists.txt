@@ -3,8 +3,11 @@ add_executable(02_zahlen 02_zahlen.c)
 add_executable(03_fibonacci 03_fibonacci.c)
 add_executable(04_reihe 04_reihe.c)
 add_executable(05_lauflicht 05_lauflicht.c)
-add_executable(06_warnungen 06_warnungen.c)
-add_executable(07_vertikal 07_vertikal.c)
-add_executable(08_wuerfel 08_wuerfel.c)
-add_executable(09_spielfeld 09_spielfeld.c)
+add_executable(06_vertikal 06_vertikal.c)
+add_executable(07_wuerfel 07_wuerfel.c)
+add_executable(08_spielfeld 08_spielfeld.c)
+
+add_executable(10_warnungen 10_warnungen.c)
+
+
 # add_executable(09_life 09_life.c)
