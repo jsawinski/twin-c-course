@@ -1,1 +1,134 @@
-\maketitle
+\thispagestyle{empty}
+\newgeometry{
+    left=0cm,
+    right=0cm,
+    top=0cm,
+    bottom=0cm,
+    marginparwidth=0cm,
+    marginparsep=0cm,
+    headheight=0cm,
+    headsep=0cm,
+    footskip=0cm,
+    includehead=false,
+    includefoot=false,
+    includemp=false
+}
+
+\begin{tikzpicture}[remember picture, overlay]
+    % Background
+    \fill[black] (current page.south west) rectangle (current page.north east);
+
+    \shade[
+        inner color=black!60, 
+        outer color=black!80,
+        path fading=north
+    ] (current page.south west) rectangle (current page.north east);
+
+    % % --- BACKGROUND LAYER (heavily blurred, small) ---
+    % \begin{scope}[opacity=0.15]
+    %     % Generate 50 random background occurrences
+    %     \foreach \i in {1,...,50} {
+    %         % Random position on page
+    %         \pgfmathsetmacro{\x}{random(0,1000)/1000}
+    %         \pgfmathsetmacro{\y}{random(0,1000)/1000}
+    %         \pgfmathsetmacro{\rot}{random(-30,30)}
+
+    %         % Random size between 4pt and 12pt
+    %         \pgfmathsetmacro{\size}{random(4,12)}
+
+    %         % Random color shift (green/cyan tech theme)
+    %         \pgfmathsetmacro{\colorShift}{random(0,100)/100}
+
+    %         \node[
+    %             text=green!\colorShift!cyan,
+    %             font=\fontsize{\size}{0}\selectfont\ttfamily,
+    %             rotate=\rot
+    %         ] at (\x\pagewidth, \y\pageheight) {11111101};
+    %     }
+    % \end{scope}
+
+    % % --- MIDGROUND LAYER (slightly blurred, medium) ---
+    % \begin{scope}[opacity=0.3, blur shadow={shadow blur radius=5pt}]
+    %     % Generate 15 medium occurrences
+    %     \foreach \i in {1,...,15} {
+    %         \pgfmathsetmacro{\x}{random(0,1000)/1000}
+    %         \pgfmathsetmacro{\y}{random(0,1000)/1000}
+    %         \pgfmathsetmacro{\rot}{random(-15,15)}
+    %         \pgfmathsetmacro{\size}{random(16,32)}
+
+    %         \node[
+    %             text=green!\colorShift!cyan,
+    %             font=\fontsize{\size}{0}\selectfont\ttfamily,
+    %             rotate=\rot
+    %         ] at (\x\pagewidth, \y\pageheight) {11111101};
+    %     }
+    % \end{scope}
+
+    % --- FOREGROUND LAYER (crisp, large) ---
+    % Central, large sequence
+    \node[
+        text=green!60!cyan,
+        font=\fontsize{80}{0}\selectfont\ttfamily\bfseries,
+        opacity=0.9
+    ] at (0.5\pagewidth, -0.55\pageheight) {11111101};
+
+    % Secondary large sequence, offset
+    \node[
+        text=green!40!cyan,
+        font=\fontsize{55}{0}\selectfont\ttfamily,
+        opacity=0.4,
+        rotate=-5
+    ] at (0.75\pagewidth, -0.45\pageheight) {11111101};
+
+    % Another offset sequence
+    \node[
+        text=green!50!cyan,
+        font=\fontsize{45}{0}\selectfont\ttfamily,
+        opacity=0.3,
+        rotate=8
+    ] at (0.25\pagewidth, -0.4\pageheight) {11111101};
+
+    % % --- DECORATIVE ELEMENTS ---
+    % % Subtle binary line at bottom
+    % \foreach \i in {0,...,20} {
+    %     \pgfmathsetmacro{\x}{0.05 + \i*0.045}
+    %     \node[
+    %         text=green!30!cyan,
+    %         font=\fontsize{8}{0}\selectfont\ttfamily,
+    %         opacity=0.3
+    %     ] at (\x\pagewidth, 0.05\pageheight) {11111101};
+    % }
+
+    \node[
+        text=white,
+        font=\fontsize{45}{50}\selectfont\sffamily\bfseries,
+        align=center
+    ] at (0.5\pagewidth, -0.22\paperheight) {
+        Binär\\
+        \& Mehr
+    };
+
+    % Subtitle
+    \node[
+        text=green!40!cyan,
+        font=\fontsize{18}{22}\selectfont\sffamily,
+        align=center
+    ] at (0.5\pagewidth, -0.35\pageheight) {
+        Ein C/C++-Kurs für junge Entdecker
+    };
+
+    % Author
+    \node[
+        text=white!60,
+        font=\fontsize{14}{18}\selectfont\sffamily,
+        align=center
+    ] at (0.5\pagewidth, -0.88\pageheight) {
+        \textbf{Dr. rer. nat. Jürgen Sawinski}
+    };
+\end{tikzpicture}
+
+\restoregeometry
+\clearpage
+
+\newpage
+{}
