@@ -1,56 +1,80 @@
 #define __GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
 
-void konsole_loeschen() { 
-    printf("\x1b[2J"); 
+#define BREITE 60  // Breite des "Spielfeldes"
+#define HOEHE 30   // Höhe des "Spielfeldes"
+
+// ============================================================================
+// random_numberen
+// ============================================================================
+
+/* Initialisierung des Zufallszahlengenerators
+ */
+void random_init() {
+    srand(time(NULL));
 }
 
-void konsole_start() { 
-    printf("\x1b[H"); 
+/* Berechnung einer Zufallszahl zwischen min und max.
+ */
+int random_number(int min, int max) {
+    return rand();
 }
 
-int zufallszahl(int min, int max) {
-    return rand() % (max - min + 1) + min;
+// ============================================================================
+// Konsole
+// ============================================================================
+
+void konsole_loeschen() {
+    printf("\x1b[2J");
 }
 
-#define BREITE 60
-#define HOEHE 30
+void konsole_start() {
+    printf("\x1b[H");
+}
+
+// ============================================================================
+// Spielfeld
+// ============================================================================
 
 struct spielfeld {
-    char daten[HOEHE][BREITE+1];  // +1 für '\0' am Ende jeder Zeile
+    char daten[HOEHE][BREITE + 1];  // +1 für '\0' am Ende jeder Zeile
     int breite;
     int hoehe;
 };
 
-void spielfeld_anzeigen(struct spielfeld *feld) {
+void spielfeld_anzeigen(struct spielfeld* feld) {
     for (int y = 0; y < feld->hoehe; y++) {
         printf("%s\n", feld->daten[y]);
     }
 }
 
-void spielfeld_setzen(struct spielfeld *feld, int x, int y, char c) {
+void spielfeld_setzen(struct spielfeld* feld, int x, int y, char c) {
     if (x >= 0 && x < feld->breite && y >= 0 && y < feld->hoehe) {
         feld->daten[y][x] = c;
     }
 }
 
-void spielfeld_zufaellig_fuellen(struct spielfeld *feld, char c, int anzahl) {
+void spielfeld_zufaellig_fuellen(struct spielfeld* feld, char c, int anzahl) {
     for (int i = 0; i < anzahl; i++) {
-        int x = zufallszahl(0, feld->breite - 1);
-        int y = zufallszahl(0, feld->hoehe - 1);
+        int x = random_number(0, feld->breite - 1);
+        int y = random_number(0, feld->hoehe - 1);
 
         /* Sicherstellen, dass das Feld frei ist */
         while (feld->daten[y][x] != ' ') {
-            x = zufallszahl(0, feld->breite - 1);
-            y = zufallszahl(0, feld->hoehe - 1);
+            x = random_number(0, feld->breite - 1);
+            y = random_number(0, feld->hoehe - 1);
         }
 
         feld->daten[y][x] = c;
     }
 }
+
+// ============================================================================
+// MAIN
+// ============================================================================
 
 int main() {
     struct spielfeld feld;
@@ -67,31 +91,29 @@ int main() {
 
     konsole_loeschen();
 
-    /* Alle 0.1s wird ein Spielfeld mit einem '*' gefüllt. */
+    // Alle 0.1s wird ein Spielfeld mit einem '*' gefüllt.
     while (1) {
-        {
-            /* Ein zufälliges freies Feld auswählen */
-            int x,y;
+        // Ein zufälliges freies Feld auswählen
+        int x, y;
 
-            x = zufallszahl(0, BREITE - 1);
-            y = zufallszahl(0, HOEHE - 1);
+        x = random_number(0, BREITE - 1);
+        y = random_number(0, HOEHE - 1);
 
-            while (feld.daten[y][x] != ' ') {
-                x = zufallszahl(0, BREITE - 1);
-                y = zufallszahl(0, HOEHE - 1);
-            }
-
-            feld.daten[y][x] = '*';
-
-            /* Spielfeld anzeigen */
-            konsole_start();
-            for (int y = 0; y < HOEHE; y++) {
-                printf("%s\n", feld.daten[y]);
-            }
-
-            fflush(stdout);
-            usleep(100000);
+        while (feld.daten[y][x] != ' ') {
+            x = random_number(0, BREITE - 1);
+            y = random_number(0, HOEHE - 1);
         }
+
+        feld.daten[y][x] = '*';
+
+        // Spielfeld anzeigen
+        konsole_start();
+        for (int y = 0; y < HOEHE; y++) {
+            printf("%s\n", feld.daten[y]);
+        }
+
+        fflush(stdout);
+        usleep(100000);
     }
 
     return 0;

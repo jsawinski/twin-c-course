@@ -3,17 +3,17 @@
 #include <time.h>
 
 // Hilfsfunktion, um den Zufallszahlengenerator zu initialisieren:
-void init_rand() { 
-    srand(time(NULL)); 
+void random_init() {
+    srand(time(NULL));
 }
 
 // Hilfsfunktion, um eine Zufallszahl im Bereich von min bis max zu erzeugen:
-int random_number(int min, int max) { 
+int random_number(int min, int max) {
     return rand();
 }
 
 int main() {
-    init_rand();
+    random_init();
 
     // Zufallszahl von 1 bis 6
     int zahl = random_number(1, 6);
@@ -23,4 +23,3 @@ int main() {
 
     return 0;
 }
-
