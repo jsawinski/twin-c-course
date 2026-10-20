@@ -1,0 +1,78 @@
+\section{Programm: Ein Würfel}
+\label{sec:c:wuerfel}
+
+Um einen Würfel zu programmieren, benötigt man Zufallszahlen. Dafür existiert der Befehl:
+\begin{code}
+#include <stdlib.h>
+
+int rand();
+\end{code}
+Der Befehl \codeinline{rand()}, definiert in der Kopfdatei ``stdlib.h'' (\emph{standard library}, so viel wie ``Standardbibliothek''), gibt Euch Zufallszahlen vom Typ \codeinline{int}. 
+
+\begin{exercise}
+    Schreibt ein Programm, dass eine Zufallszahl auf dem Bildschirm ausgibt. Ihr könnt dazu einfach Euer Programm aus Abschnitt~\ref{sec:c:zahlen} kopieren und die 42 durch \texttt{rand()} ersetzen. Vergesst aber nicht, die Kopfdatei \texttt{stdlib.h} einzubinden. Was fällt Euch auf, wenn ihr das Programm mehrmals aufruft? Probiert auch aus, 5 Zufallszahlen mit einer Schleife auszugeben.
+    \begin{solution}
+        Das Programm, um 5 Zufallszahlen auszugeben, sieht zum Beispiel folgendermaßen aus:
+\begin{code}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    for(int i = 1; i <= 5; i++) {
+        int zahl = rand();
+        printf("Zufallszahl %d: %d\n", i, zahl); 
+    }
+
+    return 0;
+}
+\end{code}
+dessen Ausgabe folgende ist:
+\begin{verbatim}
+Zufallszahl 1: 1804289383
+Zufallszahl 2: 846930886
+Zufallszahl 3: 1681692777
+Zufallszahl 4: 1714636915
+Zufallszahl 5: 1957747793
+\end{verbatim}
+    Sind diese Zahlen die Gleichen, die auch Ihr seht?
+    (Ihr könnt nun im Text nach der Aufgabe im Kapitel~\ref{sec:c:wuerfel} weiter machen, dort findet Ihr die Erklärung für dieses Verhalten.)
+    \end{solution}
+\end{exercise}
+
+In der Aufgabe habt ihr gesehen, dass die generierten Zufallszahlen immer mit derselben Zahl anfangen und darüber hinaus auch die gleiche Reihenfolge aufweisen. Das liegt daran, dass \emph{echte} Zufallszahlen sehr schwer herzustellen sind.\footnote{%
+    Selbst viele moderne Computer haben keine echten Zufallszahlengeneratoren. Die Betriebssysteme helfen sich jedoch damit, Zufallszahlen aus dem Benutzerverhalten (z.B. durch Tastatureingabe) zu generieren.}
+Daher wurden mathematische Algorithmen entwickelt um eine Zahlenfolge zu berechnen, die sich so verhällt, als wäre sie zufällig. Dabei ist es möglich, den Anfangswert festzulegen (der sogenannte \textbf{seed}, was auf Deutsch ``Saat'' bedeutet). Um nun beim Programmstart eine neuen Anfangswert zu setzen, behilft man sich im allgemeinen damit, die derzeitige Zeit zu nehmen. Dazu schreibt man sich die Funktion:
+\begin{code}
+#include <stdlib.h>
+#include <time.h>
+
+void init_rand() {
+    srand(time(NULL));
+}
+\end{code}
+Hier ist \codeinline{srand(seed)} die Funktion, mit der man den Anfangswert der Zufallszahlenfolge setzt und \codeinline{time(NULL)} die Anzahl der Sekunden seit dem 1.1.1970.
+
+Wenn wir einen Würfel programmieren wollen, der z.B. die Zahlen 1 bis 6 liefert, dann müssen wir noch einen geeigneten Weg finden, das Ergebnis von \codeinline{rand()} auf diesen Bereich einzuschränken. Wir verwenden hier die Operation \textbf{modulo}, in C/C++ wird dafür der Operator \texttt{\%} benutzt.\footnote{%
+    Das ``modulo'' ist der Rest einer Division, Beispiel: 10 ÷ 3 = 3 Rest 1.}
+Die Funktion \codeinline{rand()} liefert nun die Zahlen 0 bis \texttt{RAND\_MAX} (siehe Lösung der obigen Aufgabe; Funktionsreferenz S.~\manrefpage{rand}). Ihr könnt nun einmal ausprobieren, was passiert, wenn ihr in Eurem Program die Zeile
+\begin{code}
+    int zahl = rand();
+\end{code} 
+durch
+\begin{code}
+    int zahl = rand() % 6;
+\end{code} 
+ersetzt.
+
+Damit sieht die Hilfsfunktion folgendermaßen aus:\footnote{%
+    FIXME}
+\begin{code}
+#include <stdlib.h>
+    
+int random_number(int min, int max) {
+    return min + rand() % (max-min+1);
+}
+\end{code}
+
+Damit lässt sich nun das vollständige Program schreiben:
+\cppinput{c/07_wuerfel.c}

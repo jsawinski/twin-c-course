@@ -1,0 +1,24 @@
+        Das Programm, um 5 Zufallszahlen auszugeben, sieht zum Beispiel folgendermaßen aus:
+\begin{code}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    for(int i = 1; i <= 5; i++) {
+        int zahl = rand();
+        printf("Zufallszahl %d: %d\n", i, zahl);
+    }
+
+    return 0;
+}
+\end{code}
+dessen Ausgabe folgende ist:
+\begin{verbatim}
+Zufallszahl 1: 1804289383
+Zufallszahl 2: 846930886
+Zufallszahl 3: 1681692777
+Zufallszahl 4: 1714636915
+Zufallszahl 5: 1957747793
+\end{verbatim}
+    Sind diese Zahlen die Gleichen, die auch Ihr seht?
+    (Ihr könnt nun im Text nach der Aufgabe im Kapitel~\ref{sec:c:wuerfel} weiter machen, dort findet Ihr die Erklärung für dieses Verhalten.)

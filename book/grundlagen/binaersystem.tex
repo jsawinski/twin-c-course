@@ -1,7 +1,7 @@
 \section{Das Binärsystem}
 \label{sec:grundlagen:binärsystem}
 
-Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größere Zahlen darstellen zu können, werden mehrere dieser Nullen und Einsen, genannt ``\textbf{Bit}'' aneinandergereit. Am gebräuchlichsten dabei ist das ``\textbf{Byte}'' (siehe Abb.~\ref{fig:byte_bits}), das aus 8 Bit besteht.
+Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größere Zahlen darstellen zu können, werden mehrere dieser Nullen und Einsen, genannt ``\textbf{Bit}'' aneinandergereit. Am gebräuchlichsten dabei ist das ``\textbf{Byte}'' (siehe Abb.~\ref{fig:byte-bits}), das aus 8 Bit besteht.
 
 \begin{marginfigure}
   \centering
@@ -31,7 +31,7 @@ Computer rechnen im sogenannten Binärsystem, sie kennen nur 0 und 1. Um größe
 
   \end{tikzpicture}
   \caption{Ein Byte mit den Bit-Positionen 0 bis 7.}
-  \label{fig:byte_bits}
+  \label{fig:byte-bits}
 \end{marginfigure}
 
 \noindent
@@ -54,7 +54,7 @@ Interessant ist nun die Frage, was $2^0$ ist. Wenn Ihr genau hinschaut, dann mer
 Übrigens, jede Zahl hoch $0$ hat als Ergebnis die $1$ (wir kommen später darauf zurück).\footnote{%
   Es gibt ein Ausnahme und das ist $0^0$. Wenn Ihr diese Rechnung auf dem Computer ausführt, dann erhaltet Ihr als Ergebnis höchstwahrscheinlich auch die $1$. Die Mathematik dahinter kommt allerdings nicht zu einem eindeutigen Ergebnis.}
 
-Um auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jeweils die Werte 1 bis 128 zugeordnet sind (siehe Abb.~\ref{fig:byte_values}).
+Um auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} jeweils die Werte 1 bis 128 zugeordnet sind (siehe Abb.~\ref{fig:byte-values}).
 
 \begin{figure}[h]
   \centering
@@ -91,7 +91,7 @@ Um auf das \textbf{Byte} zurückzukommen, heißt dass, dass den \textbf{Bits} je
 
   \end{tikzpicture}
   \caption{Ein Byte mit Bit-Positionen und den zugehörigen Werten ($2^b$).}
-  \label{fig:byte_values}
+  \label{fig:byte-values}
 \end{figure}
 
 \noindent
@@ -128,7 +128,7 @@ Entsprechend lässt sich auch die Multiplikation durchführen:
 \end{lstlisting}
 Wenn Ihr genau hinseht, dann bemerkt Ihr, dass wir zwei Bytes multipliziert haben, aber das Ergebnis benötigt 9 Bits, also ein Bit mehr als ein Byte. Das führt zu dem Problem, dass, wenn Ihr auf einem Computer diese Multiplikation durchführt, das höchste Bit (die letzte ``1'' links) abgeschnitten wird und das Ergebnis, dass der Computer euch liefert, $164$ ist. Das gleiche passiert bei einem Byte, wenn Ihr zu $255$ die $1$ dazuzählt, das Ergebnis ist $0$ (in der Fachsprache als \textbf{Überlauf} bezeichnet).
 
-Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Zweierkomplement'' (den Begriff müsst Ihr euch natürlich nicht merken). Wichtig ist: dass höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
+Computer können auch negative Zahlen darstellen. Dazu nützt man aus, dass, wenn $255 + 1$ zum Ergebnis $0$ hat, dann hat $0-1$ als Ergebnis $-1$, binär also 11111111. Dies nennt man das ``Zweierkomplement'' (den Begriff müsst Ihr euch natürlich nicht merken). Wichtig ist: das höchste Bit zeigt, dass es sich um eine negative Zahl handelt. Damit können dann mit einem Byte die Zahlen -128 bis 127 dargestellt werden:
 \begin{lstlisting}
     10000000        -128
     10000001        -127
@@ -153,3 +153,12 @@ Das funktioniert auch umgekehrt, also aus einer negativen Zahl eine positive zu 
                       --------
                       10000001     (-127)
 \end{lstlisting}
+Das Interessante an diesem ``Zweierkomplement'' ist nun, dass man, z.B. eine Addition mit genau der gleichen Methode wie bei positiven Zahlen durchführen kann. Beispiel:
+\begin{lstlisting}
+    00000101       5
+  + 11111111      -1
+    1111111       (Übertrag)
+  -----------
+    00000100       4
+\end{lstlisting}
+Und in der Tat werden im Prozessor des Computers Addition und Subtraktion von positiven und negativen Zahlen auf genau diese Weise durchgeführt, ohne dass der Prozessor speziell zwischen positiven und negativen Zahlen unterscheiden muss. Im nächsten Abschnitt lernt Ihr nun die Grundelemente, aus denen ein Computer, sowie genau diese Rechenoperationen, aufgebaut sind.

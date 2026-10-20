@@ -2,12 +2,9 @@
 \label{sec:c:lauflicht}
 
 Im folgenden C-Programm wird ein sogenanntes ``Lauf"|licht'' erzeugt. Dabei wird ein Sternchen von links nach rechts über den Bildschirm bewegt. 
-
-Um genau zu sein, was wir machen wollen ist: 
-FIXME
-
-
-Das Programm läuft dabei unendlich lange, bis es mit \texttt{Strg+C} abgebrochen wird.
+Dabei werden wir eine neue Eigenheit der sogenannten \emph{Konsole} kennenlernen. Bisher habt ihr gesehen, dass man mit \texttt{printf()} Text auf den Bildschirm ausgeben kann. Um eine neue Zeile anzufangen, habe ihr den sogenannten Zeilenumbruch \esc{n} verwendet. In diesem Programm werden wir jedoch sehen, wie man den Cursor an den Anfang der aktuellen Zeile zurücksetzt, ohne eine neue Zeile zu beginnen: das geschieht mit \esc{r}.\footnote{%
+    Das \esc{r} steht für \emph{Carriage Return} (deutsch: Wagenrücklauf). Der Begriff stammt von der mechanischen Schreibmaschine, die man früher zum Schreiben von Briefen benutzt hat (vielleicht habt Ihr ja mal eine im Museum oder bei den Großeltern gesehen): Dort beförderte der Wagenrücklauf den Schreibwagen zurück an den linken Rand, ohne die Zeile zu wechseln -- genau das macht \esc{r} auch auf der Konsole: Der Cursor springt an den \emph{Anfang der aktuellen Zeile}, der bereits geschriebene Text bleibt stehen und kann überschrieben werden. Neben \esc{r} und \esc{n} gibt es noch ein paar weitere \emph{Escape-Sequenzen}, mit denen sich die Ausgabe steuern lässt. In der Tat stammen diese Sequenzen aus einer Zeit, in der Computer noch keine Bildschirme hatten und die Ausgabe hauptsächlich über Drucker erfolgte -- angelehnt an die mechanische Schreibmaschine. Ein weiteres interessantes Beispiel ist übrigens \esc{a}, das für einen Alarmton steht}
+Darüber hinaus, werden wir eine Schleife verwenden, so dass das Program unendlich lange läuft, bis es mit \texttt{Strg+C} abgebrochen wird:
 
 \begin{code}
 #include <stdio.h>
@@ -28,16 +25,36 @@ int main() {
     return 0;
 }
 \end{code}
+Hier ist \texttt{while} eine neue Schleife:
 
-Wenn ihr dieses Programm nun ausprobiert, stellt Ihr fest, dass fast nichts passiert. Woran liegt das?
-FIXME
+\begin{verbatim}
+while (Bedingung) {
+    // Schleifenkörper
+}
+\end{verbatim}
+
+\noindent
+Dabei wird der \emph{Schleifenkörper} so lange ausgeführt, so lange die \emph{Bedingung} wahr ist.
+
+Wenn Ihr dieses Programm nun ausprobiert, stellt Ihr fest, dass fast nichts passiert. Woran liegt das? Das liegt daran, dass die Zeichen zwischengespeichert werden, man nennt das \textbf{puffern} (Englisch: \emph{buffer}), bis eine Zeilenvorschub (\esc{n}) erscheint. Um sicherzustellen, dass alle Zeichen immer ausgegeben werden, muss man dem Computer sagen, dass er, auch ohne \esc{n} alles ausgeben soll. Das geschieht mit dem Kommando \codeinline{fflush(stdout)}.
+
+Aber selbst dann, wenn Ihr dieses Kommando verwendet, ist der Ablauf viel zu schnell. Das Programm muss also ``gebremst'' werden und das macht man indem man eine Pause einbaut. Dazu verwendet Ihr
+\begin{code}
+#define __GNU_SOURCE
+#include <unistd.h>
+
+usleep(100000);
+\end{code}
+Das hier eine neue Kopfdatei (``\emph{Header}'') verwendet wird, seht Ihr sofort. Um den Befehl \codeinline{usleep()} verwenden zu können, ist das \codeinline{#define __GNU_SOURCE} vor dem Einbinden der Kopfdatei notwendig -- wir kommen im nächsten Abschnitt auf die genaue Bedeutung zurück.
+\index{C-Makro!__GNU_SOURCE@\texttt{\detokenize{__GNU_SOURCE}}}
+Damit sieht das vollständige Program folgendermaßen aus:\footnote{%
+    Das Programm ist, im Gegensatz zu den vorhergehenden Kapiteln, vollständig kommentiert. Bei so einem kurzen Programm könnt Ihr natürlich die Kommentare weglassen. Allerdings ist es gut, jeden Programmcode zu kommentieren, so dass man später leicht wieder erkennen kann, was an welcher Stelle gemacht wird.}
 
 \cppinput{c/05_lauflicht.c}
-\index{C-Makro!__GNU_SOURCE@\texttt{\detokenize{__GNU_SOURCE}}}
 
-% \paragraph{Merke:}
+\paragraph{Merke:}
 
-% \begin{itemize}[noitemsep]
-%     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
-%     \item \texttt{printf()} schreibt Text auf den Bildschirm.
-% \end{itemize}
+\begin{itemize}[noitemsep]
+    \item Die Ausgabe mit \texttt{printf} ist gepuffert. Mit dem Kommando \texttt{fflush(stdout)} kann man dem Computer sagen, dass er alle gepufferten Zeichen ausgeben soll.
+    \item Mit dem Befehl \texttt{usleep} kann man in einem Programm eine Pause machen (in \texttt{usleep} steht das ``u'' übrigens für Mikrosekunde und ``sleep'' heißt auf Deutsch ``schlafen'').
+\end{itemize}

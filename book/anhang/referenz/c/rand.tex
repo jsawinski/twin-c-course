@@ -1,0 +1,36 @@
+\begin{man}{rand,srand}
+    \begin{synopsis}
+        \begin{plaincode}[gobble=8]
+            #include <stdlib.h>
+
+            int rand();
+            void srand(unsigned int seed);
+        \end{plaincode}
+    \end{synopsis}
+
+    \begin{desc}
+        Der Befehl \texttt{rand()} generiert eine Zufallszahl von 0 bis zum dem im Makro \texttt{RAND\_MAX} definierten Wert. Diese Zufahlszahl wird mit einem Algorithmus berechnet und hängt von ihrem Anfangswert ab (das ist die ``seed'', auf Deutsch ``Saat''). Dieser Anfangswert kann mit dem Befehl \texttt{srand} geändert werden.
+    \end{desc}
+
+    \begin{example}
+        \begin{code}
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    srand(time(NULL));
+    printf("Zufallszahl von %d bis %d: %d\n", 0, RAND_MAX, rand());
+    return 0;
+}
+        \end{code}
+    \end{example}
+
+    % \begin{returns}
+    % \end{returns}
+
+    \begin{seeother}
+        \manref{time}
+    \end{seeother}
+\end{man}
+
