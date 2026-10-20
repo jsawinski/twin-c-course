@@ -1,11 +1,11 @@
 #define __GNU_SOURCE
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 
 int main() {
-    // Das Lauflicht wird so lange wiederholt, 
+    // Das Lauflicht wird so lange wiederholt,
     // bis man "Strg-C" drückt.
-    while(1) {
+    while (1) {
         // Zähler für das Lauflicht (Breite von 20 Zeichen)
         for (int i = 0; i < 20; i++) {
             // An den Zeilenanfang zurückkehren
@@ -23,8 +23,8 @@ int main() {
             // Zeichen ausgeben (Puffer leeren)
             fflush(stdout);
 
-            // Pause von 0.1 Sekunden 
-            // (das Lauflicht braucht als 2 Sekunden für einen Durchlauf)
+            // Pause von 0.1 Sekunden
+            // (das Lauflicht braucht also 2 Sekunden für einen Durchlauf)
             usleep(100000);
         }
     }
