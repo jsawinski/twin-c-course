@@ -1,18 +1,18 @@
 #define __GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/ioctl.h>
 #include <termios.h>
+#include <unistd.h>
 
 static struct termios einstellungen;
 
-void konsole_loeschen() { 
-    printf("\x1b[2J"); 
+void konsole_loeschen() {
+    printf("\x1b[2J");
 }
 
-void konsole_start() { 
-    printf("\x1b[H"); 
+void konsole_start() {
+    printf("\x1b[H");
 }
 
 void konsole_cursor_aus() {
@@ -28,9 +28,9 @@ void konsole_initialisieren() {
     tcgetattr(STDIN_FILENO, &einstellungen);
     struct termios neue_einstellungen = einstellungen;
 
-    neue_einstellungen.c_lflag &= ~(ICANON | ECHO /*| ISIG*/); // Deaktiviert Canonical Mode und Echo
-    neue_einstellungen.c_cc[VMIN] = 0;  // Mindestens 1 Zeichen zum Lesen
-    neue_einstellungen.c_cc[VTIME] = 0; // Kein Timeout
+    neue_einstellungen.c_lflag &= ~(ICANON | ECHO /*| ISIG*/);  // Deaktiviert Canonical Mode und Echo
+    neue_einstellungen.c_cc[VMIN] = 0;                          // Mindestens 1 Zeichen zum Lesen
+    neue_einstellungen.c_cc[VTIME] = 0;                         // Kein Timeout
 
     tcsetattr(STDIN_FILENO, TCSANOW, &neue_einstellungen);
 
@@ -43,7 +43,7 @@ int kbhit(void) {
     fd_set fds;
     FD_ZERO(&fds);
     FD_SET(STDIN_FILENO, &fds);
-    
+
     // Prüft, ob Daten auf stdin anstehen
     return select(STDIN_FILENO + 1, &fds, NULL, NULL, &tv);
 }
@@ -52,7 +52,7 @@ int getch_nb(void) {
     if (!kbhit()) {
         return -1;  // Keine Taste gedrückt
     }
-    
+
     char ch;
     read(STDIN_FILENO, &ch, 1);
     return ch;
@@ -101,7 +101,7 @@ char spielfeld_inhalt(struct spielfeld *feld, int x, int y) {
     if (x >= 0 && x < feld->breite && y >= 0 && y < feld->hoehe) {
         return feld->daten[y * (feld->breite + 1) + x];
     }
-    return '\0'; // Rückgabe eines Nullzeichens, wenn die Koordinaten außerhalb des Spielfelds liegen
+    return '\0';  // Rückgabe eines Nullzeichens, wenn die Koordinaten außerhalb des Spielfelds liegen
 }
 
 void spielfeld_leeren(struct spielfeld *feld) {
@@ -118,7 +118,7 @@ void spielfeld_zufaellig_fuellen(struct spielfeld *feld, char c, int anzahl) {
         int y = zufallszahl(0, feld->hoehe - 1);
 
         /* Sicherstellen, dass das Feld frei ist */
-        for (int k=0; (k<1000) && (spielfeld_inhalt(feld, x, y) != ' '); k++) {
+        for (int k = 0; (k < 1000) && (spielfeld_inhalt(feld, x, y) != ' '); k++) {
             x = zufallszahl(0, feld->breite - 1);
             y = zufallszahl(0, feld->hoehe - 1);
         }
@@ -131,7 +131,7 @@ int spielfeld_nachbarn(struct spielfeld *feld, int x, int y) {
     int lebende_nachbarn = 0;
     for (int dy = -1; dy <= 1; dy++) {
         for (int dx = -1; dx <= 1; dx++) {
-            if (dx == 0 && dy == 0) continue; // Überspringe die Zelle selbst
+            if (dx == 0 && dy == 0) continue;  // Überspringe die Zelle selbst
             int nx = x + dx;
             int ny = y + dy;
             if (nx >= 0 && nx < feld->breite && ny >= 0 && ny < feld->hoehe) {
@@ -148,12 +148,11 @@ int spielfeld_nachbarn(struct spielfeld *feld, int x, int y) {
 #define REPRODUKTION 3
 #define UEBERBEVOELKERUNG 4
 
-
 int main() {
     struct winsize w;
     struct spielfeld feld;
-    int pausenzeit = 100000; // Standardpausenzeit in Mikrosekunden
-    
+    int pausenzeit = 100000;  // Standardpausenzeit in Mikrosekunden
+
     /* Terminalgröße abfragen und Spielfeld initialisieren */
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) {
         /* Ein Fehler ist aufgetreten. */
@@ -172,17 +171,17 @@ int main() {
             konsole_start();
 
             // Spiel des Lebens Logik (siehe https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens)
-            for(int x=0; x<feld.breite; x++) {
-                for(int y=0; y<feld.hoehe; y++) {
+            for (int x = 0; x < feld.breite; x++) {
+                for (int y = 0; y < feld.hoehe; y++) {
                     int nachbarn = spielfeld_nachbarn(&feld, x, y);
                     char aktueller_zustand = spielfeld_inhalt(&feld, x, y);
                     if (aktueller_zustand == '*') {
                         if (nachbarn < UNTERBEVOELKERUNG || nachbarn >= UEBERBEVOELKERUNG) {
-                            spielfeld_setzen(&feld, x, y, ' '); // Zelle stirbt
+                            spielfeld_setzen(&feld, x, y, ' ');  // Zelle stirbt
                         }
                     } else {
                         if (nachbarn == REPRODUKTION) {
-                            spielfeld_setzen(&feld, x, y, '*'); // Zelle wird lebendig
+                            spielfeld_setzen(&feld, x, y, '*');  // Zelle wird lebendig
                         }
                     }
                 }
@@ -195,25 +194,21 @@ int main() {
             int c = getch_nb();
             if (c != -1) {
                 if (c == 'q') {
-                    break;  
-                }
-                else if (c == 'n') { // "NEU"
-                    spielfeld_leeren(&feld); 
-                    spielfeld_zufaellig_fuellen(&feld, '*', (feld.breite*feld.hoehe)/20); // 5% der Felder zufällig füllen
+                    break;
+                } else if (c == 'n') {  // "NEU"
+                    spielfeld_leeren(&feld);
+                    spielfeld_zufaellig_fuellen(&feld, '*', (feld.breite * feld.hoehe) / 20);  // 5% der Felder zufällig füllen
                     spielfeld_anzeigen(&feld);
-                }
-                else if (c == 'm') { // "MEHR"
-                    spielfeld_zufaellig_fuellen(&feld, '*', (feld.breite*feld.hoehe)/20); // 5% der Felder zufällig füllen
+                } else if (c == 'm') {                                                         // "MEHR"
+                    spielfeld_zufaellig_fuellen(&feld, '*', (feld.breite * feld.hoehe) / 20);  // 5% der Felder zufällig füllen
                     spielfeld_anzeigen(&feld);
-                }
-                else if (c == 'l') { // "LANGSAMER"
+                } else if (c == 'l') {  // "LANGSAMER"
                     if (pausenzeit < 200000) {
-                        pausenzeit += 10000; // Verlangsamen
+                        pausenzeit += 10000;  // Verlangsamen
                     }
-                }
-                else if (c == 's') { // "SCHNELLER"
+                } else if (c == 's') {  // "SCHNELLER"
                     if (pausenzeit >= 10000) {
-                        pausenzeit -= 10000; // Beschleunigen
+                        pausenzeit -= 10000;  // Beschleunigen
                     }
                 }
             }
@@ -225,7 +220,3 @@ int main() {
 
     return 0;
 }
-
-
-
-
