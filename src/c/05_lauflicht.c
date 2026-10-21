@@ -24,7 +24,7 @@ int main() {
             fflush(stdout);
 
             // Pause von 0.1 Sekunden
-            // (das Lauflicht braucht also 2 Sekunden für einen Durchlauf)
+            // (ein Durchlauf braucht also etwa 2 Sekunden)
             usleep(100000);
         }
     }

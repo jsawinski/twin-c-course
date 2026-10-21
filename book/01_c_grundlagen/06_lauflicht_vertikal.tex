@@ -1,5 +1,85 @@
 \section{Programm: Lauf"|licht - Vertikal}
 \label{sec:c:lauflicht-vertikal}
 
+Im letzten Kapitel haben wir ein Lauflicht gebaut, das waagerecht über den Bildschirm läuft. Jetzt wollen wir dasselbe senkrecht machen -- ein Tropfen soll von oben nach unten fallen. Dabei lernen wir zwei neue Dinge kennen: Makros und Funktionen. (Funktionen schauen wir uns hier nur kurz an -- wie man sie selbst schreibt, sehen wir im nächsten Kapitel.)
+
+In unserem Programm aus dem vorhergehenden Kapitel stand an mehreren Stellen die Zahl 20: einmal in der \texttt{for}-Schleife für \texttt{i}, einmal in der \texttt{for}-Schleife für \texttt{j}. Wenn wir jetzt die Höhe des Lauflichts ändern wollen, müssten wir beide Stellen anpassen -- wenn so etwas häufiger vorkommt, kann man das leicht vergessen. Hier kommen Makros ins Spiel. Ein Makro ist ein Name für einen Textbaustein, den der Compiler vor dem eigentlichen Übersetzen einsetzt. In C definiert man ein Makro mit \texttt{\#define}:
+\begin{code}[numbers=none]
+#define HOEHE 20
+\end{code}
+Ab jetzt ersetzt der Compiler jedes HOEHE im Code durch 20, bevor er das Programm übersetzt.\footnote{%
+    Das erste Makro, das Ihr schon gesehen habt, war \texttt{\_\_GNU\_SOURCE} in der ersten Zeile vor den Kopfdateien. Wenn Ihr nachschaut, werdet Ihr feststellen, dass es sich um ein \emph{leeres} Makro handelt, dass im Code einfach nur dazu benutzt wird, dem Compiler zu sagen: 'Ich möchte auch Funktionen benutzen, die nicht zum Standard gehören' -- zum Beispiel \texttt{usleep()}.}
+Wichtig: Ein Makro ist kein Wert im Sinne einer Variable. Es gibt keinen Speicherplatz, keine Typprüfung, keine Rechenoperation. Es ist reine Textersetzung -- der Compiler macht aus HOEHE buchstäblich 20, bevor er den Rest liest. (Deshalb schreibt man Makronamen üblicherweise in GROSSBUCHSTABEN, damit man sie im Code sofort von Variablen unterscheiden kann.)
+
+Um das Programm übersichtlicher zu machen, führen wir zwei Funktionen ein:
+\begin{code}[numbers=none]
+void konsole_start() { 
+    printf("\x1b[H"); 
+}
+
+void tropfen(int b) {
+    if (b)
+        printf("*");
+    else
+        printf(" ");
+}
+\end{code}
+Funktionen fassen mehrere Anweisungen zu einem benannten Block zusammen, den man immer wieder aufrufen kann. Die beiden Funktionen haben folgende Eigenschaft:
+
+\paragraph{konsole\_start()}
+Diese Funktion gibt eine sogenannte \emph{ANSI-Escape-Sequenz}\footnote{\cite{wikipedia:ansi-escape}} aus. Diese Sequenzen beginnen meistens mit \esc{x1b[}, gefolgt von einem Konsolenbefehl. In diesem Fall ist es das \texttt{H}, das für ``home'' steht: Der Cursor geht dabei zur Position ``Zeile 1, Spalte 1''. Wir werden in den folgenden Kapiteln noch weitere Möglichkeiten kennenlernen.
+
+\paragraph{tropfen(int b)}
+Diese Funktion gibt einen ``Tropfen'' auf dem Bildschirm aus, wenn man für den Parameter\footnote{%
+    Ein Parameter ist ein Platzhalter für einen Wert, den man einer Funktion beim Aufruf mitgibt. In \texttt{tropfen(int b)} heißt der Parameter b -- beim Aufruf \texttt{tropfen(1)} wird \texttt{b} zu \texttt{1}, beim Aufruf \texttt{tropfen(0)} wird \texttt{b} zu \texttt{0}. Der Name \texttt{b} ist dabei egal (er könnte auch \texttt{wert} oder \texttt{x} heißen); wichtig ist nur, an welcher Stelle der Wert steht. (Manchmal sagt man statt Parameter auch Argument -- für den Anfang reicht es, wenn Ihr Euch einen von beiden Begriffen merkt.)}
+\texttt{b} eine von \texttt{0} verschiedene Zahl übergibt. Ansonsten wird ein Leerzeichen ausgegeben. Damit könnt Ihr nun im Hauptteil des Programms die innere \texttt{for}-Schleife (ab Zeile 16, S.~\pageref{sec:c:lauflicht:program}) durch
+\begin{code}[numbers=none]
+    for (int j = 0; j < 20; j++) 
+        tropfen((i == j))
+\end{code}
+ersetzen. Euch sollte nun das \codeinline{(i == j)} auffallen. In C (und vielen anderen Programmiersprachen) haben Vergleiche ein Ergebnis, das man einer Variable zuordnen kann. In C ist das Ergebnis ein \texttt{int} und \codeinline{(i == j)} liefert, wenn \texttt{i} und \texttt{j} gleich sind, den Wert \texttt{1} (für \emph{wahr}), ansonsten ist das Ergebnis \texttt{0} (für \emph{falsch}).
+
+\newpage
+Wenn Ihr nun Euer letztes Programm nehmt, das vertikale Lauflicht, sieht das Programm folgendermaßen aus:
+\begin{code}[numbers=none]
+#define __GNU_SOURCE
+#include <stdio.h>
+#include <unistd.h>
+
+#define HOEHE 20
+
+void konsole_start() { 
+    printf("\x1b[H"); 
+}
+
+void tropfen(int b) {
+    if (b)
+        printf("*");
+    else
+        printf(" ");
+}
+
+int main() {
+    while (1) {
+        for (int i = 0; i < HOEHE; i++) {
+            printf("\r");
+
+            for (int j = 0; j < HOEHE; j++) {
+                tropfen((i == j));
+            }
+
+            fflush(stdout);
+            usleep(100000);
+        }
+    }
+
+    return 0;
+}
+\end{code}
+Nun könnte Ihr überlegen, wie Ihr daraus das ``horizontale Lauflicht'' macht, bevor Ihr Euch die folgende Musterlösung anschaut.
+
+\newpage
+\paragraph{Musterlösung}
+
 \cppinput{c/06_vertikal.c}
 

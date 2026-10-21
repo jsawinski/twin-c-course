@@ -13,13 +13,13 @@ void konsole_start() {
 // Hilfsfunktion: Ausgabe eines "Tropfens" oder eines Leerzeichens
 void tropfen(int b) {
     if (b)
-        printf("|");
+        printf("*");
     else
         printf(" ");
 }
 
 int main() {
-    // Das Lauflicht läuft, bis es durch Strg+C abgebrochen wird
+    // Das Lauflicht laeuft, bis es durch Strg+C abgebrochen wird
     while (1) {
         // Schleife i: Zeile, in der der "Tropfen" erscheinen soll
         for (int i = 0; i < HOEHE; i++) {
