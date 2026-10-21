@@ -10,7 +10,7 @@ int main() {
         // Ausgabe der Zwischenergebnisse
         printf("%9d Pi: %.15f\n", i, 4 * pi);
 
-        if (i & 1)    // Bedingung: i gerade?
+        if (i & 1)    // Bedingung: i ungerade?
             pi -= n;  // ja (true)
         else
             pi += n;  // nein (false)
