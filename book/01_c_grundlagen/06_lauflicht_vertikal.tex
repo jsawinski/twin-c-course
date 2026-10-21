@@ -8,7 +8,7 @@ In unserem Programm aus dem vorhergehenden Kapitel stand an mehreren Stellen die
 #define HOEHE 20
 \end{code}
 Ab jetzt ersetzt der Compiler jedes HOEHE im Code durch 20, bevor er das Programm übersetzt.\footnote{%
-    Das erste Makro, das Ihr schon gesehen habt, war \texttt{\_\_GNU\_SOURCE} in der ersten Zeile vor den Kopfdateien. Wenn Ihr nachschaut, werdet Ihr feststellen, dass es sich um ein \emph{leeres} Makro handelt, dass im Code einfach nur dazu benutzt wird, dem Compiler zu sagen: 'Ich möchte auch Funktionen benutzen, die nicht zum Standard gehören' -- zum Beispiel \texttt{usleep()}.}
+    Das erste Makro, das Ihr schon gesehen habt, war \texttt{\_\_GNU\_SOURCE} in der ersten Zeile vor den Kopfdateien. Wenn Ihr nachschaut, werdet Ihr feststellen, dass es sich um ein \emph{leeres} Makro handelt, das im Code einfach nur dazu benutzt wird, dem Compiler zu sagen: \enquote{Ich möchte auch Funktionen benutzen, die nicht zum Standard gehören} -- zum Beispiel \texttt{usleep()}.}
 Wichtig: Ein Makro ist kein Wert im Sinne einer Variable. Es gibt keinen Speicherplatz, keine Typprüfung, keine Rechenoperation. Es ist reine Textersetzung -- der Compiler macht aus HOEHE buchstäblich 20, bevor er den Rest liest. (Deshalb schreibt man Makronamen üblicherweise in GROSSBUCHSTABEN, damit man sie im Code sofort von Variablen unterscheiden kann.)
 
 Um das Programm übersichtlicher zu machen, führen wir zwei Funktionen ein:
@@ -31,7 +31,7 @@ Diese Funktion gibt eine sogenannte \emph{ANSI-Escape-Sequenz}\footnote{\cite{wi
 
 \paragraph{tropfen(int b)}
 Diese Funktion gibt einen ``Tropfen'' auf dem Bildschirm aus, wenn man für den Parameter\footnote{%
-    Ein Parameter ist ein Platzhalter für einen Wert, den man einer Funktion beim Aufruf mitgibt. In \texttt{tropfen(int b)} heißt der Parameter b -- beim Aufruf \texttt{tropfen(1)} wird \texttt{b} zu \texttt{1}, beim Aufruf \texttt{tropfen(0)} wird \texttt{b} zu \texttt{0}. Der Name \texttt{b} ist dabei egal (er könnte auch \texttt{wert} oder \texttt{x} heißen); wichtig ist nur, an welcher Stelle der Wert steht. (Manchmal sagt man statt Parameter auch Argument -- für den Anfang reicht es, wenn Ihr Euch einen von beiden Begriffen merkt.)}
+    Ein Parameter ist ein Platzhalter für einen Wert, den man einer Funktion beim Aufruf mitgibt. In \texttt{tropfen(int b)} heißt der Parameter \texttt{b} -- beim Aufruf \texttt{tropfen(1)} wird \texttt{b} zu \texttt{1}, beim Aufruf \texttt{tropfen(0)} wird \texttt{b} zu \texttt{0}. Der Name \texttt{b} ist dabei egal (er könnte auch \texttt{wert} oder \texttt{x} heißen); wichtig ist nur, an welcher Stelle der Wert steht. (Manchmal sagt man statt Parameter auch Argument -- für den Anfang reicht es, wenn Ihr Euch einen von beiden Begriffen merkt.)}
 \texttt{b} eine von \texttt{0} verschiedene Zahl übergibt. Ansonsten wird ein Leerzeichen ausgegeben. Damit könnt Ihr nun im Hauptteil des Programms die innere \texttt{for}-Schleife (ab Zeile 16, S.~\pageref{sec:c:lauflicht:program}) durch
 \begin{code}[numbers=none]
     for (int j = 0; j < 20; j++) 
@@ -40,7 +40,7 @@ Diese Funktion gibt einen ``Tropfen'' auf dem Bildschirm aus, wenn man für den 
 ersetzen. Euch sollte nun das \codeinline{(i == j)} auffallen. In C (und vielen anderen Programmiersprachen) haben Vergleiche ein Ergebnis, das man einer Variable zuordnen kann. In C ist das Ergebnis ein \texttt{int} und \codeinline{(i == j)} liefert, wenn \texttt{i} und \texttt{j} gleich sind, den Wert \texttt{1} (für \emph{wahr}), ansonsten ist das Ergebnis \texttt{0} (für \emph{falsch}).
 
 \newpage
-Wenn Ihr nun Euer letztes Programm nehmt, das vertikale Lauflicht, sieht das Programm folgendermaßen aus:
+Wenn Ihr das Programm aus dem letzten Kapitel nehmt und die Änderungen von oben einbaut, sieht es folgendermaßen aus:
 \begin{code}[numbers=none]
 #define __GNU_SOURCE
 #include <stdio.h>
@@ -76,7 +76,7 @@ int main() {
     return 0;
 }
 \end{code}
-Nun könnte Ihr überlegen, wie Ihr daraus das ``horizontale Lauflicht'' macht, bevor Ihr Euch die folgende Musterlösung anschaut.
+Nun könnte Ihr überlegen, wie Ihr daraus das ``vertikale Lauflicht'' macht, bevor Ihr Euch die folgende Musterlösung anschaut.
 
 \newpage
 \paragraph{Musterlösung}

@@ -9,7 +9,7 @@ void random_init() {
 
 // Hilfsfunktion, um eine Zufallszahl im Bereich von min bis max zu erzeugen:
 int random_number(int min, int max) {
-    return rand();
+    return min + rand() % (max - min + 1);
 }
 
 int main() {

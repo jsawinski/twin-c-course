@@ -1,8 +1,8 @@
 \section{Programm: Ein Würfel}
 \label{sec:c:wuerfel}
 
-Um einen Würfel zu programmieren, benötigt man Zufallszahlen. Dafür existiert der Befehl:
-\begin{code}
+Ein Würfel liefert ja bekanntlich zufällige Zahlen von 1 bis 6. Um so etwas zu programmieren, brauchen wir Zufallszahlen -- und die kann der Computer auf Befehl liefern:
+\begin{code}[numbers=none]
 #include <stdlib.h>
 
 int rand();
@@ -10,10 +10,10 @@ int rand();
 Der Befehl \codeinline{rand()}, definiert in der Kopfdatei ``stdlib.h'' (\emph{standard library}, so viel wie ``Standardbibliothek''), gibt Euch Zufallszahlen vom Typ \codeinline{int}. 
 
 \begin{exercise}
-    Schreibt ein Programm, dass eine Zufallszahl auf dem Bildschirm ausgibt. Ihr könnt dazu einfach Euer Programm aus Abschnitt~\ref{sec:c:zahlen} kopieren und die 42 durch \texttt{rand()} ersetzen. Vergesst aber nicht, die Kopfdatei \texttt{stdlib.h} einzubinden. Was fällt Euch auf, wenn ihr das Programm mehrmals aufruft? Probiert auch aus, 5 Zufallszahlen mit einer Schleife auszugeben.
+    Schreibt ein Programm, dass eine Zufallszahl auf dem Bildschirm ausgibt. Ihr könnt dazu einfach Euer Programm aus Abschnitt~\ref{sec:c:zahlen} kopieren und die 42 durch \texttt{rand()} ersetzen. Vergesst aber nicht, die Kopfdatei \texttt{stdlib.h} einzubinden. Was fällt Euch auf, wenn Ihr das Programm mehrmals aufruft? Probiert auch aus, 5 Zufallszahlen mit einer Schleife auszugeben.
     \begin{solution}
         Das Programm, um 5 Zufallszahlen auszugeben, sieht zum Beispiel folgendermaßen aus:
-\begin{code}
+\begin{code}[numbers=none]
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -26,7 +26,7 @@ int main() {
     return 0;
 }
 \end{code}
-dessen Ausgabe folgende ist:
+Auf dem Computer des Autors ist die Ausgabe folgende:
 \begin{verbatim}
 Zufallszahl 1: 1804289383
 Zufallszahl 2: 846930886
@@ -34,39 +34,71 @@ Zufallszahl 3: 1681692777
 Zufallszahl 4: 1714636915
 Zufallszahl 5: 1957747793
 \end{verbatim}
-    Sind diese Zahlen die Gleichen, die auch Ihr seht?
+    Möglicherweise seht Ihr genau die gleiche Reihenfolge, das kann aber von Betriebssystem und Compiler abhängen.
     (Ihr könnt nun im Text nach der Aufgabe im Kapitel~\ref{sec:c:wuerfel} weiter machen, dort findet Ihr die Erklärung für dieses Verhalten.)
     \end{solution}
 \end{exercise}
 
-In der Aufgabe habt ihr gesehen, dass die generierten Zufallszahlen immer mit derselben Zahl anfangen und darüber hinaus auch die gleiche Reihenfolge aufweisen. Das liegt daran, dass \emph{echte} Zufallszahlen sehr schwer herzustellen sind.\footnote{%
+In der Aufgabe habt Ihr gesehen, dass die generierten Zufallszahlen immer mit derselben Zahl anfangen und darüber hinaus auch die gleiche Reihenfolge aufweisen. Das liegt daran, dass \emph{echte} Zufallszahlen sehr schwer herzustellen sind.\footnote{%
     Selbst viele moderne Computer haben keine echten Zufallszahlengeneratoren. Die Betriebssysteme helfen sich jedoch damit, Zufallszahlen aus dem Benutzerverhalten (z.B. durch Tastatureingabe) zu generieren.}
-Daher wurden mathematische Algorithmen entwickelt um eine Zahlenfolge zu berechnen, die sich so verhällt, als wäre sie zufällig. Dabei ist es möglich, den Anfangswert festzulegen (der sogenannte \textbf{seed}, was auf Deutsch ``Saat'' bedeutet). Um nun beim Programmstart eine neuen Anfangswert zu setzen, behilft man sich im allgemeinen damit, die derzeitige Zeit zu nehmen. Dazu schreibt man sich die Funktion:
-\begin{code}
+Daher wurden mathematische Algorithmen entwickelt um eine Zahlenfolge zu berechnen, die sich so verhält, als wäre sie zufällig. Dabei ist es möglich, den Anfangswert festzulegen (der sogenannte \emph{seed}, englisch für ``Saatkorn'' -- gemeint ist der Startwert der Zahlenfolge). Um nun beim Programmstart einen neuen Anfangswert zu setzen, behilft man sich im Allgemeinen damit, die aktuelle Zeit zu nehmen. Dazu schreibt man sich die Funktion:
+\begin{code}[numbers=none]
 #include <stdlib.h>
 #include <time.h>
 
-void init_rand() {
+void random_init() {
     srand(time(NULL));
 }
 \end{code}
-Hier ist \codeinline{srand(seed)} die Funktion, mit der man den Anfangswert der Zufallszahlenfolge setzt und \codeinline{time(NULL)} die Anzahl der Sekunden seit dem 1.1.1970.
+Hier ist \codeinline{srand(seed)} die Funktion, mit der man den Anfangswert der Zufallszahlenfolge setzt und \codeinline{time(NULL)} die Anzahl der Sekunden seit dem 1.1.1970 (dafür benötigen wir die Kopfdatei \texttt{time.h}, siehe auch Funktionnsreferenze S.~\manrefpage{time}).
 
 Wenn wir einen Würfel programmieren wollen, der z.B. die Zahlen 1 bis 6 liefert, dann müssen wir noch einen geeigneten Weg finden, das Ergebnis von \codeinline{rand()} auf diesen Bereich einzuschränken. Wir verwenden hier die Operation \textbf{modulo}, in C/C++ wird dafür der Operator \texttt{\%} benutzt.\footnote{%
     Das ``modulo'' ist der Rest einer Division, Beispiel: 10 ÷ 3 = 3 Rest 1.}
-Die Funktion \codeinline{rand()} liefert nun die Zahlen 0 bis \texttt{RAND\_MAX} (siehe Lösung der obigen Aufgabe; Funktionsreferenz S.~\manrefpage{rand}). Ihr könnt nun einmal ausprobieren, was passiert, wenn ihr in Eurem Program die Zeile
-\begin{code}
+Die Funktion \codeinline{rand()} liefert nun die Zahlen 0 bis \texttt{RAND\_MAX} (siehe Lösung der obigen Aufgabe; Funktionsreferenz S.~\manrefpage{rand}). Ihr könnt nun einmal ausprobieren, was passiert, wenn Ihr in Eurem Program die Zeile
+\begin{code}[numbers=none]
     int zahl = rand();
 \end{code} 
 durch
-\begin{code}
+\begin{code}[numbers=none]
     int zahl = rand() % 6;
 \end{code} 
-ersetzt.
+ersetzt. Wenn Ihr das nun ausprobiert, merkt Ihr, dass die Zahlen von 0 bis 5 ausgegeben werden -- das heißt, wir müssen noch 1 dazu addieren, um die Zahlen von 1 bis 6 zu erhalten. 
+
+Da wir solche Zufallszahlen aber noch in anderen Programmen nutzen wollen, ist es ratsam, eine Funktion zu schreiben, bei der man festlegen kann, was der kleinste und was der größte Wert ist. 
+
+\paragraph{\textbf{Einschub}: Funktionen} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Im ersten Programm (``Hallo Welt!'', S.~\ref{sec:c:hallo-welt}) habt ihr zwei Funktionen kennengelernt. Zum einen das \texttt{int main()} und zum anderen das \texttt{printf}. Der Unterschied ist, \texttt{main} habt Ihr selbst geschrieben, \texttt{printf} dagegen war hinter einer Kopfdatei (genauer: \texttt{stdio.h}) ``versteckt''. Wir haben auch schon im letzten Kapitel weitere eigene Funktionen eingeführt: \codeinline{konsole_start()} und \codeinline{tropfen()}. Der Aufbau ist in allen Fällen der Gleiche:
+\begin{verbatim}
+Rückgabetyp Funktionsname ( Parameter ) {
+    Funktionskörper
+}
+\end{verbatim}
+Der \emph{Rückgabetyp} kann jeder beliebige Datentyp sein (z.B. \texttt{int} oder \texttt{double}), den die Sprache C kennt (oder sogar selbst entwickelte Datentypen, dazu in einem späteren Kapitel mehr). Wenn Ihr eine Funktion programmieren wollt, die nichts zurück gibt (wie oben das \codeinline{random_init()}), dann verwendet man den Datentyp \texttt{void} (deutsch: ``Leere'' oder ``Nichts'').
+
+Den \emph{Funktionsnamen} könnt Ihr selbst wählen. Es gibt aber eine ganze Reihe von Regeln, die man beachten muss. Für den Anfang solltet Ihr Euch einfach an folgende Regel halten: verwendet einen Funktionsnamen der aus ganzen Worten besteht (kleingeschrieben) und durch Unterstriche verbunden ist, zum Beispiel: \codeinline{diese_funktion_macht_etwas()}.\footnote{%
+    In Computerbereich, so wie auch in der Wissenschaft und vielen anderen Bereichen, hat sich die englische Sprache durchgesetzt. Wenn Ihr bereits Englisch lernt und wisst, wie die Funktion auf Englisch geschrieben werden könnte, dann verwendet Englisch. Im genannten Beispiel wäre das \codeinline{this_function_does_something()}.
+}
+
+Die \emph{Parameter} sind die ``Eingangswerte'' (man spricht von Variablen) der Funktion. Sie werden als eine Liste (in der Programmiersprache C werden Listen durch ein Komma getrennt) von 
+\begin{verbatim}
+    Datentyp Variablenname
+\end{verbatim} 
+übergeben, so, wie Ihr auch die Deklaration von Variablen im Programmcode kennengelernt habt.
+
+\noindent
+Ein Beispiel:
+\begin{code}[numbers=none]
+int increment(int n) {
+    return n+1;
+}
+\end{code}
+
+Um einen Der Wert, den die Funktion zurück liefert, wird mit \texttt{return} 
 
 Damit sieht die Hilfsfunktion folgendermaßen aus:\footnote{%
     FIXME}
-\begin{code}
+\begin{code}[numbers=none]
 #include <stdlib.h>
     
 int random_number(int min, int max) {
@@ -74,5 +106,7 @@ int random_number(int min, int max) {
 }
 \end{code}
 
-Damit lässt sich nun das vollständige Program schreiben:
+\paragraph{Musterlösung} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Damit lässt sich nun das vollständige Programm schreiben:
 \cppinput{c/07_wuerfel.c}
