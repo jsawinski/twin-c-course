@@ -1,4 +1,74 @@
 \section{Programm: Das Spielfeld}
 \label{sec:c:spielfeld}
 
+Nachdem Ihr so viel Neues gelernt und kennengelernt habt, ist es nun Zeit, ein wenig zu Spielen. In diesem Kapitel soll das, was Ihr in Kapitel~\ref{sec:c:lauflicht} und~\ref{sec:c:lauflicht-vertikal} gebaut habt, in beide Richtungen funktionieren -- also sowohl waagerecht als auch senkrecht. Wir fangen damit an, ein Zeichen an einer zufälligen Stelle auf dem Bildschirm auszugeben -- also nicht mehr nur auf einer festen Linie, sondern irgendwo im Feld. Damit legt Ihr die Grundlage für die Regensimulation, die wir später bauen.
+
+Das Grundgerüst Eures Progamms mit den bekannten Hilfsfunktionen ist:
+\begin{code}[numbers=none]
+#define __GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
+
+#define BREITE 60  // Breite des "Spielfeldes"
+#define HOEHE 30   // Höhe des "Spielfeldes"
+
+// =================================================================
+// Zufallszahlen
+// =================================================================
+
+/* Initialisierung des Zufallszahlengenerators
+ */
+void random_init() {
+    srand(time(NULL));
+}
+
+/* Berechnung einer Zufallszahl zwischen min und max.
+ */
+int random_number(int min, int max) {
+    return min + rand() % (max-min+1);
+}
+
+// =================================================================
+// Konsole
+// =================================================================
+
+/* Löschen des gesamten Inhalts der Konsole.
+ */
+void konsole_loeschen() {
+    printf("\x1b[2J");
+}
+
+/* An die Stelle (1,1) (Zeile,Spalte) in der Konsole springen.
+ */
+void konsole_start() {
+    printf("\x1b[H");
+}
+
+/* Ein Zeichen ausgeben.
+ */
+void konsole_zeichen(int ch) {
+    printf("%c",ch);
+    fflush(stdout);
+}
+
+// =================================================================
+// MAIN
+// =================================================================
+
+int main() {
+    // Euer Code
+    return 0;
+}
+\end{code}
+
+\noindent
+Hier sind zwei neue Hilfsfunktion hinzugekommen. Das \codeinline{konsole_loeschen()} verwendet eine neue ANSI-Escape-Sequenz (siehe Kapitel~\ref{sec:c:lauflicht-vertikal}), die den Inhalt der Konsole löscht -- wie auch der Kommentar im Code sagt. Die zweite Hilfsfunktion gibt ein beliebiges Zeichen auf dem Bildschirm aus. Da das \codeinline{fflush(stdout)} hier schon eingebaut ist, braucht Ihr dieses Kommand nicht mehr zu verwendent. Wenn Ihr nun, zum Beispiel, einen Stern auf dem Bildschirm ausgeben wollt, dann schreibt Ihr:
+\begin{code}[numbers=none]
+    konsole_zeichen('*');
+\end{code}
+
+\newpage
+\paragraph{Musterlösung}
 \cppinput{c/08_spielfeld.c}

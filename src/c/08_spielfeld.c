@@ -7,9 +7,9 @@
 #define BREITE 60  // Breite des "Spielfeldes"
 #define HOEHE 30   // Höhe des "Spielfeldes"
 
-// ============================================================================
-// random_numberen
-// ============================================================================
+// =================================================================
+// Zufallszahlen
+// =================================================================
 
 /* Initialisierung des Zufallszahlengenerators
  */
@@ -20,24 +20,41 @@ void random_init() {
 /* Berechnung einer Zufallszahl zwischen min und max.
  */
 int random_number(int min, int max) {
-    return rand();
+    return min + rand() % (max-min+1);
 }
 
-// ============================================================================
+// =================================================================
 // Konsole
-// ============================================================================
+// =================================================================
 
+/* Löschen des gesamten Inhalts der Konsole.
+ */
 void konsole_loeschen() {
     printf("\x1b[2J");
 }
 
+/* An die Stelle (1,1) (Zeile,Spalte) in der Konsole springen.
+ */
 void konsole_start() {
     printf("\x1b[H");
 }
 
-// ============================================================================
+/* An die Stelle (zeile,spalte) in der Konsole springen.
+ */
+void konsole_springe(int zeile, int spalte) {
+    printf("\x1b[%d;%dH", zeile, spalte);
+}
+
+/* Ein Zeichen ausgeben.
+ */
+void konsole_zeichen(int ch) {
+    printf("%c",ch);
+    fflush(stdout);
+}
+
+// =================================================================
 // Spielfeld
-// ============================================================================
+// =================================================================
 
 struct spielfeld {
     char daten[HOEHE][BREITE + 1];  // +1 für '\0' am Ende jeder Zeile
@@ -72,9 +89,9 @@ void spielfeld_zufaellig_fuellen(struct spielfeld* feld, char c, int anzahl) {
     }
 }
 
-// ============================================================================
+// =================================================================
 // MAIN
-// ============================================================================
+// =================================================================
 
 int main() {
     struct spielfeld feld;

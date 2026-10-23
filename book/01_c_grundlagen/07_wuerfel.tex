@@ -10,7 +10,7 @@ int rand();
 Der Befehl \codeinline{rand()}, definiert in der Kopfdatei ``stdlib.h'' (\emph{standard library}, so viel wie ``Standardbibliothek''), gibt Euch Zufallszahlen vom Typ \codeinline{int}. 
 
 \begin{exercise}
-    Schreibt ein Programm, dass eine Zufallszahl auf dem Bildschirm ausgibt. Ihr könnt dazu einfach Euer Programm aus Abschnitt~\ref{sec:c:zahlen} kopieren und die 42 durch \texttt{rand()} ersetzen. Vergesst aber nicht, die Kopfdatei \texttt{stdlib.h} einzubinden. Was fällt Euch auf, wenn Ihr das Programm mehrmals aufruft? Probiert auch aus, 5 Zufallszahlen mit einer Schleife auszugeben.
+    Schreibt ein Programm, das eine Zufallszahl auf dem Bildschirm ausgibt. Ihr könnt dazu einfach Euer Programm aus Abschnitt~\ref{sec:c:zahlen} kopieren und die 42 durch \texttt{rand()} ersetzen. Vergesst aber nicht, die Kopfdatei \texttt{stdlib.h} einzubinden. Was fällt Euch auf, wenn Ihr das Programm mehrmals aufruft? Probiert auch aus, 5 Zufallszahlen mit einer Schleife auszugeben.
     \begin{solution}
         Das Programm, um 5 Zufallszahlen auszugeben, sieht zum Beispiel folgendermaßen aus:
 \begin{code}[numbers=none]
@@ -50,11 +50,11 @@ void random_init() {
     srand(time(NULL));
 }
 \end{code}
-Hier ist \codeinline{srand(seed)} die Funktion, mit der man den Anfangswert der Zufallszahlenfolge setzt und \codeinline{time(NULL)} die Anzahl der Sekunden seit dem 1.1.1970 (dafür benötigen wir die Kopfdatei \texttt{time.h}, siehe auch Funktionnsreferenze S.~\manrefpage{time}).
+Hier ist \codeinline{srand(seed)} die Funktion, mit der man den Anfangswert der Zufallszahlenfolge setzt und \codeinline{time(NULL)} die Anzahl der Sekunden seit dem 1.1.1970 (dafür benötigen wir die Kopfdatei \texttt{time.h}, siehe auch Funktionsreferenze S.~\manrefpage{time}).
 
 Wenn wir einen Würfel programmieren wollen, der z.B. die Zahlen 1 bis 6 liefert, dann müssen wir noch einen geeigneten Weg finden, das Ergebnis von \codeinline{rand()} auf diesen Bereich einzuschränken. Wir verwenden hier die Operation \textbf{modulo}, in C/C++ wird dafür der Operator \texttt{\%} benutzt.\footnote{%
     Das ``modulo'' ist der Rest einer Division, Beispiel: 10 ÷ 3 = 3 Rest 1.}
-Die Funktion \codeinline{rand()} liefert nun die Zahlen 0 bis \texttt{RAND\_MAX} (siehe Lösung der obigen Aufgabe; Funktionsreferenz S.~\manrefpage{rand}). Ihr könnt nun einmal ausprobieren, was passiert, wenn Ihr in Eurem Program die Zeile
+Die Funktion \codeinline{rand()} liefert nun die Zahlen 0 bis \texttt{RAND\_MAX} (siehe Lösung der obigen Aufgabe; Funktionsreferenz S.~\manrefpage{rand}). Ihr könnt nun einmal ausprobieren, was passiert, wenn Ihr in Eurem Programm die Zeile
 \begin{code}[numbers=none]
     int zahl = rand();
 \end{code} 
@@ -77,37 +77,37 @@ Rückgabetyp Funktionsname ( Parameter ) {
 Der \emph{Rückgabetyp} kann jeder Datentyp sein, den C kennt -- zum Beispiel \texttt{int} oder \texttt{double}. Wenn man eine Funktion programmieren will, die nichts zurück gibt (wie oben das \codeinline{random_init()}), dann verwendet man \texttt{void} (deutsch: ``Leere'' oder ``Nichts'').
 
 Den \emph{Funktionsnamen} könnt Ihr selbst wählen. Es gibt aber eine ganze Reihe von Regeln, die man beachten muss. Für den Anfang solltet Ihr Euch einfach an folgende Regel halten: verwendet einen Funktionsnamen der aus ganzen Wörtern besteht (kleingeschrieben) und durch Unterstriche verbunden ist, zum Beispiel: \codeinline{diese_funktion_macht_etwas()}.\footnote{%
-    In der Informatik, so wie auch in der Wissenschaft und vielen anderen Bereichen, hat sich die englische Sprache durchgesetzt. Wenn Ihr bereits Englisch lernt und wisst, wie die Funktion auf Englisch geschrieben werden könnte, dann verwendet Englisch. Im genannten Beispiel wäre das \codeinline{diese_funktion_macht_etwas()}.
+    In der Informatik, so wie auch in der Wissenschaft und vielen anderen Bereichen, hat sich die englische Sprache durchgesetzt. Wenn Ihr bereits Englisch lernt und wisst, wie die Funktion auf Englisch geschrieben werden könnte, dann verwendet Englisch. Im genannten Beispiel wäre das \codeinline{this_function_does_something()}.
 }
 
-Die \emph{Parameter} sind die ``Eingangswerte'' der Funktion. In der Funktion verhalten sie sich wie normale Variable. Sie werden als Liste übergeben -- in C getrennt durch Kommas. Jeder Parameter besteht aus einem Datentyp und einem Variablennamen, so wie Ihr es schon von der Deklaration von Variablen kennt. Erinnert Ihr Euch an \codeinline{tropfen(int b)} aus dem letzten Kapitel? Jetzt versteht Ihr, was da passiert ist: \texttt{b} war der Parameter, \texttt{void} der Rückgabetyp (weil die Funktion nichts zurückgibt), und der Code in den geschweiften Klammern war der Funktionskörper.
+Die \emph{Parameter} sind die ``Eingangswerte'' der Funktion. In der Funktion verhalten sie sich wie normale Variablen. Sie werden als Liste übergeben -- in C getrennt durch Kommas. Jeder Parameter besteht aus einem Datentyp und einem Variablennamen, so wie Ihr es schon von der Deklaration von Variablen kennt. Erinnert Ihr Euch an \codeinline{tropfen(int b)} aus dem letzten Kapitel? Jetzt versteht Ihr, was da passiert ist: \texttt{b} war der Parameter, \texttt{void} der Rückgabetyp (weil die Funktion nichts zurückgibt), und der Code in den geschweiften Klammern war der Funktionskörper.
 
-Wenn man eine Wert zurückgeben will, benutzt man \codeinline{return}. Ein Beispiel:
+Wenn man einen Wert zurückgeben will, benutzt man \codeinline{return}. Ein Beispiel:
 \begin{code}[numbers=none]
 int erhoehe(int n) {
     return n+1;
 }
 \end{code}
-Diese Funktion gib den Wert \codeinline{n+1} zurück. Wichtig ist: mit dem \texttt{return} kehrt die Funktion zurück, sie ist zu Ende -- jeglicher Code nach \texttt{return} wird nicht mehr ausgeführt.
+Diese Funktion gibt den Wert \codeinline{n+1} zurück. Wichtig ist: mit dem \texttt{return} kehrt die Funktion zurück, sie ist zu Ende -- jeglicher Code nach \texttt{return} wird nicht mehr ausgeführt.
 
 \vskip2em
 
 \noindent
-Damit können wir nun wieder zu den Zufallszahlen zurückkehren. Für den Würfel und folgende Programme brauchen wir eine Funktion, die Zufallszahlen zwischen zwei Werten liefert, nennen wir sie \texttt{min} (für ``Minimum'', das heißt die kleinste Zahl) und \texttt{max} (für ``Maximum'', das heißt die größte Zahl). Zunächst fangen wir mit dem obigen Beispiel an:
+Damit können wir nun wieder zu den Zufallszahlen zurückkehren. Für den Würfel und folgende Programme brauchen wir eine Funktion, die Zufallszahlen zwischen zwei Werten liefert. Die beiden Werte nennen wir \texttt{min} (für ``Minimum'', das heißt die kleinste Zahl) und \texttt{max} (für ``Maximum'', das heißt die größte Zahl). Zunächst fangen wir mit dem obigen Beispiel an:
 \begin{code}[numbers=none]
 int zahl = rand() % max;
 \end{code}
-Wie Ihr festgestellt habt, liefert das \emph{modulo} als Ergebnis eine Zufallszahl zischen \texttt{0} und \texttt{max-1}. Für einen normalen Würfel (einer der mit 1 beginnt und bei, zum Beispiel 20 endet) müssten wir also noch eine \texttt{1} addieren. Was passiert nun aber mit dem \texttt{min}?
+Wie Ihr festgestellt habt, liefert das \emph{modulo} als Ergebnis eine Zufallszahl zwischen \texttt{0} und \texttt{max-1}. Für einen normalen Würfel (einer der mit 1 beginnt und bei, zum Beispiel 20 endet) müssten wir also noch eine \texttt{1} addieren. Was passiert nun aber mit dem \texttt{min}?
 \begin{exercise}
     \begin{enumerate}[label=\alph*)]
     \item 
-        Die Berechnung hängt eng mit dem ``Zaunpfahlproblem'' zusammen: wenn ihr einen Zaum bauen wollt, der jeden Meter eine Zaunpfahl haben soll, wieviele Zaunpfähle braucht man dann für \qty{10}{\meter} Zaun?
+        Die Berechnung hängt eng mit dem ``Zaunpfahlproblem'' zusammen: wenn ihr einen Zaun bauen wollt, der alle Meter einen Zaunpfahl haben soll, wie viele Zaunpfähle braucht man dann für \qty{10}{\meter} Zaun?
     
     \item 
-        Ein Architekt sagt Euch, der Zaun beginnt \qty{6}{\meter} neben dem Haus und endet in einer Entfernung von \qty{10}{m} vom Haus. Wie lange ist der Zaun und wieviele Zaunpfähle braucht Ihr?
+        Ein Architekt sagt Euch, der Zaun beginnt \qty{6}{\meter} neben dem Haus und endet in einer Entfernung von \qty{10}{\meter} vom Haus. Wie lange ist der Zaun und wie viele Zaunpfähle braucht Ihr?
 
     \item 
-        Wenn Ihr die vorhergehenden Teilaufgaben gelöst habt, dann könnt Ihr sicher auch beantworten, dass das folgende Beispiel falsch ist, wenn Ihr alle Zahlen von \texttt{min} bis \texttt{max} haben wollt:
+        Wenn Ihr die vorhergehenden Teilaufgaben gelöst habt, dann könnt Ihr sicher auch beantworten, warum das folgende Beispiel falsch ist, wenn Ihr alle Zahlen von \texttt{min} bis \texttt{max} haben wollt:
 \begin{code}[numbers=none]
 int random_number(int min, int max) {
     return min + rand() % max;
@@ -121,6 +121,7 @@ int random_number(int min, int max) {
         \item 11
         \item \qty{4}{\meter}, 5 Zaunpfähle
         \item 
+            Wie beim vorhergehenden Zaunpfahlproblem ist \texttt{max-min} die Distanz zwischen \texttt{min} und \texttt{max}. Die Anzahl der Zahlen ist aber \texttt{max-min+1}. Wenn ihr also \texttt{rand() \% (max-min+1)} berechnet, braucht man nur noch \texttt{min} dazuzuaddieren:
 \begin{code}[numbers=none]
 int random_number(int min, int max) {
     return min + rand() % (max-min+1);

@@ -2,6 +2,7 @@
         \item 11
         \item \qty{4}{\meter}, 5 Zaunpfähle
         \item
+            Wie beim vorhergehenden Zaunpfahlproblem ist \texttt{max-min} die Distanz zwischen \texttt{min} und \texttt{max}. Die Anzahl der Zahlen ist aber \texttt{max-min+1}. Wenn ihr also \texttt{rand() \% (max-min+1)} berechnet, braucht man nur noch \texttt{min} dazuzuaddieren:
 \begin{code}[numbers=none]
 int random_number(int min, int max) {
     return min + rand() % (max-min+1);
