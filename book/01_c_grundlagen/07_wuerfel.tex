@@ -68,44 +68,72 @@ Da wir solche Zufallszahlen aber noch in anderen Programmen nutzen wollen, ist e
 
 \paragraph{\textbf{Einschub}: Funktionen} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Im ersten Programm (``Hallo Welt!'', S.~\ref{sec:c:hallo-welt}) habt ihr zwei Funktionen kennengelernt. Zum einen das \texttt{int main()} und zum anderen das \texttt{printf}. Der Unterschied ist, \texttt{main} habt Ihr selbst geschrieben, \texttt{printf} dagegen war hinter einer Kopfdatei (genauer: \texttt{stdio.h}) ``versteckt''. Wir haben auch schon im letzten Kapitel weitere eigene Funktionen eingeführt: \codeinline{konsole_start()} und \codeinline{tropfen()}. Der Aufbau ist in allen Fällen der Gleiche:
+Im ersten Programm (``Hallo Welt!'', S.~\ref{sec:c:hallo-welt}) habt ihr zwei Funktionen kennengelernt. Zum einen das \texttt{int main()} und zum anderen das \texttt{printf}. Der Unterschied ist, \texttt{main} habt Ihr selbst geschrieben, \texttt{printf} dagegen war hinter einer Kopfdatei (genauer: \texttt{stdio.h}) ``versteckt''. Wir haben auch schon im letzten Kapitel weitere eigene Funktionen eingeführt: \codeinline{konsole_start()} und \codeinline{tropfen()}. Der Aufbau ist in allen Fällen der gleiche:
 \begin{verbatim}
 Rückgabetyp Funktionsname ( Parameter ) {
     Funktionskörper
 }
 \end{verbatim}
-Der \emph{Rückgabetyp} kann jeder beliebige Datentyp sein (z.B. \texttt{int} oder \texttt{double}), den die Sprache C kennt (oder sogar selbst entwickelte Datentypen, dazu in einem späteren Kapitel mehr). Wenn Ihr eine Funktion programmieren wollt, die nichts zurück gibt (wie oben das \codeinline{random_init()}), dann verwendet man den Datentyp \texttt{void} (deutsch: ``Leere'' oder ``Nichts'').
+Der \emph{Rückgabetyp} kann jeder Datentyp sein, den C kennt -- zum Beispiel \texttt{int} oder \texttt{double}. Wenn man eine Funktion programmieren will, die nichts zurück gibt (wie oben das \codeinline{random_init()}), dann verwendet man \texttt{void} (deutsch: ``Leere'' oder ``Nichts'').
 
-Den \emph{Funktionsnamen} könnt Ihr selbst wählen. Es gibt aber eine ganze Reihe von Regeln, die man beachten muss. Für den Anfang solltet Ihr Euch einfach an folgende Regel halten: verwendet einen Funktionsnamen der aus ganzen Worten besteht (kleingeschrieben) und durch Unterstriche verbunden ist, zum Beispiel: \codeinline{diese_funktion_macht_etwas()}.\footnote{%
-    In Computerbereich, so wie auch in der Wissenschaft und vielen anderen Bereichen, hat sich die englische Sprache durchgesetzt. Wenn Ihr bereits Englisch lernt und wisst, wie die Funktion auf Englisch geschrieben werden könnte, dann verwendet Englisch. Im genannten Beispiel wäre das \codeinline{this_function_does_something()}.
+Den \emph{Funktionsnamen} könnt Ihr selbst wählen. Es gibt aber eine ganze Reihe von Regeln, die man beachten muss. Für den Anfang solltet Ihr Euch einfach an folgende Regel halten: verwendet einen Funktionsnamen der aus ganzen Wörtern besteht (kleingeschrieben) und durch Unterstriche verbunden ist, zum Beispiel: \codeinline{diese_funktion_macht_etwas()}.\footnote{%
+    In der Informatik, so wie auch in der Wissenschaft und vielen anderen Bereichen, hat sich die englische Sprache durchgesetzt. Wenn Ihr bereits Englisch lernt und wisst, wie die Funktion auf Englisch geschrieben werden könnte, dann verwendet Englisch. Im genannten Beispiel wäre das \codeinline{diese_funktion_macht_etwas()}.
 }
 
-Die \emph{Parameter} sind die ``Eingangswerte'' (man spricht von Variablen) der Funktion. Sie werden als eine Liste (in der Programmiersprache C werden Listen durch ein Komma getrennt) von 
-\begin{verbatim}
-    Datentyp Variablenname
-\end{verbatim} 
-übergeben, so, wie Ihr auch die Deklaration von Variablen im Programmcode kennengelernt habt.
+Die \emph{Parameter} sind die ``Eingangswerte'' der Funktion. In der Funktion verhalten sie sich wie normale Variable. Sie werden als Liste übergeben -- in C getrennt durch Kommas. Jeder Parameter besteht aus einem Datentyp und einem Variablennamen, so wie Ihr es schon von der Deklaration von Variablen kennt. Erinnert Ihr Euch an \codeinline{tropfen(int b)} aus dem letzten Kapitel? Jetzt versteht Ihr, was da passiert ist: \texttt{b} war der Parameter, \texttt{void} der Rückgabetyp (weil die Funktion nichts zurückgibt), und der Code in den geschweiften Klammern war der Funktionskörper.
 
-\noindent
-Ein Beispiel:
+Wenn man eine Wert zurückgeben will, benutzt man \codeinline{return}. Ein Beispiel:
 \begin{code}[numbers=none]
-int increment(int n) {
+int erhoehe(int n) {
     return n+1;
 }
 \end{code}
+Diese Funktion gib den Wert \codeinline{n+1} zurück. Wichtig ist: mit dem \texttt{return} kehrt die Funktion zurück, sie ist zu Ende -- jeglicher Code nach \texttt{return} wird nicht mehr ausgeführt.
 
-Um einen Der Wert, den die Funktion zurück liefert, wird mit \texttt{return} 
+\vskip2em
 
-Damit sieht die Hilfsfunktion folgendermaßen aus:\footnote{%
-    FIXME}
+\noindent
+Damit können wir nun wieder zu den Zufallszahlen zurückkehren. Für den Würfel und folgende Programme brauchen wir eine Funktion, die Zufallszahlen zwischen zwei Werten liefert, nennen wir sie \texttt{min} (für ``Minimum'', das heißt die kleinste Zahl) und \texttt{max} (für ``Maximum'', das heißt die größte Zahl). Zunächst fangen wir mit dem obigen Beispiel an:
 \begin{code}[numbers=none]
-#include <stdlib.h>
+int zahl = rand() % max;
+\end{code}
+Wie Ihr festgestellt habt, liefert das \emph{modulo} als Ergebnis eine Zufallszahl zischen \texttt{0} und \texttt{max-1}. Für einen normalen Würfel (einer der mit 1 beginnt und bei, zum Beispiel 20 endet) müssten wir also noch eine \texttt{1} addieren. Was passiert nun aber mit dem \texttt{min}?
+\begin{exercise}
+    \begin{enumerate}[label=\alph*)]
+    \item 
+        Die Berechnung hängt eng mit dem ``Zaunpfahlproblem'' zusammen: wenn ihr einen Zaum bauen wollt, der jeden Meter eine Zaunpfahl haben soll, wieviele Zaunpfähle braucht man dann für \qty{10}{\meter} Zaun?
     
+    \item 
+        Ein Architekt sagt Euch, der Zaun beginnt \qty{6}{\meter} neben dem Haus und endet in einer Entfernung von \qty{10}{m} vom Haus. Wie lange ist der Zaun und wieviele Zaunpfähle braucht Ihr?
+
+    \item 
+        Wenn Ihr die vorhergehenden Teilaufgaben gelöst habt, dann könnt Ihr sicher auch beantworten, dass das folgende Beispiel falsch ist, wenn Ihr alle Zahlen von \texttt{min} bis \texttt{max} haben wollt:
+\begin{code}[numbers=none]
+int random_number(int min, int max) {
+    return min + rand() % max;
+}
+\end{code}
+        Findet heraus, wie die Funktion richtig geschrieben werden muss.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label=\alph*)]
+        \item 11
+        \item \qty{4}{\meter}, 5 Zaunpfähle
+        \item 
+\begin{code}[numbers=none]
 int random_number(int min, int max) {
     return min + rand() % (max-min+1);
 }
 \end{code}
+        \end{enumerate}
+    \end{solution}
+\end{exercise}
 
+\noindent
+Damit haben wir nun alle notwendigen Hilfsfunktionen. Versucht nun einmal, Euer Würfelprogramm selbst zu vervollständigen.
+
+\newpage
 \paragraph{Musterlösung} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Damit lässt sich nun das vollständige Programm schreiben:
