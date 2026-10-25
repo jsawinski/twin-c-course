@@ -2,8 +2,9 @@
 \usepackage{makecell}
 \usepackage{enumitem}
 \usepackage{tikz}
-  \usetikzlibrary{positioning, fit, backgrounds}
+    \usetikzlibrary{positioning, fit, backgrounds}
 \usepackage{eso-pic}
+\usepackage{tcolorbox}
 
 \addto\captionsngerman{%
     \def\exercise@name{Übung}%
@@ -19,3 +20,23 @@
 \def\myunit#1{\;\mathrm{#1}}
 
 \def\esc#1{\texttt{\textbackslash #1}}
+
+
+\newtcbox{\sourcebox}{
+    on line,
+    colback=green!10,   % background
+    colframe=green!10,  % border color
+    boxrule=0pt,
+    arc=0pt,            % no rounded corners
+    boxsep=0pt,
+    left=1pt, right=1pt, top=1pt, bottom=1pt
+}
+
+\NewDocumentCommand{\source}{o m}{%
+    %   \IfNoValueTF{#1}
+    %       {\sourcebox{\href{#2}{Quellcode}}}% No optional argument: display "Quellcode"
+    %       {\sourcebox{\href{#2}{#1}}}% With optional argument: display custom text
+  \IfNoValueTF{#1}
+      {\underline{\href{#2}{Quellcode}}}% No optional argument: display "Quellcode"
+      {\underline{\href{#2}{#1}}}% With optional argument: display custom text
+}

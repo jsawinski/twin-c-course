@@ -77,8 +77,7 @@ Rückgabetyp Funktionsname ( Parameter ) {
 Der \emph{Rückgabetyp} kann jeder Datentyp sein, den C kennt -- zum Beispiel \texttt{int} oder \texttt{double}. Wenn man eine Funktion programmieren will, die nichts zurück gibt (wie oben das \codeinline{random_init()}), dann verwendet man \texttt{void} (deutsch: ``Leere'' oder ``Nichts'').
 
 Den \emph{Funktionsnamen} könnt Ihr selbst wählen. Es gibt aber eine ganze Reihe von Regeln, die man beachten muss. Für den Anfang solltet Ihr Euch einfach an folgende Regel halten: verwendet einen Funktionsnamen der aus ganzen Wörtern besteht (kleingeschrieben) und durch Unterstriche verbunden ist, zum Beispiel: \codeinline{diese_funktion_macht_etwas()}.\footnote{%
-    In der Informatik, so wie auch in der Wissenschaft und vielen anderen Bereichen, hat sich die englische Sprache durchgesetzt. Wenn Ihr bereits Englisch lernt und wisst, wie die Funktion auf Englisch geschrieben werden könnte, dann verwendet Englisch. Im genannten Beispiel wäre das \codeinline{this_function_does_something()}.
-}
+    In der Informatik, so wie auch in der Wissenschaft und vielen anderen Bereichen, hat sich die englische Sprache durchgesetzt. Wenn Ihr bereits Englisch lernt und wisst, wie die Funktion auf Englisch geschrieben werden könnte, dann verwendet Englisch. Im genannten Beispiel wäre das \codeinline{this_function_does_something()}.}
 
 Die \emph{Parameter} sind die ``Eingangswerte'' der Funktion. In der Funktion verhalten sie sich wie normale Variablen. Sie werden als Liste übergeben -- in C getrennt durch Kommas. Jeder Parameter besteht aus einem Datentyp und einem Variablennamen, so wie Ihr es schon von der Deklaration von Variablen kennt. Erinnert Ihr Euch an \codeinline{tropfen(int b)} aus dem letzten Kapitel? Jetzt versteht Ihr, was da passiert ist: \texttt{b} war der Parameter, \texttt{void} der Rückgabetyp (weil die Funktion nichts zurückgibt), und der Code in den geschweiften Klammern war der Funktionskörper.
 
@@ -132,9 +131,9 @@ int random_number(int min, int max) {
 \end{exercise}
 
 \noindent
-Damit haben wir nun alle notwendigen Hilfsfunktionen. Versucht nun einmal, Euer Würfelprogramm selbst zu vervollständigen.
+Damit haben wir nun alle notwendigen Hilfsfunktionen. Versucht nun einmal, Euer Würfelprogramm selbst zu vervollständigen, bevor Ihr die Musterlösung lest.
 
-\newpage
+\vfill
 \paragraph{Musterlösung} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Damit lässt sich nun das vollständige Programm schreiben:

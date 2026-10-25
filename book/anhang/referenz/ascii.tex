@@ -1,0 +1,56 @@
+\section{ASCII -- die Zahlen hinter den Zeichen}
+\label{sec:referenz:ascii}
+
+Jedes Zeichen, das Ihr auf dem Bildschirm seht, hat eine Nummer. Diese Nummern heißen \textbf{ASCII-Codes} (ASCII steht für \emph{American Standard Code for Information Interchange}). Wenn Ihr \codeinline{konsole_zeichen(65)} aufruft (siehe Kapitel~\ref{sec:c:spielfeld}: ``\nameref{sec:c:spielfeld}''), erscheint ein \texttt{A} -- weil 65 der ASCII-Code für \texttt{A} ist. Wenn Ihr \codeinline{konsole_zeichen(42)} aufruft, erscheint ein \texttt{*}. Im Gegensatz zu \esc{n} oder \esc{x1b} sind diese Beispiele druckbare Zeichen. Man nennt sie  \textbf{druckbar} weil man diese Zeichen tatsächlich sehen kann und auch auf einer Schreibmaschine drucken könnte -- das \esc{n}, also der Zeilenvorschub, gehört daher nicht dazu. Die nicht druckbaren Zeichen sind Steuercodes. 
+
+\noindent
+Die folgende Tabelle zeigt Euch alle \textbf{druckbaren} Zeichen:
+\begin{table*}[h]
+  \begin{tabular}{lll@{\hspace{1cm}}lll}
+    \toprule
+    \textbf{ASCII} & \textbf{Zeichen} & \textbf{Bedeutung} & \textbf{ASCII} & \textbf{Zeichen} & \textbf{Bedeutung} \\
+    \midrule
+    32     & ' '         & Leerzeichen          & 59     & ';'         & Semikolon \\
+    33     & '!'         & Ausrufezeichen       & 60     & '<'         & Kleiner-als-Zeichen \\
+    34     & '\"'        & Anführungszeichen    & 61     & '='         & Gleichheitszeichen \\
+    35     & '\#'        & Raute (Hashtag)      & 62     & '>'         & Größer-als-Zeichen \\
+    36     & '\$'        & Dollarzeichen        & 63     & '?'         & Fragezeichen \\
+    37     & '\%'        & Prozentzeichen       & 64     & '@'         & ``At'' \\
+    38     & '\&'        & Und-Zeichen          & 65--90 & 'A' \ldots\ 'Z' & Großbuchstaben \\
+    39     & '\textquotesingle' & Apostroph     & 91     & '['         & Eckige Klammer auf \\
+    40     & '('         & Klammer auf          & 92     & '\textbackslash' & Backslash \\
+    41     & ')'         & Klammer zu           & 93     & ']'         & Eckige Klammer zu \\
+    42     & '*'         & Sternchen            & 94     & '\^{}'      & Zirkumflex (Dach) \\
+    43     & '+'         & Pluszeichen          & 95     & '\_'        & Unterstrich \\
+    44     & ','         & Komma                & 96     & '\textasciigrave' & Gravis \\
+    45     & '-'         & Bindestrich          & 97--122 & 'a' \ldots\ 'z' & Kleinbuchstaben \\
+    46     & '.'         & Punkt                & 123    & '\{'        & Geschweifte Klammer auf \\
+    47     & '/'         & Schrägstrich         & 124    & '|'         & Senkrechter Strich \\
+    48--57 & '0' \ldots\ '9' & Ziffern          & 125    & '\}'        & Geschweifte Klammer zu \\
+    58     & ':'         & Doppelpunkt          & 126    & '\textasciitilde' & Tilde \\
+    \bottomrule
+  \end{tabular}
+  \caption{Liste druckbarer ASCII-Codes.}
+  \label{tab:referenz::ascii:druckbar}
+\end{table*}
+
+\vskip2em
+\noindent
+Die wichtigsten \textbf{Steuerungscodes} (also nicht druckbare Zeichen) sind: 
+\begin{table}[h]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{ASCII-Code} & \textbf{Escape-Sequenz} & \textbf{Bedeutung} \\
+    \midrule
+    7  & '\textbackslash a'      & Alarmton \\
+    9  & '\textbackslash t'      & Tabulator \\
+    10 & '\textbackslash n'      & Zeilenumbruch \\
+    13 & '\textbackslash r'      & Wagenrücklauf \\
+    27 & '\textbackslash x1b'    & Escape (für ANSI-Sequenzen) \\
+    \bottomrule
+  \end{tabular}
+  \caption{Die Steuerzeichen, die in diesem Kurs vorkommen.}
+  \label{tab:referenz::ascii:steuer}
+\end{table}
+

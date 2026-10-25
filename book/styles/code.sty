@@ -108,4 +108,11 @@
 }{}
 
 % Load C/C++ code from file
-\def\cppinput#1{\lstinputlisting[style=cppstyle]{../src/#1}}
+\NewDocumentCommand{\cppinput}{O{} m}{%
+    \lstinputlisting[style=cppstyle, #1]{../src/#2}%
+}
+
+% "Source" for marginnote
+\NewDocumentCommand{\cppsource}{o m}{%
+    \marginnote{\vskip2em\source[#1]{#2}}
+}
