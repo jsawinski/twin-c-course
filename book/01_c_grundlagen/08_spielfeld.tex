@@ -1,7 +1,7 @@
 \section{Programm: Das Spielfeld}
 \label{sec:c:spielfeld}
 
-Nachdem Ihr so viel Neues gelernt und kennengelernt habt, ist es nun Zeit, ein wenig zu Spielen. In diesem Kapitel soll bauen wir auf das ``Lauflicht'' auf (Kapitel~\ref{sec:c:lauflicht} und~\ref{sec:c:lauflicht-vertikal}): ein Zeichen an einer zufälligen Stelle auf dem Bildschirm ausgegeben werden. Damit legt Ihr die Grundlage für die Regensimulation, die wir später bauen.
+Nachdem Ihr so viel Neues gelernt und kennengelernt habt, ist es nun Zeit, ein wenig zu Spielen. In diesem Kapitel bauen wir auf den ``Lauflicht-Kapiteln'' auf (Kapitel~\ref{sec:c:lauflicht} und~\ref{sec:c:lauflicht-vertikal}): ein Zeichen soll an einer zufälligen Stelle auf dem Bildschirm ausgegeben werden. Damit legt Ihr die Grundlage für die Regensimulation, die wir später bauen.
 
 Das Grundgerüst Eures Progamms mit den bekannten Hilfsfunktionen ist (\source{https://raw.githubusercontent.com/jsawinski/twin-c-course/refs/heads/main/src/c/08_spielfeld_1.c}):\footnote{%
     Wenn Ihr auf ``Quellcode'' klickt, bekommt Ihr den Code zum Kopieren in einem Browserfenster.
@@ -9,7 +9,7 @@ Das Grundgerüst Eures Progamms mit den bekannten Hilfsfunktionen ist (\source{h
 \cppinput[numbers=none,style=cppsmall]{c/08_spielfeld_1.c}
 
 \noindent
-Hier sind zwei neue Hilfsfunktionen hinzugekommen: \codeinline{konsole_loeschen()} und \codeinline{konsole_start()}. Schauen wir sie uns an: Das \codeinline{konsole_loeschen()} verwendet eine neue ANSI-Escape-Sequenz (vergleiche Kapitel~\ref{sec:c:lauflicht-vertikal}), die den Inhalt der Konsole löscht -- wie auch der Kommentar im Code sagt. Die zweite Hilfsfunktion gibt ein beliebiges Zeichen auf dem Bildschirm aus. Da das \codeinline{fflush(stdout)} hier schon eingebaut ist, braucht Ihr dieses Kommando nicht mehr zu verwenden. Wenn Ihr nun, zum Beispiel, einen Stern auf dem Bildschirm ausgeben wollt, dann schreibt Ihr:
+Hier sind zwei neue Hilfsfunktionen hinzugekommen: \codeinline{konsole_loeschen()} und \codeinline{konsole_zeichen()}. Schauen wir sie uns an: Das \codeinline{konsole_loeschen()} verwendet eine neue ANSI-Escape-Sequenz (vergleiche Kapitel~\ref{sec:c:lauflicht-vertikal}), die den Inhalt der Konsole löscht -- wie auch der Kommentar im Code sagt. Die zweite Hilfsfunktion, \codeinline{konsole_zeichen()}, gibt ein beliebiges Zeichen auf dem Bildschirm aus. Da das \codeinline{fflush(stdout)} hier schon eingebaut ist, braucht Ihr dieses Kommando nicht mehr zu verwenden. Wenn Ihr nun, zum Beispiel, einen Stern auf dem Bildschirm ausgeben wollt, dann schreibt Ihr:
 \begin{code}[numbers=none]
     konsole_zeichen('*');
 \end{code}
@@ -91,7 +91,7 @@ int main() {
 \noindent
 Wenn Ihr die Lösung ausprobiert habt, werden Euch vermutlich zwei Dinge aufgefallen sein: Im ersten Schritt habt Ihr vielleicht die ``Box'' neben dem Stern gesehen. Das ist der Cursor und der steht immer neben dem letzten Zeichen, dass ausgegeben wurde. Im zweiten Schritt werdet Ihr möglicherweise auch bemerkt haben, dass Sterne wieder von der Konsole verschwinden. 
 
-Das können wir auf verschiedene Arten lösen. Es wäre möglich -- und wir werden das in einem späteren Kapitel tatsächlich machen, ist, den Inhalt des Bildschirms zu speichern. Dann bleibt zum Einen der Cursor immer rechts am unteren Bildrand stehen und es werden keine Zeichen gelöscht. Dazu müssen wir allerdings noch lernen, wie man etwas speichert, dass ``Spalten'' und ``Zeilen'' hat. Wir gehen daher einen anderen Weg. Schaut Euch jetzt dazu im Anhang das Kapitel ``\nameref{sec:referenz:ansi-esc}'' einmal ganz an.
+Das können wir auf verschiedene Arten lösen. Eine Möglichkeit wäre, den Inhalt des Bildschirms zu speichern -- und wir werden das in einem späteren Kapitel tatsächlich machen. Dazu müssen wir allerdings noch lernen, wie man etwas speichert, das ‚Spalten' und ‚Zeilen' hat. Wir gehen daher einen anderen Weg. Schaut Euch jetzt dazu im Anhang das Kapitel ``\nameref{sec:referenz:ansi-esc}'' einmal ganz an.
 
 Zum jetzigen Zeitpunkt ignorieren wir den sichtbaren Cursor (aber Ihr könnt ja selbst die Escapesequenz heraussuchen, um ihn auszuschalten). Wir führen aber folgende Hilfsfunktion ein, die mittels eines Escapecodes den Cursor in die richtige Spalte und Zeile bewegt:
 \begin{code}[numbers=none]
@@ -99,7 +99,7 @@ void konsole_gehe(int x, int y) {
     printf("\x1b[%d;%dH", y, x);
 }
 \end{code}
-Ihr solltet bemerken, dass die Spalte und Zeile in umgekehrter Reihenfolge an die Funktion übergeben werden. Das liegt daran -- Ihr werdet dass vermutlich aus der Schule kennen: das bei Achsenpaaren immer zuerst auf der horizontale und dann die vertikale Achse angegeben wird. Man nennt das auch Koordinaten (zum Beispiel \texttt{x} und \texttt{y}). Damit könnt Ihr die beiden \codeinline{for}-Schleifen ersetzen und durch \codeinline{konsole_gehe(spalte, zeile)} ersetzen.
+Ihr solltet bemerken, dass die ANSI-Escapesequenz Spalte und Zeile in umgekehrter Reihenfolge erwartet -- das ist selbst für den Autor verwirrend. Für unsere Hilfsfunktion bleiben wir aber bei der bekannten Reihenfolge -- Ihr werdet das vermutlich aus der Schule kennen: bei Achsenpaaren wird zuerst die horizontale und dann die vertikale Achse angegeben. Man nennt das auch Koordinaten (zum Beispiel \texttt{x} und \texttt{y}). Damit könnt Ihr die beiden \codeinline{for}-Schleifen ersetzen und durch \codeinline{konsole_gehe(spalte, zeile)} ersetzen.
 
 \newpage
 \paragraph{Musterlösung}

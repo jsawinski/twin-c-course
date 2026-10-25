@@ -39,7 +39,8 @@ void konsole_start() {
     printf("\x1b[H");
 }
 
-/* FIXME
+/* Den Cursor in einer bestimmten Spalte und Zeile positionieren.
+ * (Bei Koordinaten kommt immer die horizontale vor der vertikalen Position.)
  */
 void konsole_gehe(int spalte, int zeile) {
     printf("\x1b[%d;%dH", zeile, spalte);

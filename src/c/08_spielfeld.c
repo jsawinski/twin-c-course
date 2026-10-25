@@ -64,8 +64,8 @@ int main() {
     while (1) {
         konsole_start();
 
-        int zeile = random_number(0, HOEHE);
-        int spalte = random_number(0, BREITE);
+        int zeile = random_number(1, HOEHE);
+        int spalte = random_number(1, BREITE);
 
         konsole_gehe(spalte, zeile);
 
