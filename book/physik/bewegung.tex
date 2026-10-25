@@ -1,6 +1,171 @@
 \section{Bewegung}
 \label{sec:physik:bewegung}
 
-Sicherlich habt Ihr schon einiges über Bewegung erfahren. 
+Sicherlich habt Ihr schon einiges über Bewegung erfahren und schon Aufgaben gelöst, in denen zum Beispiel gefragt wird:\footnote{%
+    Die Aufgabe werdet Ihr vermutlich mit Leichtigkeit lösen. Dennoch ist es ratsam, dass Ihr dieses Kapitel mit einer Begleitperson durchlest, die Eure fragen beantworten kann.}
 
-FIXME Wenn Ihr zum Beispiel im Zug sitzt Ihr fahrt mit $\qty{100}{\km\per\hour}$, dann bewegt sich das Auto mit dieser Geschwindigkeit relativ zur Straße.
+\begin{exercise}
+    Ein Zug fährt von Bonn mit \qty{100}{\km\per\hour} nach Stuttgart. Ein anderer Zug fährt zur gleichen Zeit los, aber mit \qty{200}{\km\per\hour} von Stuttgart nach Bonn. Wenn wir annehmen, die Entfernung über die Schiene ist \qty{300}{\km}, wie lange dauert es, bis die Züge sich begegnen?
+    \begin{solution}
+        Es dauert \qty{1}{\hour}.
+    \end{solution}
+\end{exercise}
+
+Das werdet Ihr natürlich sofort sagen können -- aber, wenn wir Bewegung berechnen, müssen wir -- über die Formeln hinaus -- wissen, welchen Bezugspunkt man wählt. Setzt Euch mal hin und bewegt Euch nicht vom Fleck. Welche Geschwindigkeit habt Ihr dann? Die Antwort ist faszinierend:
+\begin{itemize}
+    \item Auf der Erdoberfläche ist Eure Geschwindigkeit \qty{0}{\km\per\hour}.
+    \item Aufgrund der Erdrotation bewegt Ihr Euch aber mit etwa \qty{800}{\km\per\hour} (etwa \qty{220}{\meter\per\second}) um die Rotationsachse.
+    \item Die Erde kreist um die Sonne mit etwa \qty{107000}{\km\per\hour}.
+    \item Unser Sonnensystem bewegt sich in der Galaxy mit etwa \qty{864000}{\km\per\hour} (das sind \qty{240000}{\meter\per\second}).
+\end{itemize}
+Jetzt könntet Ihr natürlich zweifeln und sagen: ``wenn ich im Auto mit \qty{100}{\km\per\hour} um eine Kurve fahre, dann drückt es mich nach außen! Wieso nicht fliege ich dann nicht weg, wenn ich mit \qty{800}{\km\per\hour} um die Erdachse drehe?'' Die Antwort liegt natürlich klar an der Erdanziehung. Diese Erdanziehung, weswegen auch die Tropfen auf den Boden fallen, wird mit der Konstante $g$ beschrieben. Ihr Wert ist $g = \qty{9,81}{\m\per\second^2}$. Tatsächlich ist das eine Beschleunigung. Fangen wir aber zuerst mit der sogenannten ``gleichmäßigen'' Bewegung an, in der Beschleunigung noch keine Rolle spielt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Gleichmäßige Bewegung}
+
+Um die Bewegung der Regentropfen zu berechnen, müssen wir mit Formeln arbeiten. Zunächst wollen wir dazu nur beschreiben, wie weit sich ein Objekt bei konstanter Geschwindigkeit (das nennt man ``gleichmäßig'') bewegt. Dazu hat der Physiker die Formel:
+\begin{equation*}
+    s = v\cdot t\,.
+\end{equation*}
+Diese Formel sagt: die Streck $s$, die ein Objekt mit der Geschwindigkeit $v$ in der Zeit $t$ zurücklegt, ist ``Geschwindigkeit mal Zeit'', also $v\cdot t$.\footnote{%
+    Diese Variablennamen kommen aus dem Lateinischen, \emph{spatium} oder \emph{situs} für Strecke, \emph{velocitas} für Geschwindigkeit und \emph{tempus} für Zeit. Im Englischen benutzt man \emph{space}, \emph{velocity} und \emph{time}. Die Wahl dieser Buchstaben ist dennoch nur eine Konvention, das heißt eine Abmachung. Durch diese Abmachung ist es einfacher, den Sinn und Zweck einer physikalischen oder mathematischen Formel zu erkennen. Es existiert eine Vielzahl solcher Konvention -- Ihr werdet einige davon im Laufe der Schulzeit kennen lernen. Für das Volumen zum Beispiel wird das große $V$ verwendet. Eine der wichtigsten Konventionen kennt Ihr bestimmt schon: jeder weiß, was der griechische Buchstabe $\pi$ bedeutet -- nämlich die Kreiszahl.}
+
+Wir wollen einmal die obige Übung mit dieser Formel ausdrücken. Dazu müssen wir die Formel ein bisschen erweitern -- den wir müssen betrachten, wie die Züge sich zueinander bewegen: was Ihr vorher im Kopf gemacht habt, müssen wir in die Formeln schreiben, nämlich den Bezugspunkt (das gleich gilt auch für den Regentropfen, der ja, wenn er anfängt zu fallen, nicht bei Höhe 0 anfängt). Dazu schreibt man
+\begin{equation*}
+    s = s_0 + v\cdot t\,,
+\end{equation*}
+wobei das $s_0$ die Position zur Zeit $t=0$ angibt.
+
+Um nun die obige Aufgabe nachzurechenen, wählen wir Bonn als Bezugsort Bonn. Damit können wir die beiden Züge so beschreiben:
+\begin{equation}
+    \begin{split}
+        s_1 &= v_1\cdot t \\
+        s_2 &= d + v_2\cdot t\,.
+    \end{split}
+    \label{eq:physik:bewegung:zuege}
+\end{equation}
+Dabei berechnen wir die Entfernung von Bonn, $s_1$ ist die Entfernung von Bonn des Zugs der in Bonn startet, $s_2$ die des Zugs, der in Stuttgart startet. Bonn und Stuttgart haben die Entfernung $d$. Die Zuggeschwindigkeiten sind $v_1$ des Bonner Zuges und $v_2$ des Stuttgarter Zuges. In den Formeln steckt ein kleiner Stolperstein, der in Klassenarbeiten schnell zu einem Leichtsinnsfehler führen kann: da wir Bonn als Bezugsort ausgewählt haben, fährt der Bonner Zug mit $v_1 = \qty{100}{\km\per\hour}$, der Stuttgarter Zug aber mit $v_2 = -\qty{200}{\km\per\hour}$! Mit den Formeln können wir nun rechnerisch lösen, in dem wir $s_1$ mit $s_2$ gleichsetzen, also genau dann, wenn die Entfernung beider Züge von Bonn gleich ist, sie sich also begegnen:
+\begin{align*}
+    s_1 &= s_2 && \iff\\
+    v_1\cdot t &= d + v_2\cdot t\,, &&
+\end{align*} 
+Bei mathematischen Formeln heißt der Doppelpfeil ($\iff$) so viel wie ``genau dann, wenn''. Nun müssen wir so umformen, dass am Ende die Zeit $t$, die wir ja noch nicht kennen, links als Ergebnis stehen bleibt:
+\begin{align*}
+    v_1\cdot t &= d + v_2\cdot t && \iff\\
+    v_1\cdot t - v_2\cdot t &= d && \iff\\
+    (v_1-v_2)\cdot t &= d && \iff\\
+    t &= \frac{d}{v_1-v_2}\,,
+\end{align*} 
+mit Einsetzen der Werte erhalten wir
+\begin{align*}
+    t &= \frac{\qty{300}{\km}}{\qty{100}{\km\per\hour} - (-\qty{200}{\km\per\hour})} && \iff \\
+    t &= \frac{\qty{300}{\km}}{\qty{100}{\km\per\hour} + \qty{200}{\km\per\hour}} && \iff \\
+    t &= \frac{\qty{300}{\km}}{\qty{300}{\km\per\hour}} = \qty{1}{\hour} \,.&&\\
+\end{align*} 
+
+Wir können das gleiche Ergebnis aber auch mit einem Diagramm lösen.
+\begin{figure}[h]
+    \input{physik/images/zuege.tex}
+    \caption{Entfernung der Züge von Bonn in der Darstellung eines Diagramms. Der Punkt an dem sich die Züge treffen ist der Schnittpunkt der roten und blauen Linie.}
+    \label{img:physik:bewegung:zuege}
+\end{figure}
+Aus dem Diagramm in Abb.~\ref{img:physik:bewegung:zuege} kann man mehrere Dinge ablesen, die wir natürlich auch mit den Formeln berechnen können: 1. Eine vertikal Linie vom Schnittpunkt beider Geraden auf die Zeitachse zeigt uns wann beide Züge sich treffen (nach \qty{1}{\hour}). 2. Eine horizontale Linie vom Schnittpunkt beider Gerade zur Entfernungsachse zeigt uns wo die beiden Züge sich treffen (in einer Entfernng \qty{100}{km} von Bonn entfernt). 3. Wenn der Zug aus Stuttgart Bonn erreicht, hat der Zug aus Bonn erst die Hälfte seiner Streck zurückgelegt (nämlich \qty{150}{\km}).
+
+Um dies zu berechnen wollen wir die Notation (das heißt: die Schreibweise) etwas verfeinern und schreiben die Beziehung von Strecke zu Zeit so:\footnote{%
+    Die Notation, so wie auch musikalische Noten, hat sich über viele Jahrhunderte entwickelt. Dadurch ist die Mathematik zu einer universellen (also weltweiten) Sprache geworden, die jeder verstehen kann. Den kleinen Ausschnitt, den wir hier zeigen, versteht jeder, der ein bisschen Mathe kann.}
+\begin{equation*}
+    s(t) = s_0 + v\cdot t\,.
+\end{equation*}
+Für den Leser wird damit deutlich: die Zeit $t$ ist eine Variable während die Geschwindigkeit $v$ und der Startpunkt $s_0$ feste Werte, man nennt sie Konstanten, sind. Das ist genau dasselbe wie in der Programmiersprache C.\footnote{%
+    In der Tat haben viele Programmiersprachen
+    } Da würden wir schreiben:
+\begin{code}[numbers=none]
+    #define S_0 300
+    #define V -200
+    double strecke(double t) {
+        return S_0 + V * t;
+    }
+\end{code}
+Damit schreiben wir die Gleichung (\ref{eq:physik:bewegung:zuege}) folgendermaßen:
+\begin{equation}
+    \begin{split}
+        s_1(t) &= v_1\cdot t \\
+        s_2(t) &= d + v_2\cdot t\,.
+    \end{split}
+\end{equation}
+Ein weiteres Detail ist die Zeit, bei der sich beide Züge treffen: man würde hier einen anderen Namen wählen, denn $t = \qty{1}{\hour}$ würde bedeuten, dass auch $t$ zu einer Konstanten wird, wir schreiben daher:
+\begin{equation*}
+    t_\textrm{x} = \qty{1}{\hour} \,.
+\end{equation*}
+Mit dieser Schreibweise berechnen wir den Abstand von Bonn zu dem Zeitpunkt $t_\textrm{x}$ mit
+\begin{equation*}
+    s_1(t_\textrm{x}) = v_1\cdot t_\textrm{x} = \cdots = \qty{100}{\km} \,.
+\end{equation*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Newton und die Kraft}
+
+\begin{marginfigure}%
+    \includegraphics[width=\linewidth]{images/Portrait_of_Sir_Isaac_Newton,_1689_(brightened).jpg}
+    \caption{Sir Isaac Newton, 1643--1727. (Gemälde von Godfrey Kneller, 1689. Das Bild ist gemeinfrei / Allgemeingut, Wikimedia Commons)}%
+    \label{fig:referenz:vt100}
+\end{marginfigure}%
+Sir Newton saß in seinem Garten unter einem Apfelbaum, als er einen Apfel fallen sah. Augenzeugen berichten, dass er tief in Gedanken versunken war. Der fallende Apfel löste eine Gedankenkette aus und er fragte sich: Warum fällt der Apfel immer gerade nach unten -- und warum fällt der Mond nicht auch auf die Erde? Die Schlüsse, die er zog, haben noch immer Gültigkeit. 
+
+Aus diesen Gedanken sind drei Naturgesetze entstanden, die er 1687 veröffentlichte (und noch immer gelehrt werden):
+\begin{enumerate}
+\item Ein Körper, auf den keine Kraft wirkt, behält seinen Bewegungszustand bei.
+\item Kraft ist gleich Masse mal Beschleunigung.
+\item ``actio'' ist gleich ``reactio'' -- Übt ein Körper A auf einen anderen Körper B eine Kraft aus (actio), so wirkt eine gleich große, aber entgegen gerichtete Kraft von Körper B auf Körper A (reactio).
+\end{enumerate}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Beschleunigte Bewegung}
+
+Für die beschleunigte Bewegung gibt es zwei wichtige Gleichungen:
+\begin{align}
+    v(x) &= v_0 + a\cdot t \\
+    s(x) &= s_0 + \frac12 a\cdot t^2 \,.
+\end{align}
+Hier sind $v_0$ und $s_0$ die anfängliche Geschwindigkeit und Strecke, $a$ die Beschleunigung und wieder $t$ die Zeit. Die Beschleunigung, die auf eine Tropfen wirkt, ist die Erdbeschleunigung, die durch $g$ beschrieben wird.\footnote{%
+    Diese Variablennamen kommen aus dem Lateinischen, \emph{acceleratio} für Beschleunigung und \emph{gravitas} (Schwere) für Erdbeschleunigung. Im Englischen benutzt man \emph{acceleration} und \emph{gravity}.}
+
+Die Erdbeschleunigung ist (fast) eine Konstante, die wir mit $g = \qty{9,81}{\meter\per\second^2}$ verwenden können.\footnote{%
+    } 
+
+
+
+Ein Körper, der frei fällt, hat nach \qty{10}{\second} eine Geschwindigkeit von fast \qty{100}{\meter\per\second} (das sind \qty{360}{\km\per\hour}) und wäre fast \qty{500}{\meter} weit geflogen.
+
+\begin{figure}[h]
+    \input{physik/images/freierfall.tex}
+    \caption{Der freie Fall eines Sandkorns aus 10 km Höhe (ohne Luftwiderstand). Die blaue Linie zeigt die Höhe, die rote Linie die Geschwindigkeit. Nach etwa 35 Sekunden (gestrichelte Linie) durchbricht das Sandkorn die Schallmauer (gepunktete Linie).}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Reibung}
+
+Die Kraft auf einen Körper...
+\begin{equation}
+    F_\textrm{w}(v) = \frac12 \cdot c_\textrm{w} \cdot A \cdot \varrho \cdot v^2 \,.
+\end{equation}
+mit 
+\begin{description}
+    \item[$c_\textrm{w}$]Der Luftwiderstandsbeiwert (formabhängig, "Windschnittigkeit"). 
+    \item[$A$] Die Querschnittsfläche des Körpers senkrecht zur Strömung. 
+    \item[$\varrho$] Die Dichte der Luft. 
+    \item[$v$] Die Geschwindigkeit des Körpers relativ zur Luft. 
+\end{description}
+% c_w Sandkorn, etwa 0.4
+% Luftdichte (Standard) 1,225 kg/m^3
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Der Tropfen fällt}
+
+TODO
