@@ -40,3 +40,49 @@
       {\underline{\href{#2}{Quellcode}}}% No optional argument: display "Quellcode"
       {\underline{\href{#2}{#1}}}% With optional argument: display custom text
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Boxes for high-lighting special topics
+
+\usepackage{mdframed}
+
+% Colors
+\definecolor{cbblue}{RGB}{0, 114, 178}
+\definecolor{cborange}{RGB}{230, 159, 0}
+\definecolor{cbgreen}{RGB}{0, 158, 115}
+
+% ... and aliases
+\colorlet{blue@bg}{cbblue!15}
+\colorlet{blue@border}{cbblue}
+
+\colorlet{orange@bg}{cborange!15}
+\colorlet{orange@border}{cborange}
+
+\colorlet{green@bg}{cbgreen!15}
+\colorlet{green@border}{cbgreen}
+
+% Plain
+\mdfsetup{
+  roundcorner=4pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  skipabove=0.5em,
+  skipbelow=0.5em
+}
+
+\newmdenv[
+  backgroundcolor=blue@bg,
+  linecolor=blue@border
+]{exercisebox}
+
+\newmdenv[
+  backgroundcolor=orange@bg,
+  linecolor=orange@border
+]{challengebox}
+
+\newmdenv[
+  backgroundcolor=green@bg,
+  linecolor=green@border
+]{notebox}

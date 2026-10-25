@@ -1,20 +1,108 @@
 \section{Programm: Das Spielfeld}
 \label{sec:c:spielfeld}
 
-Nachdem Ihr so viel Neues gelernt und kennengelernt habt, ist es nun Zeit, ein wenig zu Spielen. In diesem Kapitel soll das ``Lauflicht'', das Ihr in Kapitel~\ref{sec:c:lauflicht} und~\ref{sec:c:lauflicht-vertikal} gebaut habt, in beide Richtungen funktionieren -- also sowohl waagerecht als auch senkrecht. Wir fangen damit an, ein Zeichen an einer zufälligen Stelle auf dem Bildschirm auszugeben -- also nicht mehr nur auf einer festen Linie, sondern irgendwo im Feld. Damit legt Ihr die Grundlage für die Regensimulation, die wir später bauen.
+Nachdem Ihr so viel Neues gelernt und kennengelernt habt, ist es nun Zeit, ein wenig zu Spielen. In diesem Kapitel soll bauen wir auf das ``Lauflicht'' auf (Kapitel~\ref{sec:c:lauflicht} und~\ref{sec:c:lauflicht-vertikal}): ein Zeichen an einer zufälligen Stelle auf dem Bildschirm ausgegeben werden. Damit legt Ihr die Grundlage für die Regensimulation, die wir später bauen.
 
 Das Grundgerüst Eures Progamms mit den bekannten Hilfsfunktionen ist (\source{https://raw.githubusercontent.com/jsawinski/twin-c-course/refs/heads/main/src/c/08_spielfeld_1.c}):\footnote{%
     Wenn Ihr auf ``Quellcode'' klickt, bekommt Ihr den Code zum Kopieren in einem Browserfenster.
 }
-\cppinput[numbers=none]{c/08_spielfeld_1.c}
+\cppinput[numbers=none,style=cppsmall]{c/08_spielfeld_1.c}
 
 \noindent
-Hier sind zwei neue Hilfsfunktion hinzugekommen. Das \codeinline{konsole_loeschen()} verwendet eine neue ANSI-Escape-Sequenz (vergleiche Kapitel~\ref{sec:c:lauflicht-vertikal}), die den Inhalt der Konsole löscht -- wie auch der Kommentar im Code sagt. Die zweite Hilfsfunktion gibt ein beliebiges Zeichen auf dem Bildschirm aus. Da das \codeinline{fflush(stdout)} hier schon eingebaut ist, braucht Ihr dieses Kommando nicht mehr zu verwendent. Wenn Ihr nun, zum Beispiel, einen Stern auf dem Bildschirm ausgeben wollt, dann schreibt Ihr:
+Hier sind zwei neue Hilfsfunktionen hinzugekommen: \codeinline{konsole_loeschen()} und \codeinline{konsole_start()}. Schauen wir sie uns an: Das \codeinline{konsole_loeschen()} verwendet eine neue ANSI-Escape-Sequenz (vergleiche Kapitel~\ref{sec:c:lauflicht-vertikal}), die den Inhalt der Konsole löscht -- wie auch der Kommentar im Code sagt. Die zweite Hilfsfunktion gibt ein beliebiges Zeichen auf dem Bildschirm aus. Da das \codeinline{fflush(stdout)} hier schon eingebaut ist, braucht Ihr dieses Kommando nicht mehr zu verwenden. Wenn Ihr nun, zum Beispiel, einen Stern auf dem Bildschirm ausgeben wollt, dann schreibt Ihr:
 \begin{code}[numbers=none]
     konsole_zeichen('*');
 \end{code}
+Alternativ könntet Ihr auch \codeinline{konsole_zeichen(42)} schreiben, 42 ist der ASCII-Code für den Stern (eine Erklärung und Auflistung findet ihr im Anhang unter ``\nameref{sec:referenz:ascii}'' auf S.~\pageref{sec:referenz:ascii}).
+
+Um die folgende Aufgabe zu lösen, müsst Ihr Euch genau überlegen, welchen Ablauf Euer Code haben soll. Zunächst kennt Ihr \codeinline{printf()}, mit dem Ihr entweder ein \texttt{\textbackslash n} (um in eine neue Zeile zu kommen) oder ein Leerzeichen (um in die nächste Spalte zu kommen) ausgeben könnt. Des Weiteren hatten wir die \codeinline{for}-Schleife kennengelernt, mit der man zählen kann. Überlegt auch, in welcher Reihenfolge die Zeichen ausgegeben werden müssen.
+
+\textbf{Hinweis}: Es ist gut, wenn Ihr die Übung selbst löst, vor allem die \emph{blau} gefärbten. Die \emph{orange} gefärbten Übungen sind jedoch richtige Herausforderungen. Hier gilt besonders: wenn die Geduld fehlt, schaut Euch besser gleich die Lösung an und versucht sie nachzuvollziehen. 
+
+\begin{challenge}
+    In dieser Übung sollt Ihr das Programm, dessen Gerüst Ihr bereits oben bekommen habt, so vervollständigen, dass an einer zufälligen Stelle am Bildschirm ein Stern ausgegeben wird. Benutzt für die Ausgabe der Zeichen möglichst die Funktion \codeinline{konsole_zeichen()}. Denkt auch daran, die Zufallszahlen zu initialisieren!
+
+    In einem zweiten Schritt solltet Ihr das Programm so ergänzen, dass es ununterbrochen weiterläuft und nur durch drücken von Strg-C unterbrochen werden kann (erinnert Euch an die \codeinline{while}-Schleife und das \codeinline{usleep()}). 
+    \begin{solution}
+        Im ersten Schritt sollte Euer Programm etwa so aussehen:
+
+\begin{code}
+int main() {
+    random_init();
+
+    konsole_loeschen();
+    konsole_start();
+
+    int zeile = random_number(1, HOEHE);
+    int spalte = random_number(1, BREITE);
+
+    for (int i = 1; i < zeile; i++) {
+        konsole_zeichen('\n');
+    }
+    for (int s = 1; s < spalte; s++) {
+        konsole_zeichen(' ');
+    }
+    konsole_zeichen('*');
+
+    return 0;
+}
+\end{code}
+    Der Ablauf im Einzelnen ist:
+    \begin{enumerate}
+    \item Initialisierung des Zufallszahlengenerators.
+    \item Konsole löschen und in die erste Zeile und Spalte gehen.
+    \item Berechnen der Zufallszahlen für Zeile und Spalte, in der der Stern ausgegeben werden soll.
+    \item Schleife, um in die richtige Zeile zu gehen.
+    \item Schleife, um in die richtige Spalte zu gehen.
+    \item Ausgabe des Sterns.
+    \end{enumerate}
+
+    \noindent
+    Im zweiten Schritt folgt dann:
+\begin{code}
+int main() {
+    random_init();
+
+    konsole_loeschen();
+    while (1) {
+        konsole_start();
+
+        int zeile = random_number(1, HOEHE);
+        int spalte = random_number(1, BREITE);
+
+        for (int i = 1; i < zeile; i++) {
+            konsole_zeichen('\n');
+        }
+        for (int s = 1; s < spalte; s++) {
+            konsole_zeichen(' ');
+        }
+        konsole_zeichen('*');
+
+        usleep(100000);
+    }
+
+    return 0;
+}
+\end{code}
+    Hier kommt nur das \codeinline{while} und \codeinline{usleep} hinzu.
+    \end{solution}
+\end{challenge}
+
+\noindent
+Wenn Ihr die Lösung ausprobiert habt, werden Euch vermutlich zwei Dinge aufgefallen sein: Im ersten Schritt habt Ihr vielleicht die ``Box'' neben dem Stern gesehen. Das ist der Cursor und der steht immer neben dem letzten Zeichen, dass ausgegeben wurde. Im zweiten Schritt werdet Ihr möglicherweise auch bemerkt haben, dass Sterne wieder von der Konsole verschwinden. 
+
+Das können wir auf verschiedene Arten lösen. Es wäre möglich -- und wir werden das in einem späteren Kapitel tatsächlich machen, ist, den Inhalt des Bildschirms zu speichern. Dann bleibt zum Einen der Cursor immer rechts am unteren Bildrand stehen und es werden keine Zeichen gelöscht. Dazu müssen wir allerdings noch lernen, wie man etwas speichert, dass ``Spalten'' und ``Zeilen'' hat. Wir gehen daher einen anderen Weg. Schaut Euch jetzt dazu im Anhang das Kapitel ``\nameref{sec:referenz:ansi-esc}'' einmal ganz an.
+
+Zum jetzigen Zeitpunkt ignorieren wir den sichtbaren Cursor (aber Ihr könnt ja selbst die Escapesequenz heraussuchen, um ihn auszuschalten). Wir führen aber folgende Hilfsfunktion ein, die mittels eines Escapecodes den Cursor in die richtige Spalte und Zeile bewegt:
+\begin{code}[numbers=none]
+void konsole_gehe(int x, int y) {
+    printf("\x1b[%d;%dH", y, x);
+}
+\end{code}
+Ihr solltet bemerken, dass die Spalte und Zeile in umgekehrter Reihenfolge an die Funktion übergeben werden. Das liegt daran -- Ihr werdet dass vermutlich aus der Schule kennen: das bei Achsenpaaren immer zuerst auf der horizontale und dann die vertikale Achse angegeben wird. Man nennt das auch Koordinaten (zum Beispiel \texttt{x} und \texttt{y}). Damit könnt Ihr die beiden \codeinline{for}-Schleifen ersetzen und durch \codeinline{konsole_gehe(spalte, zeile)} ersetzen.
 
 \newpage
 \paragraph{Musterlösung}
+Die Musterlösung geht noch einen Schritt weiter, als Ihr bisher im Text gelesen habt: sie gibt nicht nur ein Zeichen an einer zufälligen Stelle, sondern auch noch ein zufälliges, druckbares Zeichen (vergleiche ``\nameref{sec:referenz:ascii}'') aus:
 \cppsource{https://raw.githubusercontent.com/jsawinski/twin-c-course/refs/heads/main/src/c/08_spielfeld.c}
 \cppinput{c/08_spielfeld.c}

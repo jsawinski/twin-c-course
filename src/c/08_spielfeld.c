@@ -39,6 +39,13 @@ void konsole_start() {
     printf("\x1b[H");
 }
 
+/* Den Cursor in einer bestimmten Spalte und Zeile positionieren.
+ * (Bei Koordinaten kommt immer die horizontale vor der vertikalen Position.)
+ */
+void konsole_gehe(int spalte, int zeile) {
+    printf("\x1b[%d;%dH", zeile, spalte);
+}
+
 /* Ein Zeichen ausgeben.
  */
 void konsole_zeichen(int ch) {
@@ -51,6 +58,22 @@ void konsole_zeichen(int ch) {
 // ====================================================================
 
 int main() {
-    // Euer Code
+    random_init();
+
+    konsole_loeschen();
+    while (1) {
+        konsole_start();
+
+        int zeile = random_number(0, HOEHE);
+        int spalte = random_number(0, BREITE);
+
+        konsole_gehe(spalte, zeile);
+
+        int zeichen = random_number(33,126);
+        konsole_zeichen(zeichen);
+
+        usleep(10000);
+    }
+
     return 0;
 }

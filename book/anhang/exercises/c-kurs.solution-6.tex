@@ -1,0 +1,61 @@
+        Im ersten Schritt sollte Euer Programm etwa so aussehen:
+
+\begin{code}
+int main() {
+    random_init();
+
+    konsole_loeschen();
+    konsole_start();
+
+    int zeile = random_number(1, HOEHE);
+    int spalte = random_number(1, BREITE);
+
+    for (int i = 1; i < zeile; i++) {
+        konsole_zeichen('\n');
+    }
+    for (int s = 1; s < spalte; s++) {
+        konsole_zeichen(' ');
+    }
+    konsole_zeichen('*');
+
+    return 0;
+}
+\end{code}
+    Der Ablauf im Einzelnen ist:
+    \begin{enumerate}
+    \item Initialisierung des Zufallszahlengenerators.
+    \item Konsole löschen und in die erste Zeile und Spalte gehen.
+    \item Berechnen der Zufallszahlen für Zeile und Spalte, in der der Stern ausgegeben werden soll.
+    \item Schleife, um in die richtige Zeile zu gehen.
+    \item Schleife, um in die richtige Spalte zu gehen.
+    \item Ausgabe des Sterns.
+    \end{enumerate}
+
+    \noindent
+    Im zweiten Schritt folgt dann:
+\begin{code}
+int main() {
+    random_init();
+
+    konsole_loeschen();
+    while (1) {
+        konsole_start();
+
+        int zeile = random_number(1, HOEHE);
+        int spalte = random_number(1, BREITE);
+
+        for (int i = 1; i < zeile; i++) {
+            konsole_zeichen('\n');
+        }
+        for (int s = 1; s < spalte; s++) {
+            konsole_zeichen(' ');
+        }
+        konsole_zeichen('*');
+
+        usleep(100000);
+    }
+
+    return 0;
+}
+\end{code}
+    Hier kommt nur das \codeinline{while} und \codeinline{usleep} hinzu.

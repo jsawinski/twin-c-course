@@ -78,21 +78,10 @@
     morestring=[b]R"(
 }
 
-% Optional: Define a more compact style
-\lstdefinestyle{cppcompact}{
+% Optional: Small font style
+\lstdefinestyle{cppsmall}{
     style=cppstyle,
-    numbers=none,
-    frame=none,
-    backgroundcolor=\color{white},
     basicstyle=\ttfamily\footnotesize,
-}
-
-% Optional: Define a style with line numbers
-\lstdefinestyle{cppnumbered}{
-    style=cppstyle,
-    numbers=left,
-    stepnumber=1,
-    numberstyle=\tiny\color{codegray},
 }
 
 % Define \code for inline listings
