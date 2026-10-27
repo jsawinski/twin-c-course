@@ -10,7 +10,6 @@ Sicherlich habt Ihr schon einiges über Bewegung erfahren und schon Aufgaben gel
         Es dauert \qty{1}{\hour}.
     \end{solution}
 \end{exercise}
-
 Das werdet Ihr natürlich sofort sagen können -- aber, wenn wir Bewegung berechnen, müssen wir -- über die Formeln hinaus -- wissen, welchen Bezugspunkt man wählt. Setzt Euch mal hin und bewegt Euch nicht vom Fleck. Welche Geschwindigkeit habt Ihr dann? Die Antwort ist faszinierend:
 \begin{itemize}
     \item Auf der Erdoberfläche ist Eure Geschwindigkeit \qty{0}{\km\per\hour}.
@@ -18,7 +17,7 @@ Das werdet Ihr natürlich sofort sagen können -- aber, wenn wir Bewegung berech
     \item Die Erde kreist um die Sonne mit etwa \qty{107000}{\km\per\hour}.
     \item Unser Sonnensystem bewegt sich in der Galaxy mit etwa \qty{864000}{\km\per\hour} (das sind \qty{240000}{\meter\per\second}).
 \end{itemize}
-Jetzt könntet Ihr natürlich zweifeln und sagen: ``wenn ich im Auto mit \qty{100}{\km\per\hour} um eine Kurve fahre, dann drückt es mich nach außen! Wieso nicht fliege ich dann nicht weg, wenn ich mit \qty{800}{\km\per\hour} um die Erdachse drehe?'' Die Antwort liegt natürlich klar an der Erdanziehung. Diese Erdanziehung, weswegen auch die Tropfen auf den Boden fallen, wird mit der Konstante $g$ beschrieben. Ihr Wert ist $g = \qty{9,81}{\m\per\second^2}$. Tatsächlich ist das eine Beschleunigung. Fangen wir aber zuerst mit der sogenannten ``gleichmäßigen'' Bewegung an, in der Beschleunigung noch keine Rolle spielt.
+Jetzt könntet Ihr natürlich zweifeln und sagen: ``wenn ich im Auto mit \qty{100}{\km\per\hour} um eine Kurve fahre, dann drückt es mich nach außen! Wieso fliege ich dann nicht weg, wenn ich mit \qty{800}{\km\per\hour} um die Erdachse drehe?'' Die Antwort liegt natürlich klar an der Erdanziehung. Diese Erdanziehung (in der Fachsprache: \emph{Gravitation}), weswegen auch die Tropfen auf den Boden fallen, wird mit der Konstante $g$ beschrieben. Ihr Wert ist $g = \qty{9,81}{\m\per\second^2}$. Tatsächlich ist das eine Beschleunigung. Fangen wir aber zuerst mit der sogenannten ``gleichmäßigen'' Bewegung an, in der Beschleunigung noch keine Rolle spielt.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Gleichmäßige Bewegung}
@@ -119,17 +118,31 @@ Aus diesen Gedanken sind drei Naturgesetze entstanden, die er 1687 veröffentlic
 \item[Wechselwirkung] ``actio'' ist gleich ``reactio'' -- Übt ein Körper A auf einen anderen Körper B eine Kraft aus (actio), so wirkt eine gleich große, aber entgegen gerichtete Kraft von Körper B auf Körper A (reactio).
 \end{description}
 
-\noindent
-\textbf{Trägheit} ist FIXME
+\vskip\baselineskip
 
 \noindent
-\textbf{Kraft und Beschleunigung} ist FIXME
+Schauen wir uns die drei Gesetze einmal genauer an:
 
-% siehe youtube Apollo 15 (Hammer & Feder)
-% -> https://nssdc.gsfc.nasa.gov/planetary/image/AS15_Ham_feath_drop.mp4
+\vskip\baselineskip
 
 \noindent
-\textbf{Wechselwirkung} ist FIXME
+\textbf{Trägheit}\\
+Den Begriff Trägheit kennt Ihr natürlich: Wenn Ihr träge seid (sprich: einfach keine Lust habt, etwas zu tun), bleibt Ihr sitzen und verändert Euren ``Bewegungszustand'' nicht. Aber genau das meint Newton nicht und es ist sehr schwer zu verstehen, weil wir es tatsächlich nicht beobachten können. Was Newton meint, ist, dass ein Körper -- auf den keine Kräfte wirken -- seine Geschwindigkeit beibehält. Auf ein Auto übertragen hieße das: wenn man in der Stadt mit \qty{30}{\km\per\hour} fährt und man den Fuß vom Gas nimmt (der Motor also keine Kraft mehr an die Räder weitergibt) dann fährt das Auto mit \qty{30}{\km\per\hour} bis in alle Unendlichkeit so schnell weiter, bis man die Bremse betätigt. Die Krux\footnote{%
+    Krux (von lateinisch \emph{crux}, das Kreuz) bedeutet so viel wie `Schwierigkeit' oder `Haken'. Den Begriff könnt Ihr Euch merken, falls Ihr einmal Scrabble spielt und nicht wisst, was Ihr mit einem 'X' machen sollt.}
+daran ist, das wir daran gewöhnt sind, Reibung nicht als ``Kraft'' zu verstehen. Im physikalischen -- und damit Newtons -- Sinn, ist aber Reibung eine Kraft. Bei einem Auto sind das zum Beispiel die Reifen auf der Straße. Aber auch der sogenannte Luftwiderstand, der vor allem für unsere Regensimulation eine Rolle spielt -- und den wir später noch genauer anschauen werden, ist ``Reibung'': eine Kraft. Was Newton also meint: ein Körper, auf den keine Kraft einwirkt (weder Anziehungskraft noch Reibung) bewegt sich \emph{gleichmäßig} weiter (siehe vorhergehendes Kapitel -- stehen bleiben, also $v=0$ gehört dazu). 
+% TODO "weil wir es tatsächlich nicht beobachten können" sollte erklärt werden...
+
+\vskip\baselineskip
+
+\noindent
+\textbf{Kraft und Beschleunigung}\\
+Das klingt zunächst einmal sehr abstrakt
+
+\vskip\baselineskip
+
+\noindent
+\textbf{Wechselwirkung}\\
+FIXME
 
 
 
@@ -145,7 +158,7 @@ Hier sind $v_0$ und $s_0$ die anfängliche Geschwindigkeit und Strecke, $a$ die 
     Diese Variablennamen kommen aus dem Lateinischen, \emph{acceleratio} für Beschleunigung und \emph{gravitas} (Schwere) für Erdbeschleunigung. Im Englischen benutzt man \emph{acceleration} und \emph{gravity}.}
 
 Die Erdbeschleunigung ist (fast) eine Konstante, die wir mit $g = \qty{9,81}{\meter\per\second^2}$ verwenden können.\footnote{%
-    } 
+    FIXME} 
 
 
 
@@ -173,6 +186,9 @@ mit
 \end{description}
 % c_w Sandkorn, etwa 0.4
 % Luftdichte (Standard) 1,225 kg/m^3
+
+% siehe youtube Apollo 15 (Hammer & Feder)
+% -> https://nssdc.gsfc.nasa.gov/planetary/image/AS15_Ham_feath_drop.mp4
 
 
 
