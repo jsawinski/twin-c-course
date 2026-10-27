@@ -1,6 +1,8 @@
 \section{Bewegung}
 \label{sec:physik:bewegung}
 
+
+
 Sicherlich habt Ihr schon einiges über Bewegung erfahren und schon Aufgaben gelöst, in denen zum Beispiel gefragt wird:\footnote{%
     Die Aufgabe werdet Ihr vermutlich mit Leichtigkeit lösen. Dennoch ist es ratsam, dass Ihr dieses Kapitel mit einer Begleitperson durchlest, die Eure fragen beantworten kann.}
 
@@ -121,57 +123,75 @@ Aus diesen Gedanken sind drei Naturgesetze entstanden, die er 1687 veröffentlic
 \vskip\baselineskip
 
 \noindent
-Schauen wir uns die drei Gesetze einmal genauer an:
+Schauen wir uns die drei Gesetze einmal genauer an:\footnote{%
+    FIXME Aristoteles, Descartes, Euler, und so weiter, haben schon vor Newton daran gearbeitet. Übrigens, bis vor 100 Jahren sagte man nicht Physiker, sondern Naturphilosophen... Newton hat als Erster erkannt, dass die Kraft, die einen Apfel fallen lässt, dieselbe ist, die die Planeten bewegt... Streng genommen sind es Axiom...}
 
 \vskip\baselineskip
 
 \noindent
-\textbf{Trägheit}\\
-Den Begriff Trägheit kennt Ihr natürlich: Wenn Ihr träge seid (sprich: einfach keine Lust habt, etwas zu tun), bleibt Ihr sitzen und verändert Euren ``Bewegungszustand'' nicht. Aber genau das meint Newton nicht und es ist sehr schwer zu verstehen, weil wir es tatsächlich nicht beobachten können. Was Newton meint, ist, dass ein Körper -- auf den keine Kräfte wirken -- seine Geschwindigkeit beibehält. Auf ein Auto übertragen hieße das: wenn man in der Stadt mit \qty{30}{\km\per\hour} fährt und man den Fuß vom Gas nimmt (der Motor also keine Kraft mehr an die Räder weitergibt) dann fährt das Auto mit \qty{30}{\km\per\hour} bis in alle Unendlichkeit so schnell weiter, bis man die Bremse betätigt. Die Krux\footnote{%
+\textbf{Trägheit}\footnote{%
+    Das 1.\ Newtonsche Gesetz wird als \textbf{Trägheitsprinzip} bezeichnet.}\\
+Den Begriff Trägheit kennt Ihr natürlich Wenn Ihr träge seid (sprich: einfach keine Lust habt, etwas zu tun), bleibt Ihr sitzen und verändert Euren ``Bewegungszustand'' nicht. Aber genau das meint Newton nicht und es ist sehr schwer zu verstehen, weil wir es tatsächlich nicht beobachten können. Was Newton meint, ist, dass ein Körper -- auf den keine Kräfte wirken -- seine Geschwindigkeit beibehält. Auf ein Auto übertragen hieße das: wenn man in der Stadt mit \qty{30}{\km\per\hour} fährt und man den Fuß vom Gas nimmt (der Motor also keine Kraft mehr an die Räder weitergibt) dann fährt das Auto mit \qty{30}{\km\per\hour} bis in alle Unendlichkeit so schnell weiter, bis man die Bremse betätigt. Die Krux\footnote{%
     Krux (von lateinisch \emph{crux}, das Kreuz) bedeutet so viel wie `Schwierigkeit' oder `Haken'. Den Begriff könnt Ihr Euch merken, falls Ihr einmal Scrabble spielt und nicht wisst, was Ihr mit einem 'X' machen sollt.}
-daran ist, das wir daran gewöhnt sind, Reibung nicht als ``Kraft'' zu verstehen. Im physikalischen -- und damit Newtons -- Sinn, ist aber Reibung eine Kraft. Bei einem Auto sind das zum Beispiel die Reifen auf der Straße. Aber auch der sogenannte Luftwiderstand, der vor allem für unsere Regensimulation eine Rolle spielt -- und den wir später noch genauer anschauen werden, ist ``Reibung'': eine Kraft. Was Newton also meint: ein Körper, auf den keine Kraft einwirkt (weder Anziehungskraft noch Reibung) bewegt sich \emph{gleichmäßig} weiter (siehe vorhergehendes Kapitel -- stehen bleiben, also $v=0$ gehört dazu). 
+daran ist, das wir daran gewöhnt sind, Reibung nicht als ``Kraft'' zu verstehen. Im physikalischen -- und damit Newtons -- Sinn, ist aber Reibung eine Kraft. Bei einem Auto sind das zum Beispiel die Reifen auf der Straße. Aber auch der sogenannte Luftwiderstand, der vor allem für unsere Regensimulation eine Rolle spielt -- und den wir später noch genauer anschauen werden, ist ``Reibung'': eine Kraft. Was Newton also meint: ein Körper, auf den keine Kraft einwirkt (weder Anziehungskraft noch Reibung) bewegt sich \emph{gleichmäßig} weiter (siehe vorhergehendes Kapitel -- $v=0$, also ``stehen bleiben'', gehört dazu). 
 % TODO "weil wir es tatsächlich nicht beobachten können" sollte erklärt werden...
 
 \vskip\baselineskip
 
 \noindent
-\textbf{Kraft und Beschleunigung}\\
-Das klingt zunächst einmal sehr abstrakt
+\textbf{Kraft und Beschleunigung}\footnote{%
+    Das 2.\ Newtonsche Gesetz wird als \textbf{Aktionsprinzip} bezeichnet.}\\
+Vom Fußballspielen wisst Ihr natürlich, dass, wenn Ihr doppelt so stark den Ball tretet, dass der Ball dann auch gefühlt doppelt so weit fliegt. Aber warum ist denn nun die Kraft gleich Masse mal Beschleunigung. 
+
+Denkt mal an eine Feder. Wenn Ihr an einer Feder zieht, verlängert sie sich. Zieht Ihr doppelt so stark, verlängert sie sich doppelt so weit. Eine Feder ist also ein prima Kraftmesser. Hängt man ein Gewicht (zum Beispiel ein 1-kg-Stück) an die Feder, verlängert sie sich um eine bestimmte Strecke. Hängt man zwei gleiche Gewichte daran, verlängert sie sich doppelt so weit. Die Gewichte ziehen also doppelt so stark an der Feder.
+
+Jetzt stellen wir uns vor, wir fliegen zum Mond. Dort ist die Anziehungskraft nur ein Sechstel so groß wie auf der Erde. Was beobachten wir? Die Feder verlängert sich nur noch ein Sechstel so weit. Das Gewicht zieht also nur noch ein Sechstel so stark.
+
+Was passiert nun, wenn wir das Gewicht fallen lassen? Auf dem Mond fällt es sechs Mal langsamer zu Boden als auf der Erde. Die Beschleunigung ist also auch nur ein Sechstel so groß -- und jetzt kommt der Trick: Was gleich bleibt, ist die Masse! Denn Ihr nehmt ja nichts von den Gewichten weg und tut auch nichts hinzu. Das Verhältnis von Kraft zu Beschleunigung bleibt also gleich. Genau das steckt in der Formel $F=m\cdot a$: die Kraft ist das Produkt aus Masse und Beschleunigung.
+
+(Und dass ein Hammer und eine Feder im Vakuum sogar gleich schnell fallen, obwohl sie unterschiedlich schwer sind -- das schauen wir uns später bei der Reibung an.)
 
 \vskip\baselineskip
 
 \noindent
-\textbf{Wechselwirkung}\\
-FIXME
+\textbf{Wechselwirkung}\footnote{%
+    Das 3.\ Newtonsche Gesetz wird als \textbf{Wechselwirkungsprinzip} bezeichnet}\\
+Ihr könntet Euch jetzt fragen: wenn wir auf der Erde stehen und die Erde eine Gewichtskraft auf mich ausübt, übe ich dann auch die gleich Kraft auf die Erde aus? Die Antwort ist kaum zu glauben: Ja! Es wird sogar noch unglaublicher: Wenn Ihr von der Erde wegspringt, beschleunigt Ihr nicht nur Euch selbst, sondern auch die Erde mit der gleichen Kraft, mit der Ihr losgesprungen seid.\footnote{%
+    Falls Ihr Euch fragt, ob man das Messen könnte, dann müsst Ihr wissen, dass die Erde ungefähr eine Masse von \qty{6e24}{\kg} hat -- das ist die Zahl 6 mit 24 Nullen. Selbst wenn alle Menschen sich auf einer Seite der Erde zusammenfinden und gleichzeitig hochspringen, ist das Verhältnis so enorm, dass man es nicht feststellen könnte.}
 
-
+Am besten kann man sich dieses Wechselwirkungsprinzip vorstellen, in dem wir uns fragen, wie eine Rakete zum Mond fliegen kann. Eine Rakete ist tatsächlich nichts anderes als ein riesiger Motor, der heiße Gase mit voller Wucht nach unten ausstößt. Die Kraft, mit der die Gase ausgestoßen werden (actio), drücken die Rakete mit derselben Kraft in die entgegengesetzte Richtung (reactio). Die Rakete muss also gar nicht an etwas ``ziehen'', um nach oben zu kommen -- sie erreicht das, indem sie etwas nach unten wirft. Der Ausstoß muss allerdings so groß sein, dass die Rakete auch der Erdanziehung ``entfliehen'' kann. Ohne dieses Gesetz (das man deshalb auch das Rückstoßprinzip nennt) wäre die Menschheit nie in den Weltraum gekommen.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Beschleunigte Bewegung}
 
 Für die beschleunigte Bewegung gibt es zwei wichtige Gleichungen:
 \begin{align}
-    v(x) &= v_0 + a\cdot t \\
-    s(x) &= s_0 + \frac12 a\cdot t^2 \,.
+    v(t) &= v_0 + a\cdot t \\
+    s(t) &= s_0 + \frac12 a\cdot t^2 \,.
 \end{align}
-Hier sind $v_0$ und $s_0$ die anfängliche Geschwindigkeit und Strecke, $a$ die Beschleunigung und wieder $t$ die Zeit. Die Beschleunigung, die auf eine Tropfen wirkt, ist die Erdbeschleunigung, die durch $g$ beschrieben wird.\footnote{%
+Hier sind $v_0$ und $s_0$ die anfängliche Geschwindigkeit und Strecke, $a$ die Beschleunigung und wieder $t$ die Zeit.\footnote{%
     Diese Variablennamen kommen aus dem Lateinischen, \emph{acceleratio} für Beschleunigung und \emph{gravitas} (Schwere) für Erdbeschleunigung. Im Englischen benutzt man \emph{acceleration} und \emph{gravity}.}
+Im vorhergehenden Abschnitt haben wir ja gesehen, dass Objekte auf der Erde durch die Erdanziehung in Richtung Erde beschleunigt werden. Die Beschleunigung, die auf eine Tropfen wirkt, ist die Erdbeschleunigung, die durch $g$ beschrieben wird. Diese Erdbeschleunigung\footnote{%
+    Die Kraft, mit der ein Objekt angezogen wird, nennt man ganz allgemein Gravitation. Alle Objekt -- die Masse haben -- ziehen sich durch Gravitation an. Erstaunlicherweise sind sich die Physiker noch nicht im Klaren, was Gravitation tatsächlich ist. Das gilt übrigens auch in anderen Bereichen, in denen Physiker Dinge zwar sehr genau mathematisch beschreiben und berechnen können -- den Ursache dafür aber noch nicht kennen. Der Autor möchte zu Gravitation auch anmerken, dass eine Gruppe Mathematiker 2026 darstellen konnte, dass -- entgegen bisheriger Lehrmeinung -- die Gravition keine Grundkraft ist.}
+    % FIXME maybe too much for kids ("Grundkraft"), evtl. Studio weglassen
+ist (fast) eine Konstante, die wir mit $g = \qty{9,81}{\meter\per\second^2}$ verwenden können.
 
-Die Erdbeschleunigung ist (fast) eine Konstante, die wir mit $g = \qty{9,81}{\meter\per\second^2}$ verwenden können.\footnote{%
-    FIXME} 
-
-
-
-Ein Körper, der frei fällt, hat nach \qty{10}{\second} eine Geschwindigkeit von fast \qty{100}{\meter\per\second} (das sind \qty{360}{\km\per\hour}) und wäre fast \qty{500}{\meter} weit geflogen.
-
+Um herauszufinden, was es bedeutet, wenn ein Körper zur Erde fällt betrachten wir ein Sandkorn. Starke Winde können den Sand der Sahara über Hunderte Kilometer weit  bis zu einer Höhe von \qty{10}{\km} um die Erde tragen (der Autor hat diesen roten Sand schon in seiner Kindheit in Deutschland zur Erde fallen sehen). 
+% TODO vll. Fußnote über "jet streams"
+Wenn ein Sandkorn nun aus dieser Höhe mit fällt, beschrieben durch die genannten Formeln, machen wir einigen aufschlussreiche Feststellungen.
 \begin{figure}[h]
     \input{physik/images/freierfall.tex}
     \caption{Der freie Fall eines Sandkorns aus 10 km Höhe (ohne Luftwiderstand). Die blaue Linie zeigt die Höhe, die rote Linie die Geschwindigkeit. Nach etwa 35 Sekunden (gestrichelte Linie) durchbricht das Sandkorn die Schallmauer (gepunktete Linie).}
+    \label{fig:physik:bewegung:sandkorn}
 \end{figure}
+Die Flugstrecke und Geschwindigkeit dieses Sandkorns werden in Abb.~\ref{fig:physik:bewegung:sandkorn} gezeigt. Da sehen wir, dass das Sandkorn nach etwa \qty{35}{s} die Schallmauer durchbricht (um die \qty{1200}{\km\per\hour}) und schon \qty{6}{\km} weit geflogen ist. Nach \qty{45}{\second} schlägt es dann mit eine Geschwindigkeit von etwa \qty{1620}{\km\per\hour} auf den Boden. 
 
+Solch eine Geschwindigkeit würde selbst für ein Sandkorn zu schweren Verletzungen führen -- in der Realität wird ein Sandkorn aber höchstens mit \qty{15}{\km\per\hour} zu Boden fallen, denn die obigen Formeln haben einen ``kleinen'' Nachteil: sie gelten nur im Vakuum, also ohne Luftreibung. Da wir später aber unser ``Regensimulation'' zu programmieren wollen, dass sie natürlich aussieht, müssen wir uns mit dem Thema Reibung befassen.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Reibung}
+
+
 
 Die Kraft auf einen Körper...
 \begin{equation}
@@ -189,8 +209,6 @@ mit
 
 % siehe youtube Apollo 15 (Hammer & Feder)
 % -> https://nssdc.gsfc.nasa.gov/planetary/image/AS15_Ham_feath_drop.mp4
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Der Tropfen fällt}
