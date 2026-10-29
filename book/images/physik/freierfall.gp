@@ -1,6 +1,6 @@
 # Ausgabe als PDF (Cairolatex für perfekte Schrift-Einbindung in LaTeX)
 set terminal cairolatex pdf size 12cm, 8cm font ",10"
-set output "physik/images/freierfall.tex"
+set output "images/physik/freierfall.tex"
 
 # Achsen und Beschriftung
 set xlabel "Zeit t [s]"

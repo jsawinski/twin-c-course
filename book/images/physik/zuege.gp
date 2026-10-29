@@ -2,7 +2,7 @@
 set terminal cairolatex pdf size 12cm, 8cm font ",10"
 
 # Dateiname der Ausgabe
-set output "physik/images/zuege.tex"
+set output "images/physik/zuege.tex"
 
 # Achsen und Beschriftung
 set xlabel "Zeit t [h]"

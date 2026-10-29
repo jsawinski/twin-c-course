@@ -1,8 +1,6 @@
 \section{Bewegung}
 \label{sec:physik:bewegung}
 
-
-
 Sicherlich habt Ihr schon einiges über Bewegung erfahren und schon Aufgaben gelöst, in denen zum Beispiel gefragt wird:\footnote{%
     Die Aufgabe werdet Ihr vermutlich mit Leichtigkeit lösen. Dennoch ist es ratsam, dass Ihr dieses Kapitel mit einer Begleitperson durchlest, die Eure fragen beantworten kann.}
 
@@ -66,7 +64,7 @@ mit Einsetzen der Werte erhalten wir
 
 Wir können das gleiche Ergebnis aber auch mit einem Diagramm lösen.
 \begin{figure}[h]
-    \input{physik/images/zuege.tex}
+    \input{images/physik/zuege.tex}
     \caption{Entfernung der Züge von Bonn in der Darstellung eines Diagramms. Der Punkt an dem sich die Züge treffen ist der Schnittpunkt der roten und blauen Linie.}
     \label{img:physik:bewegung:zuege}
 \end{figure}
@@ -78,8 +76,8 @@ Um dies zu berechnen wollen wir die Notation (das heißt: die Schreibweise) etwa
     s(t) = s_0 + v\cdot t\,.
 \end{equation*}
 Für den Leser wird damit deutlich: die Zeit $t$ ist eine Variable während die Geschwindigkeit $v$ und der Startpunkt $s_0$ feste Werte, man nennt sie Konstanten, sind. Das ist genau dasselbe wie in der Programmiersprache C.\footnote{%
-    In der Tat haben viele Programmiersprachen
-    } Da würden wir schreiben:
+    In der Tat verwenden viele Programmiersprachen diese Struktur, nämlich \texttt{Funktionsname ( Parameter... )}. } % TODO
+Da würden wir schreiben:
 \begin{code}[numbers=none]
     #define S_0 300
     #define V -200
@@ -119,6 +117,7 @@ Aus diesen Gedanken sind drei Naturgesetze entstanden, die er 1687 veröffentlic
 \item[Kraft und Beschleunigung] Kraft ist gleich Masse mal Beschleunigung.
 \item[Wechselwirkung] ``actio'' ist gleich ``reactio'' -- Übt ein Körper A auf einen anderen Körper B eine Kraft aus (actio), so wirkt eine gleich große, aber entgegen gerichtete Kraft von Körper B auf Körper A (reactio).
 \end{description}
+% TODO: add a footnote about the pronounciation of actio and reactio?
 
 \vskip\baselineskip
 
@@ -150,6 +149,7 @@ Jetzt stellen wir uns vor, wir fliegen zum Mond. Dort ist die Anziehungskraft nu
 Was passiert nun, wenn wir das Gewicht fallen lassen? Auf dem Mond fällt es sechs Mal langsamer zu Boden als auf der Erde. Die Beschleunigung ist also auch nur ein Sechstel so groß -- und jetzt kommt der Trick: Was gleich bleibt, ist die Masse! Denn Ihr nehmt ja nichts von den Gewichten weg und tut auch nichts hinzu. Das Verhältnis von Kraft zu Beschleunigung bleibt also gleich. Genau das steckt in der Formel $F=m\cdot a$: die Kraft ist das Produkt aus Masse und Beschleunigung.
 
 (Und dass ein Hammer und eine Feder im Vakuum sogar gleich schnell fallen, obwohl sie unterschiedlich schwer sind -- das schauen wir uns später bei der Reibung an.)
+% TODO: add a figure describing the relation of unit N to kg (rope over the edge of a table with a weight pulling something horizontally)
 
 \vskip\baselineskip
 
@@ -180,35 +180,68 @@ Um herauszufinden, was es bedeutet, wenn ein Körper zur Erde fällt betrachten 
 % TODO vll. Fußnote über "jet streams"
 Wenn ein Sandkorn nun aus dieser Höhe mit fällt, beschrieben durch die genannten Formeln, machen wir einigen aufschlussreiche Feststellungen.
 \begin{figure}[h]
-    \input{physik/images/freierfall.tex}
+    \input{images/physik/freierfall.tex}
     \caption{Der freie Fall eines Sandkorns aus 10 km Höhe (ohne Luftwiderstand). Die blaue Linie zeigt die Höhe, die rote Linie die Geschwindigkeit. Nach etwa 35 Sekunden (gestrichelte Linie) durchbricht das Sandkorn die Schallmauer (gepunktete Linie).}
     \label{fig:physik:bewegung:sandkorn}
 \end{figure}
 Die Flugstrecke und Geschwindigkeit dieses Sandkorns werden in Abb.~\ref{fig:physik:bewegung:sandkorn} gezeigt. Da sehen wir, dass das Sandkorn nach etwa \qty{35}{s} die Schallmauer durchbricht (um die \qty{1200}{\km\per\hour}) und schon \qty{6}{\km} weit geflogen ist. Nach \qty{45}{\second} schlägt es dann mit eine Geschwindigkeit von etwa \qty{1620}{\km\per\hour} auf den Boden. 
+% TODO explain that we're suddenly dealing with a graph with two axes!
 
 Solch eine Geschwindigkeit würde selbst für ein Sandkorn zu schweren Verletzungen führen -- in der Realität wird ein Sandkorn aber höchstens mit \qty{15}{\km\per\hour} zu Boden fallen, denn die obigen Formeln haben einen ``kleinen'' Nachteil: sie gelten nur im Vakuum, also ohne Luftreibung. Da wir später aber unser ``Regensimulation'' zu programmieren wollen, dass sie natürlich aussieht, müssen wir uns mit dem Thema Reibung befassen.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Reibung}
 
+Reibung ist ein faszinierendes Thema. Zum Einen stecken wir Menschen sehr viel Zeit in Entwicklungen um die Reibung zu vermindern, zum Anderen brauchen wir aber Reibung um überhaupt gehen zu können -- und manchmal ist es sogar notwendig, Zeit zu investieren um Reibung zu erhalten.
 
+Eine der faszinierendsten Formen der Reibung ist die \textbf{Haftgleitreibung} (im Englischen: \emph{stick-slip motion}). Der Begriff Haftgleitreibung beschreibt den Effekt hervorragend: zwei Objekt wechseln zwischen \emph{Haften} und \emph{Gleiten}: Dies führt zu ruckartigen Bewegungen, die meistens nicht erwünscht sind -- in anderen Fällen aber gewünscht werden. Ein gutes Beispiel für die gewünschte Wirkung der Haftgleitreibung ist der Geigenbogen: obwohl man den Effekt nicht direkt wahrnimmt: er ist die Ursache dafür, dass die gestrichene Saite einen Ton erzeugt. Falls Ihr selbst ein Streichinstrument spielt oder einen Streicher beobachtet habt: um diese Haftgleitreibung des Bogens zu erhalten, ist es notwendig, den Bogen mit einem Harz (dem Kolophonium) regelmäßig einzustreichen. Die Haftgleitreibung ist übrigens auch dafür verantwortlich, dass die Kreide auf einer Kreidetafel quietscht. Falls Ihr gerne Computer-Spiele spielt, wird Euch überraschenderweise dieser Effekt da auch begegnen: die Minecraft-Gamer unter Euch nennen das ``Butterfly Clicking''. Dabei rutscht der Klick-Finger so über die Maustaste, dass man mit er Maustaste hohe Klick-Raten erzeugt. 
+% TODO: Reihenfolge der Beispiele überdenken (Minecraft zuerst, dann Geige/Kreide).
+% TODO: "Butterfly Clicking" kurz erklären (Stick-Slip: kurz haften, dann rutschen).
+% TODO: Fußnote/Box: Verweis auf Resonanz (Geige) als "später mehr" markieren.
+% TODO: Klimax/Übergang schärfen: Von der Alltagsreibung zurück zum Sandkorn/Luftwiderstand (Brücke zur Regensimulation).
 
-Die Kraft auf einen Körper...
+Die Art von Reibung die Euch selbst jeden Tag begenet ist die \textbf{Gleitreibung}. Die ist Euch bestimmt schon mal beim Schlittschuhlaufen begegnet: nachdem Ihr Euch abgestoßen habt, werdet Ihr langsamer. Es fühlt sich so an, egal wie kräftig Ihr Euch abstoßt, als ob jemand auf der Bremse steht -- egal wie schell, immer das gleiche Langsamerwerden. In der Tat spielt auch Haftung wieder eine Rolle, denn zum Abstoßen braucht Ihr mehr Kraft. Aber sobald Ihr Euch bewegt, hängt die Reibung nur von Eurem Gewicht\footnote{%
+    Habt Ihr Euch schonmal Gedanken gemacht, was eine Waage eigentlich misst? Die Waage, die Ihr aus dem Badezimmer kennt ist eine sogenannte Federwaage. Sie misst die Kraft, mit der Ihr auf die Erde angezogen werdet. Omas Küchenwaage jedoch, solche, wo Ihr vorne eine ein ``Gewicht'' verschiebt, vergleicht Gewichte -- hier wird tatsächlich die Masse ermittelt. Diese Technik wird schon seit vielen Jahrhunderten benutzt: dabei werden zwei Teller an einen Stab gehängt, der in der Mitte aufgehangen wird. Wenn beide Teller sich ``die Waage halten'' sind die Gewichte (Massen) auf beiden Seiten gleich. Diese Art von Waagen würden auf dem Mond genau gleich funktionieren, während die Federwaage nur ein Sechstel des Gewichts anzeigen würde.}
+ab. Die Ursache dafür hängt damit zusammen, wie Oberflächen sich miteinander ``verzahnen''. Aber es gibt ``Gegenmaßnahmen''. In mechanischen Geräten benutzt man zum Beispiel Öl, dass diese Verzahnung erschwert -- die Bauteile gleiten dadurch leichter aneinander. Beim Schlittschuhfahren ist es das Wasser, dass die Reibung vermindert. ``Das Wasser?'' werden Ihr jetzt fragen -- ja, in der Tat hat die Form Eurer Kufen damit etwas zu tun: an der Spitze der Kufe ist der Druck so groß, dass das Eis wieder flüssig wird: man gleitet auf einer Wasserschicht. 
+% TODO: zu harter Übergang zum Thema Gleitreibung
+
+% TODO: Rollreibung erwähnen oder nicht?
+
+Was passiert jetzt aber nun mit einem Gegenstand -- dem Regentropfen, der zur Erde fällt. Der Gegenstand bewegt sich durch die Luft, und die steht ihm buchstäblich im Weg: Er muss die Luftmoleküle beiseiteschieben, und das bremst ihn ab. Man nennt das \textbf{Luftwiderstand}. 
+    
+Machen wir aber erst einen Schritt zurück und schauen, was passiert, wenn die Luft keine Rolle spielt. Schaut Euch mal das Video an, dass die NASA während der Apollo 15 auf dem Mond gemacht hat (siehe QR-Code).\footnote{%
+    \qrcode[height=2cm]{https://nssdc.gsfc.nasa.gov/planetary/image/AS15_Ham_feath_drop.mp4}}
+Hier lässt der Astronaut einen Hammer und eine Feder gleichzeitig fallen: sie fallen tatsächlich gleich schnell auf die Mondoberfläche. Mehr noch: sie verhalten sich genau so, wie Newton es in seinem zweiten Gesetz aufschrieb und wir durch Formeln im letzten Abschnitt beschrieben haben.
+
+Wie schnell so ein Regentropfen nun tatsächlich fällt, hängt von vielen Dingen ab: Wie groß ist er? Welche hoch ist Temperatur und der Luftdruck?\footnote{%
+    Vereinfacht kann man sagen, dass Temperatur und Druck die Dichte beeinflussen, also die Menge an Luftmolekülen pro Volumen.}
+Natürlich spielt auch die Form des Tropfens eine Rolle -- und die wird sogar von durch die Luft beeinflusst. Eine exakte Vorhersage ist deshalb ziemlich kompliziert.\footnote{%
+    Tatsächlich braucht man sehr starke Computer um so etwas zu berechnen. Daher nutzt man für Autos, Flugzeuge, Raketen -- ja sogar für Gebäude -- Windkanäle. In diesen lässt sich die Strömung der Luft bei verschiedenen Geschwindigkeiten sehr genau beobachten.}
+Aber wir können eine sehr gute Abschätzung machen, wenn wir ein paar dieser Dinge einfach ignorieren -- und genau das schauen wir uns jetzt an.
+% TODO: die Berechnungen sind eher komplex - könnte man irgendwie einbauen
+
+In der sogenannten Strömungsmechanik (das ist ein Teilgebiet der Physik und des Ingenieurswesens) benutzt man die folgende Formel, um den Luftwiderstand zu berechnen:
 \begin{equation}
-    F_\textrm{w}(v) = \frac12 \cdot c_\textrm{w} \cdot A \cdot \varrho \cdot v^2 \,.
+    F_\textrm{w}(v) = \frac12 \cdot c_\mathrm{w} \cdot A \cdot \varrho \cdot v^2 \,.
 \end{equation}
-mit 
+wobei die Variablen die folgende Bedeutung haben:
 \begin{description}
-    \item[$c_\textrm{w}$]Der Luftwiderstandsbeiwert (formabhängig, "Windschnittigkeit"). 
+    \item[$c_\mathrm{w}$]Der Luftwiderstandsbeiwert ("Windschnittigkeit"). 
     \item[$A$] Die Querschnittsfläche des Körpers senkrecht zur Strömung. 
     \item[$\varrho$] Die Dichte der Luft. 
     \item[$v$] Die Geschwindigkeit des Körpers relativ zur Luft. 
 \end{description}
-% c_w Sandkorn, etwa 0.4
-% Luftdichte (Standard) 1,225 kg/m^3
+Der $c_\mathrm{w}$ wird Euch vielleicht schon mal in einer Autowerbung begegnet sein, wenn darüber gesprochen wurde, dass ein Sportwagen einen besoders niedrigen $c_\mathrm{w}$-Wert hat und deshalb sehr windschnittig ist. In diesem Zusammenhang ist Euch vielleicht auch aufgefallen, dass in der Formel die Querschnittlsfläche $A$ folgt: das ist der Grund warum Sportwagen so flach sind -- halbe Höhe bedeutet halber Luftwiderstand. Für die Dichte hat sich bei Berechnung ein Standardwert \qty{1,225}{\kg\per\meter^3} eingebürgert (das ist ungefähr die Dichte von Luft auf Meereshöhe bei \qty{15}{\degreeCelsius}). Als letzten Teil der Gleichung findet Ihr aber nun $v^2$ (errinert Euch an das erste Kapitel, wo wir die Potenzen angesprochen haben): das heißt, die Geschwindigkeit geht quadratisch ein -- doppelte Geschwindigkeit für zum vierfachen Luftwiderstand.
+\begin{figure}[h]
+    \input{images/physik/luftwiderstand.tex}
+    \caption{Der Luftwiderstand...}
+    \label{fig:physik:bewegung:luftwiderstand}
+\end{figure}
 
-% siehe youtube Apollo 15 (Hammer & Feder)
-% -> https://nssdc.gsfc.nasa.gov/planetary/image/AS15_Ham_feath_drop.mp4
+
+
+
+% c_w Sandkorn, etwa 0.4
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Der Tropfen fällt}
