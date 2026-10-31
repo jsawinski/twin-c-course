@@ -1,3 +1,23 @@
+% TODO: Einleitung nach dem Motto
+%    % Bevor wir unseren Regentropfen programmieren können, müssen wir verstehen, 
+%      wie er sich in der echten Welt verhält. Dieses Kapitel ist deshalb etwas 
+%      anders aufgebaut als die vorherigen: Es ist ein Baukasten.
+%
+%    % Ihr müsst es nicht in einem Rutsch durchlesen! Im Gegenteil: Es ist besser, 
+%      wenn Ihr die Abschnitte Stück für Stück durchgeht, wenn Ihr sie für die 
+%      Programmierung braucht. Am Anfang der folgenden Programmierkapitel steht 
+%      immer, welcher Abschnitt aus diesem Kapitel wichtig ist. (Wenn Ihr neugierig
+%      seid, könnt Ihr aber natürlich auch alles auf einmal lesen – aber lasst Euch 
+%      Zeit, es ist viel Stoff.)
+%
+% TODO: ansprechen, dass wir eigentlich keine Simulation programmieren, sonder etwas,
+%       das "echt" aussieht. (...das wird so gemacht, seit die ersten grafischen 
+%       Computerspiele auf dem Markt sind...)
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bewegung}
 \label{sec:physik:bewegung}
 
@@ -151,6 +171,15 @@ Was passiert nun, wenn wir das Gewicht fallen lassen? Auf dem Mond fällt es sec
 (Und dass ein Hammer und eine Feder im Vakuum sogar gleich schnell fallen, obwohl sie unterschiedlich schwer sind -- das schauen wir uns später bei der Reibung an.)
 % TODO: add a figure describing the relation of unit N to kg (rope over the edge of a table with a weight pulling something horizontally)
 
+
+\begin{challenge}
+    Die Einheit der Kraft ist $\mathrm{N}$, das heißt tatsächlich ``Newton''. Die Erdbeschleunigung ist $g = \qty{9,81}{\meter\per\second^2}$. Wenn man nur eine Abschätzung haben will, nehmen wir dafür einfach gerundet eine $10$. Mit der Formel $F=m\cdot a$ ($a$ ist die Beschleunigung, dafür nehmen wir jetzt die Erdbeschleunigung $g$) heißt das: ein Gewicht von \qty{1}{\kg} wird mit etwa \qty{10}{\N} von der Erde angezogen.
+    \begin{solution}
+        FIXME
+    \end{solution}
+\end{challenge}
+
+
 \vskip\baselineskip
 
 \noindent
@@ -231,7 +260,7 @@ wobei die Variablen die folgende Bedeutung haben:
     \item[$\varrho$] Die Dichte der Luft. 
     \item[$v$] Die Geschwindigkeit des Körpers relativ zur Luft. 
 \end{description}
-Der $c_\mathrm{w}$ wird Euch vielleicht schon mal in einer Autowerbung begegnet sein, wenn darüber gesprochen wurde, dass ein Sportwagen einen besoders niedrigen $c_\mathrm{w}$-Wert hat und deshalb sehr windschnittig ist. In diesem Zusammenhang ist Euch vielleicht auch aufgefallen, dass in der Formel die Querschnittlsfläche $A$ folgt: das ist der Grund warum Sportwagen so flach sind -- halbe Höhe bedeutet halber Luftwiderstand. Für die Dichte hat sich bei Berechnung ein Standardwert \qty{1,225}{\kg\per\meter^3} eingebürgert (das ist ungefähr die Dichte von Luft auf Meereshöhe bei \qty{15}{\degreeCelsius}). Als letzten Teil der Gleichung findet Ihr aber nun $v^2$ (errinert Euch an das erste Kapitel, wo wir die Potenzen angesprochen haben): das heißt, die Geschwindigkeit geht quadratisch ein -- doppelte Geschwindigkeit für zum vierfachen Luftwiderstand.
+Der $c_\mathrm{w}$ wird Euch vielleicht schon mal in einer Autowerbung begegnet sein, wenn darüber gesprochen wurde, dass ein Sportwagen einen besoders niedrigen $c_\mathrm{w}$-Wert hat und deshalb sehr windschnittig ist. In diesem Zusammenhang ist Euch vielleicht auch aufgefallen, dass in der Formel die Querschnittlsfläche $A$ folgt: das ist der Grund warum Sportwagen so flach sind -- halbe Höhe bedeutet halber Luftwiderstand. Für die Dichte hat sich bei Berechnung ein Standardwert \qty{1,225}{\kg\per\meter^3} eingebürgert (das ist ungefähr die Dichte von Luft auf Meereshöhe bei \qty{15}{\degreeCelsius}). Als letzten Teil der Gleichung findet Ihr aber nun $v^2$ (errinert Euch an das erste Kapitel, wo wir die Potenzen angesprochen haben): das heißt, die Geschwindigkeit geht quadratisch ein -- doppelte Geschwindigkeit führt zum vierfachen Luftwiderstand.
 \begin{figure}[h]
     \input{images/physik/luftwiderstand.tex}
     \caption{Der Luftwiderstand...}
