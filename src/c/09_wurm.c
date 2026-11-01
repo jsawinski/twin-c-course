@@ -119,7 +119,7 @@ int main() {
             konsole_zeichen(' ');
             konsole_schritt(CURSOR_LINKS);
 
-            usleep(1000);
+            usleep(100000);
         }
 
         alte_richtung = richtung;
