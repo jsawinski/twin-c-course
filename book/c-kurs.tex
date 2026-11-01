@@ -102,19 +102,6 @@ eine Hommage an die koreanische Band Idiotape und ein wiederkehrendes visuelles 
 \null
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Epilog
-\newpage
-\thispagestyle{empty}
-\par\noindent
-Dieser Kurs ist gedacht für Kinder ab Ende der Grundschule (ca. 5. Klasse), 
-die Begeisterung für Mathematik und Computer mitbringen und den Drang haben, 
-programmieren zu lernen.
-
-Der erste Teil des Kurses beschäftigt sich damit, alle grundlegenden Kenntnisse zu erwerben, um eine Konsolen-basierte Regensimulation in C zu programmieren, was auch mathematische und physikalische Grundlagen beinhaltet.
-
-Der zweite Teil des Kurses wird das Ziel haben, verschiedene interaktive Spiele in C++ umzusetzen, wobei das Hauptaugenmerk dabei zunächst auf die Grundlagen Objekt-orientierter Programmierung gelegt wird.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,25 +112,20 @@ Der zweite Teil des Kurses wird das Ziel haben, verschiedene interaktive Spiele 
 
 \section*{Vorwort}
 
-Dieser Kurs ist aus der gemeinsamen Arbeit des Autors mit seinen Söhnen entstanden.
-Die Idee, einen C/C++-Kurs für Kinder zu schreiben, kam von den Jungs selbst,
-die unbedingt programmieren lernen wollten um ihre eigenen Spiele zu entwickeln
-zu können. 
+Dieser Kurs ist aus der gemeinsamen Arbeit des Autors mit seinen Söhnen entstanden. Die Idee, einen C/C++-Kurs für Kinder zu schreiben, kam von den Jungs selbst, die unbedingt programmieren lernen wollten um ihre eigenen Spiele zu entwickeln zu können. Die Mitschrift -- die sich noch entwickelt -- ist in erster Linie für Kinder gedacht (wir haben den Kurs am Ende der Grundschule angefangen), die Spaß und Neugier an Mathematik und Computern haben. Der Autor empfiehlt, den Kurs mit einer Begleitperson zusammen zu durchlaufen. Das Buch dient dabei als Leitfaden sowie als Nachschlagewerk für die behandelten Themen. 
 
-Die Mitschrift ist in erster Linie für Kinder gedacht, die den Kurs mit einer 
-Begleitperson zusammen durchlaufen und dient als Leitfaden sowie als 
-Nachschlagewerk für die behandelten Themen. 
+Im ersten Teil erwerben wir alle grundlegenden Kenntnisse, mit denen wir zunächst einfache, konsolenbasierte Programme schreiben. Zum einen sind das die Grundlagen der Sprache C. Die Sprache C wurde gewählt, da sie eine maschinennahe Sprache ist -- man kann darin die Schritte, die ein Prozessor geht, sehr gut nachvollziehen. Die Grundlagen werden sich aber auch abseits von Spielen nutzen lassen — etwa bei der Programmierung von Mikroprozessoren, wie Raspberry Pi Pico, ESP32 oder Arduino. Zum anderen werden wir mathematische und physikalische Grundlagen behandeln. Die werden es uns ermöglichen, kleine Spiele und Effekte zu programmieren -- zum Beispiel das Spiel ``Snake'' und eine Regensimulation, so dass sie realistisch wirken. 
+% TODO eigentlich MCU, also Mikrocontroller, nicht Mikroprozessor
 
-Der Autor hat die Inhalte erarbeitet, erklärt und in LaTeX festgehalten.
-Bei der Strukturierung des Materials und der Erstellung einiger LaTeX-Makros
-wurde er durch KI-gestützte Werkzeuge (\textbf{DeepSeek} und \textbf{GitHub Copilot}) 
-unterstützt.
+Im zweiten Teil werden wir in die objektorientierte Programmierung eintauchen und zur Programmiersprache C++ übergehen. Da C++ auf der Programmiersprache C aufbaut, hat dies den Vorteil, dass alles bisher Gelernte weiterverwendet werden kann. Es gibt auch eine ganze Menge ``game engines'',\footnote{%
+    Eine ``\emph{game engine}'' (auf Deutsch: der Antrieb des Spiels) ist eine Ansammlung von Code, die es einem ermöglicht, ein Spiel zu programmieren, ohne dabei alles neu erfinden zu müssen.}
+die als Kern C++ verwenden (unity, Unreal Engine, Godot, usw.). Die Objektorientierung, so wie sie in C++ verwendet wird, wird es Euch auch ermöglichen, andere Programmiersprachen (wie C\# oder Java) leicht zu erlernen.
 
-DeepSeek lieferte Vorschläge zur Gliederung, zur didaktischen Aufbereitung
-und zu technischen Umsetzungen in LaTeX. Github Copilot wurde beim Schreiben von 
-LaTeX-Code und bei der Erstellung von C/C++-Codebeispielen eingesetzt. Alle 
-Vorschläge wurden vom Autor geprüft, angepasst und auf die Bedürfnisse seiner 
-Kinder zugeschnitten.
+Der Autor hat die Inhalte erarbeitet, erklärt und in LaTeX festgehalten. Bei der Strukturierung des Materials und der Erstellung einiger LaTeX-Makros
+wurde er durch KI-gestützte Werkzeuge (\textbf{DeepSeek} und \textbf{GitHub Copilot}) unterstützt.
+
+DeepSeek lieferte Vorschläge zur Gliederung, zur didaktischen Aufbereitung und zu technischen Umsetzungen in LaTeX. GitHub Copilot wurde beim Schreiben von 
+LaTeX-Code und bei der Erstellung von C/C++-Codebeispielen eingesetzt. Alle Vorschläge wurden vom Autor geprüft, angepasst und auf die Bedürfnisse seiner Kinder zugeschnitten.
 
 \textit{-- Jürgen ``George'' Sawinski, \today}
 
@@ -187,6 +169,7 @@ entstehen.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Erste Schritte in C}
+\label{sec:c}
 \input{01_c_grundlagen/01_hallo_welt}
 \newpage\input{01_c_grundlagen/02_zahlen}
 \newpage\input{01_c_grundlagen/03_fibonacci}
@@ -200,8 +183,24 @@ entstehen.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Etwas Physik}
+\label{sec:physik}
+
+\noindent
+Dieses Kapitel enthält Themen, die Ihr in der Schule vielleicht erst in der 10. Klasse kennenlernt. Das liegt nicht daran, dass Ihr zu jung seid — es liegt daran, dass diese Themen wirklich nicht einfach sind. Niemand versteht Newton beim ersten Lesen. Auch der Autor hat Newton erst während seines Physikstudiums so richtig verstanden — also lange nach der Schule.\footnote{%
+    Nicht nur hier, sondern in allen Kapiteln gilt: Verstehen kommt nicht auf einmal, sondern in Schritten. Egal ob Ihr ein Musikinstrument lernt, eine Sportart oder ein Hobby -- Schritt für Schritt.}
+Wenn Ihr also irgendwo hängen bleibt: Das ist kein Zeichen dafür, dass Ihr es nicht könnt, sondern ein Zeichen dafür, dass Ihr an der richtigen Stelle seid. Lest weiter, probiert die Programme aus, und kommt später nochmal zurück.
+
+Das Konzept dieses Kapitels ist daher ein anderes. (Wenn Ihr dabei an ein Kochrezept denkt, liegt Ihr ziemlich gut.) Im letzten Kapitel habt Ihr einen Abschnitt nach dem anderen gemacht. Dieses Kapitel funktioniert anders: Wir steigen in die Grundlagen ein, die es uns ermöglichen, Spiele und Effekte realistisch zu gestalten — aber das eigentliche Programmieren soll dabei nicht zu kurz kommen. Der Autor empfiehlt daher: Lest einen Abschnitt (oder Absatz), und geht dann ins nächste Programmierkapitel und setzt um, was Ihr gerade gelernt habt. Dann kommt zurück und lest weiter.
+
+Dieses ``Kochrezept'' ist letztendlich aber nur ein Vorschlag. Wer so neugierig ist, das ganze Kapitel auf einmal zu lesen — nur zu! Welchen Schritt Ihr wann geht -- Ihr dürft selbst entscheiden.
+
+\vskip\baselineskip
 
 \input{physik/bewegung}
+\input{physik/newton}
+\input{physik/einheiten}
+\input{physik/reibung}
+\input{physik/fazit}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
