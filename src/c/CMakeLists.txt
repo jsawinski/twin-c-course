@@ -7,8 +7,8 @@ add_executable(06_vertikal 06_vertikal.c)
 add_executable(07_wuerfel 07_wuerfel.c)
 add_library(08_spielfeld_1 OBJECT 08_spielfeld_1.c)
 add_executable(08_spielfeld 08_spielfeld.c)
-add_executable(09_wurm 09_wurm.c)
+add_executable(09_warnungen 09_warnungen.c)
 
-add_executable(10_warnungen 10_warnungen.c)
+add_executable(10_wurm 10_wurm.c)
 
 

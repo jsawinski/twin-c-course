@@ -10,7 +10,7 @@ Sicherlich habt Ihr schon einiges über Bewegung erfahren und schon Aufgaben gel
         Es dauert \qty{1}{\hour}.
     \end{solution}
 \end{exercise}
-Das werdet Ihr natürlich sofort sagen können -- aber, wenn wir Bewegung berechnen, müssen wir -- über die Formeln hinaus -- wissen, welchen Bezugspunkt man wählt. Setzt Euch mal hin und bewegt Euch nicht vom Fleck. Welche Geschwindigkeit habt Ihr dann? Die Antwort ist faszinierend:
+Das werdet Ihr natürlich sofort sagen können. Wenn wir aber Bewegung berechnen, müssen wir wissen, welchen Bezugspunkt man wählt. Setzt Euch mal hin und bewegt Euch nicht vom Fleck. Welche Geschwindigkeit habt Ihr dann? Die Antwort ist faszinierend:
 \begin{itemize}
     \item Auf der Erdoberfläche ist Eure Geschwindigkeit \qty{0}{\km\per\hour}.
     \item Aufgrund der Erdrotation bewegt Ihr Euch aber mit etwa \qty{800}{\km\per\hour} (etwa \qty{220}{\meter\per\second}) um die Rotationsachse.
@@ -68,14 +68,14 @@ Wir können das gleiche Ergebnis aber auch mit einem Diagramm lösen.
     \caption{Entfernung der Züge von Bonn in der Darstellung eines Diagramms. Der Punkt an dem sich die Züge treffen ist der Schnittpunkt der roten und blauen Linie.}
     \label{img:physik:bewegung:zuege}
 \end{figure}
-Aus dem Diagramm in Abb.~\ref{img:physik:bewegung:zuege} kann man mehrere Dinge ablesen, die wir natürlich auch mit den Formeln berechnen können: 1. Eine vertikal Linie vom Schnittpunkt beider Geraden auf die Zeitachse zeigt uns wann beide Züge sich treffen (nach \qty{1}{\hour}). 2. Eine horizontale Linie vom Schnittpunkt beider Gerade zur Entfernungsachse zeigt uns wo die beiden Züge sich treffen (in einer Entfernng \qty{100}{km} von Bonn entfernt). 3. Wenn der Zug aus Stuttgart Bonn erreicht, hat der Zug aus Bonn erst die Hälfte seiner Streck zurückgelegt (nämlich \qty{150}{\km}).
+Aus dem Diagramm in Abb.~\ref{img:physik:bewegung:zuege} kann man mehrere Dinge ablesen, die wir natürlich auch mit den Formeln berechnen können: 1) Eine vertikal Linie vom Schnittpunkt beider Geraden auf die Zeitachse zeigt uns wann beide Züge sich treffen (nach \qty{1}{\hour}). 2) Eine horizontale Linie vom Schnittpunkt beider Gerade zur Entfernungsachse zeigt uns wo die beiden Züge sich treffen (in einer Entfernng \qty{100}{km} von Bonn entfernt). 3) Wenn der Zug aus Stuttgart Bonn erreicht, hat der Zug aus Bonn erst die Hälfte seiner Streck zurückgelegt (nämlich \qty{150}{\km}).
 
-Um dies zu berechnen wollen wir die Notation (das heißt: die Schreibweise) etwas verfeinern und schreiben die Beziehung von Strecke zu Zeit so:\footnote{%
+Um dies zu berechnen, verfeinern wir die Notation (das heißt: die Schreibweise) ein wenig und schreiben die Beziehung von Strecke zu Zeit so:\footnote{%
     Die Notation, so wie auch musikalische Noten, hat sich über viele Jahrhunderte entwickelt. Dadurch ist die Mathematik zu einer universellen (also weltweiten) Sprache geworden, die jeder verstehen kann. Den kleinen Ausschnitt, den wir hier zeigen, versteht jeder, der ein bisschen Mathe kann.}
 \begin{equation*}
     s(t) = s_0 + v\cdot t\,.
 \end{equation*}
-Für den Leser wird damit deutlich: die Zeit $t$ ist eine Variable während die Geschwindigkeit $v$ und der Startpunkt $s_0$ feste Werte, man nennt sie Konstanten, sind. Das ist genau dasselbe wie in der Programmiersprache C.\footnote{%
+Für den Leser wird damit deutlich: die Zeit $t$ ist eine Variable während die Geschwindigkeit $v$ und der Startpunkt $s_0$ feste Werte sind -- man nennt sie Konstanten. Das ist genau dasselbe wie in der Programmiersprache C.\footnote{%
     In der Tat verwenden viele Programmiersprachen diese Struktur, nämlich \texttt{Funktionsname ( Parameter... )}. } % TODO
 Da würden wir schreiben:
 \begin{code}[numbers=none]
@@ -85,7 +85,7 @@ Da würden wir schreiben:
         return S_0 + V * t;
     }
 \end{code}
-Damit schreiben wir die Gleichung (\ref{eq:physik:bewegung:zuege}) folgendermaßen:
+Damit schreiben wir die Gleichungen (\ref{eq:physik:bewegung:zuege}) folgendermaßen:
 \begin{equation}
     \begin{split}
         s_1(t) &= v_1\cdot t \\
@@ -103,6 +103,8 @@ Mit dieser Schreibweise berechnen wir den Abstand von Bonn zu dem Zeitpunkt $t_\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Beschleunigte Bewegung}
+
+Ihr saßt bestimmt schon mal in einem Auto. Der Autor hatte neulich das Vergnügen, einen Elektroauto mit einem richtig starken Motor zu fahren -- so stark, dass es einen in den Sitz drückt und man das Gefühl hat: jemand hat mich am Sitz festgeklebt. Dieses Gefühl, in den Sitz gedrückt zu werden wenn die Geschwindigkeit zunimmt, nennt man -- es wird Euch nicht überraschen: Beschleunigung. Ihr kennt aber auch bestimmt das Gegenteil: das Auto wird so sehr abgebremst, dass man das Gefühl hat, nach vorne zu fliegen und man nur vom Gurt festegehalten wird. Nun die Überraschung: für den Physiker ist das auch Beschleunigung, nur eben in die entgegengesetze Richtung. Ihr könnt Euch das so vorstellen: das Auto steht an einem Hang und rollt rückwärts. Wenn man nun Gas gibt, wird es erst langsamer, kommt zum Stillstand und fährt dann schließlich nach vorne, den Berg hoch. Wie Ihr im vorhergehenden Abschnitt schon gesehen habt, ist es wichtig, den Bezugspunkt zu wählen -- aber auch die Richtung: auch die Beschleunigung kann ``negativ'' sein, abhängig davon, in welche Richtung sieht wirkt. 
 
 Für die beschleunigte Bewegung gibt es zwei wichtige Gleichungen:
 \begin{align}
@@ -128,12 +130,3 @@ Die Flugstrecke und Geschwindigkeit dieses Sandkorns werden in Abb.~\ref{fig:phy
 % TODO explain that we're suddenly dealing with a graph with two axes!
 
 Solch eine Geschwindigkeit würde selbst für ein Sandkorn zu schweren Verletzungen führen -- in der Realität wird ein Sandkorn aber höchstens mit \qty{15}{\km\per\hour} zu Boden fallen, denn die obigen Formeln haben einen ``kleinen'' Nachteil: sie gelten nur im Vakuum, also ohne Luftreibung. Da wir später aber unser ``Regensimulation'' zu programmieren wollen, dass sie natürlich aussieht, müssen wir uns mit dem Thema Reibung befassen.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Einheiten}
-
-Die Einheit der Kraft ist \unit{N}, das ``Newton''.\footnote{%
-        Wer hier genau aufgepasst hat, sieht, dass man auch mit \emph{Einheiten} rechnet. Tatsäch ist die Einheit der Masse \unit{\kg} (Kilogramm) und die der Beschleunigung \unit{\meter\per\second^2}. Mit $m\cdot a$ werden dann beide Einheiten multipliziert und es kommt \unit{\kg.\meter\per\second^2} das man mit der Einheit \unit{\N} abkürzt.}
-% FIXME: cdot between kg and m
-
-
