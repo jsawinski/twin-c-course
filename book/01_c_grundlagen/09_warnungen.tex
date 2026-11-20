@@ -1,60 +1,59 @@
-\section{Warnungen des Compilers}
+\section{Programmierfehler}
 \label{sec:c:warnungen}
 
-FIXME
-
+Versucht einmal folgendes Programm zu verstehen:
 \cppinput{c/09_warnungen.c}
+und löst die folgende Übung.
+
+\begin{exercise}
+    Ihr erinnert Euch bestimmt an die ersten Programmierschritte, die Ihr unternommen
+    habt. Schaut Euch dieses Programm nun genau an überlegt, was welche Zeile macht. 
+    \begin{enumerate}
+        \item Was erwartet Ihr, was auf dem Bildschirm ausgegeben wird?
+        \item Macht ein neues Projekt und führt diese Programm aus. Welche Ausgabe seht Ihr tatsächlich?
+    \end{enumerate}
+    \begin{solution}
+        \begin{enumerate}
+            \item Wenn Ihr genau hingeschaut habt, dann seht Ihr, dass der Variable \texttt{zahl} kein Wert 
+                zugewiesen wird. Daher kann man nicht wissen, was ausgegeben wird.
+            \item Wenn Ihr dieses Programm ausführt, werdet Ihr vermutlich auf dem Bildschirm ``\texttt{Die Zahl: 0}'' sehen. 
+                Das hängt aber davon ab, wie ein Compiler mit einer Variablendeklaration umgeht, ohne dass ein Wert zugewiesen 
+                wird. 
+        \end{enumerate}
+    \end{solution}
+\end{exercise}
+
+Fehler passieren. Das ist jedem klar. Im obigen Programm ist der Fehler, dass der Variable \texttt{zahl} kein Wert zugewiesen wird. Jetzt fragt Ihr Euch vielleicht, warum der Compiler das nicht erkennt und dem Programmierer sagt, dass es ein Fehler ist. Tatsächlich ist es so, dass es für den Compiler sehr schwierig ist, zu entscheiden, ob etwas ein Fehler ist, oder ob der Programmierer nur gewarnt werden muss.
+
+Versucht nun nocheinmal das Programm zu kompilieren. Wenn Ihr genau darauf achtet, dann seht Ihr dabei vermutlich folgendes:
 
 \small
 \begin{verbatim}
-10_warnungen.c: In Funktion »main«:
-10_warnungen.c:6:3: Warnung: »zahl« ist nicht initialisiert, 
+09_warnungen.c: In Funktion »main«:
+09_warnungen.c:6:3: Warnung: »zahl« ist nicht initialisiert, 
                     wird aber benutzt [-Wuninitialized]
     6 |   printf("Die Zahl: %d\n", zahl);
       |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-10_warnungen.c:5:7: Anmerkung: »zahl« wurde hier deklariert
+09_warnungen.c:5:7: Anmerkung: »zahl« wurde hier deklariert
     5 |   int zahl;
       |       ^~~~
 \end{verbatim}
 \normalsize
 
-\paragraph{Erklärung:}
+Der Compiler hat also tatsächlich festgestellt, dass in Eurem Programm etwas nicht stimmt.
 
-% \begin{description}
-%     \item[\texttt{int zahl = 42;}]\hfill\\
-%         Das ist die \textbf{Deklaration}\protect\footnote{%
-%         } und \textbf{Initialisierung}\protect\footnote{%
-%         } einer Variablen.
-
-%         \texttt{int} ist der Datentyp, in diesem Fall eine ganze Zahl (Integer).\\
-%         \texttt{zahl} ist der Name der Variable.\\
-%         \texttt{42} ist der Wert, der der Variable zugewiesen wird.
-
-%         Es ist auch möglich, eine Variable folgendermaßen zu deklarieren:
-% \begin{code}
-%   int zahl; // Deklaration ohne Initialisierung
-% \end{code}
-%         und ihr zu einem späteren Zeitpunkt einen Wert zuzuweisen:
-% \begin{code}
-%   zahl = 42; // Zuweisung eines Wertes
-% \end{code}
-%     \item[\texttt{printf("Die Zahl: \%d$\backslash$n", zahl);}]\hfill\\
-%         Das ist die \textbf{Ausgabe}.
-
-%         \texttt{printf} steht für \textit{print formatted} und schreibt Text
-%         auf den Bildschirm (genauer: in die Konsole).
-
-%         Das \texttt{\%d} ist ein Platzhalter für eine ganze Zahl, die an dieser Stelle ausgegeben wird.\\
-%         Das \texttt{$\backslash$n} ist ein \textbf{Zeilenumbruch}.
-%         Es sorgt dafür, dass der Cursor nach der Ausgabe in die nächste Zeile springt.
-% \end{description}
-
-\paragraph{Merke:}
-
-% \begin{itemize}[noitemsep]
-%     \item Ein C-Programm beginnt immer in der \texttt{main()}-Funktion.
-%     \item \texttt{printf()} schreibt Text auf den Bildschirm.
-%     \item \texttt{$\backslash$n} macht einen Zeilenumbruch.
-%     \item \texttt{return 0;} sagt dem Computer: ``Alles OK.''
-%     \item Jede Anweisung endet mit \texttt{;}.
-% \end{itemize}
+\begin{exercise}
+    Welche zwei Möglichkeiten gibt es, das Progamm richtig zu schreiben?
+    (Versuch diese Aufgabe zu lösen, ohne dabei die vorigen Kapitel nocheinmal anzuschauen.)
+    \begin{solution}
+        Die zwei Möglichkeiten sind:
+        \begin{code}[numbers=none]
+            int zahl = 42;
+        \end{code}
+        oder
+        \begin{code}[numbers=none]
+            int zahl; 
+            zahl = 42;
+        \end{code}
+    \end{solution}
+\end{exercise}
