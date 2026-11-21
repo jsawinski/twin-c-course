@@ -2,30 +2,33 @@
 \label{sec:c:warnungen}
 
 Versucht einmal folgendes Programm zu verstehen:
+
 \cppinput{c/09_warnungen.c}
+
 und löst die folgende Übung.
 
+\vskip\baselineskip
 \begin{exercise}
     Ihr erinnert Euch bestimmt an die ersten Programmierschritte, die Ihr unternommen
-    habt. Schaut Euch dieses Programm nun genau an überlegt, was welche Zeile macht. 
+    habt. Schaut Euch das Programm nun genau an und überlegt, was welche Zeile macht. 
     \begin{enumerate}
         \item Was erwartet Ihr, was auf dem Bildschirm ausgegeben wird?
         \item Macht ein neues Projekt und führt diese Programm aus. Welche Ausgabe seht Ihr tatsächlich?
     \end{enumerate}
     \begin{solution}
-        \begin{enumerate}
-            \item Wenn Ihr genau hingeschaut habt, dann seht Ihr, dass der Variable \texttt{zahl} kein Wert 
-                zugewiesen wird. Daher kann man nicht wissen, was ausgegeben wird.
-            \item Wenn Ihr dieses Programm ausführt, werdet Ihr vermutlich auf dem Bildschirm ``\texttt{Die Zahl: 0}'' sehen. 
-                Das hängt aber davon ab, wie ein Compiler mit einer Variablendeklaration umgeht, ohne dass ein Wert zugewiesen 
-                wird. 
-        \end{enumerate}
+        Wenn Ihr genau hingeschaut habt, dann seht Ihr, dass der Variable \texttt{zahl} kein Wert 
+        zugewiesen wird, bevor sie verwendet wird. Deshalb können wir unmöglich varaussehen, welchen
+        Wert das Programm tatsächlich auf dem Bildschirm ausgibt. 
     \end{solution}
 \end{exercise}
 
-Fehler passieren. Das ist jedem klar. Im obigen Programm ist der Fehler, dass der Variable \texttt{zahl} kein Wert zugewiesen wird. Jetzt fragt Ihr Euch vielleicht, warum der Compiler das nicht erkennt und dem Programmierer sagt, dass es ein Fehler ist. Tatsächlich ist es so, dass es für den Compiler sehr schwierig ist, zu entscheiden, ob etwas ein Fehler ist, oder ob der Programmierer nur gewarnt werden muss.
+Wie Ihr seht, ist das Programm fehlerhaft. Eine Variable darf zwar zunächst ohne Anfangswert angelegt werden. Bevor die Variable verwendet wird, muss ihr aber ein Wert zugewiesen werden. 
 
-Versucht nun nocheinmal das Programm zu kompilieren. Wenn Ihr genau darauf achtet, dann seht Ihr dabei vermutlich folgendes:
+Jetzt entsteht natürlich die Frage, warum der Compiler den Fehler nicht erkennt und ein fehlerhaftes aber ausführbares Programm erzeugt. Das liegt an einer Besonderheit der Programmiersprachen C und C++: Sie lassen dem Programmierer sehr viele Freiheiten. Manche Dinge sind zwar erlaubt, ihr Ergebnis ist aber nicht festgelegt. Man spricht dann von ``undefiniertem Verhalten'': in unserem Beispiel oben wird die Variable \texttt{zahl} in \texttt{printf} verwendet, ohne das zuvor ein Wert zugewiesen wurde. 
+
+Tatsächlich aber hilft der Compiler, viele diese Fehler zu vermeiden. Dazu gibt er sogenannte Warnungen aus. Anders als bei einer Fehlermeldung kann der Compiler das Programm trotz einer Warnung meistens übersetzen.
+
+Sucht mal die Ausgabe des Compilers. Ihr solltet etwa folgendes sehen:
 
 \small
 \begin{verbatim}
@@ -40,8 +43,17 @@ Versucht nun nocheinmal das Programm zu kompilieren. Wenn Ihr genau darauf achte
 \end{verbatim}
 \normalsize
 
-Der Compiler hat also tatsächlich festgestellt, dass in Eurem Programm etwas nicht stimmt.
+Der Compiler hat also tatsächlich festgestellt, dass in Eurem Programm etwas nicht stimmt:
+\begin{itemize}
+    \item und zwar in der Datei \texttt{09\_warnungen.c}, in der Funktion \texttt{main}:
+    \item In Zeile 6, Spalte 3: \texttt{zahl} ist nicht initialisiert, wird aber benutzt.
+    \item In Zeile 5, Spalte 7: \texttt{zahl} wurde hier deklariert.
+\end{itemize}
+Auf das \texttt{-Wuninitialized} kommen wir an anderer Stelle zurück.
 
+Mit dieser Warnung des Compilers könnt Ihr nun die folgende Aufgabe lösen.
+
+\vskip\baselineskip
 \begin{exercise}
     Welche zwei Möglichkeiten gibt es, das Progamm richtig zu schreiben?
     (Versuch diese Aufgabe zu lösen, ohne dabei die vorigen Kapitel nocheinmal anzuschauen.)
